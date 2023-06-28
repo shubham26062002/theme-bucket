@@ -2,533 +2,556 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="icon" href="./assets/images/favicon.svg" />
+    <link rel="icon" href="./assets/images/favicon.svg" />
 
-  <link rel="stylesheet" href="../dist/css/index.css" />
+    <link rel="stylesheet" href="../dist/css/index.css" />
 
-  <!-- title -->
-  <title>ThemeBucket Frontend</title>
+    <!-- title -->
+    <title>ThemeBucket Frontend</title>
 </head>
 
 <body>
-  <!-- desktop navbar -->
-  <header class="hidden desktop:block">
-    <div class="py-4 mx-28 flex justify-between items-center">
-      <a class="group" href="#">
-        <h1
-          class="font-space-grotesk text-[42px] font-bold tracking-tighter leading-tight text-brown group-hover:text-yellow-ochre transition"
-          id="header-logo">
-          Theme<span class="text-yellow-ochre font-space-grotesk group-hover:text-brown transition">Bucket</span>.
-        </h1>
-      </a>
-      <div
-        class="flex justify-start rounded-full items-center border-[1px] border-brown focus-within:ring-2 ring-yellow-ochre"
-        id="searchbar">
-        <select class="text-sm font-semibold py-2 px-4 focus:outline-none rounded-l-full text-brown">
-          <option disabled selected hidden>Filter by</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-        </select>
-        <input class="py-[8.4px] px-4 focus:outline-none text-sm min-w-[320px]" placeholder="I'm looking for..."
-          id="searchbar-input" />
-        <button class="flex justify-start items-center p-3 rounded-r-full bg-yellow-ochre">
-          <svg class="flex justify-start items-center h-4 w-4 fill-white" xmlns="http://www.w3.org/2000/svg"
-            height="1em" viewBox="0 0 512 512">
-            <path
-              d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
-          </svg>
-        </button>
-      </div>
-      <div class="flex items-center justify-start gap-5">
-        <a class="flex justify-start items-center relative" href="#">
-          <svg class="flex justify-start items-center h-6 w-6 stroke-brown" xmlns="http://www.w3.org/2000/svg"
-            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag">
-            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <path d="M16 10a4 4 0 0 1-8 0"></path>
-          </svg>
-          <div
-            class="bg-yellow-ochre text-white absolute text-[10px] font-medium py-1 leading-none w-[18px] top-0 right-0 translate-x-[40%] translate-y-[-40%] text-center rounded-full">
-            1
-          </div>
-        </a>
-        <a class="flex justify-start items-center relative" href="#">
-          <svg class="flex justify-start items-center h-6 w-6 stroke-brown" xmlns="http://www.w3.org/2000/svg"
-            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
-            <path
-              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-            </path>
-          </svg>
-          <div
-            class="absolute text-[10px] font-medium py-1 leading-none w-[18px] top-0 right-0 translate-x-[40%] translate-y-[-40%] text-center rounded-full bg-yellow-ochre text-white">
-            1
-          </div>
-        </a>
-        <a class="flex justify-start rounded-full border-[1px] border-yellow-ochre items-center gap-2 py-2 px-5 hover:bg-yellow-ochre group transition"
-          href="#">
-          <!-- Log-in button -->
-          <span class="font-medium text-sm text-yellow-ochre group-hover:text-white transition">Log in</span>
-          <svg class="flex justify-start items-center h-5 w-5 stroke-yellow-ochre group-hover:stroke-white transition"
-            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-user">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-        </a>
-        <!-- Google profile Photo -->
-        <a class="flex justify-center items-center rounded-full border-[2px] border-brown overflow-hidden" href="#">
-          <img class="h-8 w-8 aspect-square object-cover" src="./assets/images/profile-placeholder.png"
-            alt="User-Name" />
-        </a>
-      </div>
-    </div>
-    <nav class="mt-3 px-28 bg-black-2">
-      <div>
-        <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
-          href="#">Home</a>
-        <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
-          href="#">Collections</a>
-        <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
-          href="#">Shop</a>
-        <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
-          href="#">Journal</a>
-        <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
-          href="#">About</a>
-      </div>
-    </nav>
-  </header>
-
-  <!-- mobile header -->
-  <header class=" z-50 desktop:hidden ">
-    <div class="py-4 mx-6 flex justify-between items-center">
-      <a class="group" href="#">
-        <h1
-          class="font-space-grotesk text-4xl font-bold tracking-tighter leading-tight text-brown group-hover:text-yellow-ochre transition"
-          id="header-logo">
-          Theme<span class="text-yellow-ochre font-space-grotesk group-hover:text-brown transition">Bucket</span>.
-        </h1>
-      </a>
-      <div class="flex items-center justify-start gap-5">
-        <a class="flex justify-start items-center relative" href="#">
-          <svg class="flex justify-start items-center h-6 w-6 stroke-brown" xmlns="http://www.w3.org/2000/svg"
-            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag">
-            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <path d="M16 10a4 4 0 0 1-8 0"></path>
-          </svg>
-          <div
-            class="bg-yellow-ochre text-white absolute text-[10px] font-medium py-1 leading-none w-[18px] top-0 right-0 translate-x-[40%] translate-y-[-40%] text-center rounded-full">
-            1
-          </div>
-        </a>
-        <button
-          class="flex justify-start items-center p-1.5 rounded-sm bg-yellow-ochre bg-opacity-80 hover:bg-opacity-100 transition">
-          <svg class="flex justify-start items-center h-5 w-5 stroke-white" xmlns="http://www.w3.org/2000/svg"
-            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-    </div>
-    <div
-      class="mt-4 mb-8 mx-6 flex justify-start rounded-full items-center border-[1px] border-brown focus-within:ring-2 ring-yellow-ochre"
-      id="searchbar">
-      <select class="text-sm font-semibold py-2 px-4 focus:outline-none rounded-l-full text-brown">
-        <option disabled selected hidden>Filter by</option>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-      </select>
-      <input class="py-[8.4px] px-4 focus:outline-none text-sm block w-full" placeholder="I'm looking for..."
-        id="searchbar-input" />
-      <button class="flex justify-start items-center p-3 rounded-r-full bg-yellow-ochre">
-        <svg class="flex justify-start items-center h-4 w-4 fill-white" xmlns="http://www.w3.org/2000/svg" height="1em"
-          viewBox="0 0 512 512">
-          <path
-            d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
-        </svg>
-      </button>
-    </div>
-  </header>
-
-  <!--Mobile side bar  -->
-  <aside class="py-16  desktop:hidden fixed top-0 right-0 bottom-0 h-screen w-2/3 bg-black-2 z-10 bg-opacity-95 ">
-    <div class=" h-full w-full flex flex-col justify-between items-center "> <a href="#">
-        <h1 class="font-space-grotesk text-[42px] font-bold tracking-tighter leading-tight text-yellow-ochre"
-          id="header-logo">
-          Theme<span class="text-yellow-ochre font-space-grotesk">Bucket</span>.
-        </h1>
-      </a>
-      <div>
-        <div class="flex flex-col justify-center items-center ">
-          <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
-            href="#">HOME</a>
-          <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
-            href="#">COLLECTIONS</a>
-          <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
-            href="#">SHOP</a>
-          <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
-            href="#">JOURNAL</a>
-          <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
-            href="#">ABOUT</a>
-        </div>
-        <div class="mt-4">
-          <a class="flex justify-center rounded-full border-[1px] border-yellow-ochre items-center gap-2 py-2 px-5 hover:bg-yellow-ochre group transition "
-            href="#">
-            <!-- Log-in button -->
-            <span class="font-medium text-sm text-yellow-ochre group-hover:text-white transition">Log in</span>
-            <svg class="flex justify-start items-center h-5 w-5 stroke-yellow-ochre group-hover:stroke-white transition"
-              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="feather feather-user">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-          </a>
-          <a class="flex justify-center items-center rounded-full   w-fit mx-auto gap-3 group opacity-80 hover:opacity-100 transition"
-            href="#">
-            <img class="h-8 w-8 aspect-square object-cover border-[2px] rounded-full border-brown"
-              src="./assets/images/profile-placeholder.png" alt="User-Name" /><span
-              class="text-white font-semibold text-sm group-hover:text-yellow-ochre transition  ">User Name</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="flex justify-start items-center gap-3">
-        <a href="#" class="flex justify-center items-center">
-          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
-            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-mail">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-            <polyline points="22,6 12,13 2,6"></polyline>
-          </svg>
-        </a>
-        <a href="#" class="flex justify-center items-center">
-          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
-            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-github">
-            <path
-              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-            </path>
-          </svg>
-        </a>
-        <a href="#" class="flex justify-center items-center">
-          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
-            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-twitter">
-            <path
-              d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
-            </path>
-          </svg>
-        </a>
-        <a href="#" class="flex justify-center items-center">
-          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
-            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-facebook">
-            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-          </svg>
-        </a>
-        <a href="#" class="flex justify-center items-center">
-          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
-            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-linkedin">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-            <rect x="2" y="9" width="4" height="12"></rect>
-            <circle cx="4" cy="4" r="2"></circle>
-          </svg>
-        </a>
-        <a href="#" class="flex justify-center items-center">
-          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
-            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-instagram">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-          </svg>
-        </a>
-      </div>
-
-    </div>
-    <!-- HOME COLLECTIONS SHOP JOURNAL ABOUT -->
-
-  </aside>
-
-  <main>
-    <!-- carousel slider -->
-    <div class="relative h-[480px]">
-      <div class="relative h-full overflow-hidden">
-        <ul class="relative h-full transition-all duration-700 ease-in-out" id="carousel-items-list">
-          <li class="absolute top-0 bottom-0 w-full current-slide">
-            <!-- slide content -->
-            <div class="bg-yellow-ochre h-full">Slide 1</div>
-          </li>
-          <li class="absolute top-0 bottom-0 w-full">
-            <!-- slide content -->
-            <div class="bg-yellow-ochre h-full">Slide 2</div>
-          </li>
-          <li class="absolute top-0 bottom-0 w-full">
-            <!-- slide content -->
-            <div class="bg-yellow-ochre h-full">Slide 3</div>
-          </li>
-          <li class="absolute top-0 bottom-0 w-full">
-            <!-- slide content -->
-            <div class="bg-yellow-ochre h-full">Slide 4</div>
-          </li>
-        </ul>
-      </div>
-      <!-- carousel indicators -->
-      <div class="absolute flex justify-start left-[50%] -translate-x-[50%] items-center gap-4 bottom-8"
-        id="carousel-indicators-container">
-        <button
-          class="inline-block w-8 h-1 bg-white bg-opacity-50 hover:bg-brown hover:bg-opacity-100 transition rounded-sm current-indicator"></button>
-        <button
-          class="inline-block w-8 h-1 bg-white bg-opacity-50 hover:bg-brown hover:bg-opacity-100 transition rounded-sm"></button>
-        <button
-          class="inline-block w-8 h-1 bg-white bg-opacity-50 hover:bg-brown hover:bg-opacity-100 transition rounded-sm"></button>
-        <button
-          class="inline-block w-8 h-1 bg-white bg-opacity-50 hover:bg-brown hover:bg-opacity-100 transition rounded-sm"></button>
-      </div>
-    </div>
-
-    <!-- technologies banner -->
-    <div class="py-10 px-8 desktop:px-64 bg-gray-lightest grid grid-cols-1 desktop:grid-cols-4 gap-y-8">
-      <div class="flex justify-start items-center gap-3 mx-auto">
-        <img class="h-12 aspect-square" src="./assets/images/react-logo.svg" alt="React Logo" />
-        <h1 class="text-gray-400 font-semibold text-lg">React</h1>
-      </div>
-      <div class="flex justify-start items-center gap-3 mx-auto">
-        <img class="h-12 aspect-square" src="./assets/images/tailwindcss-logo.svg" alt="TailwindCSS Logo" />
-        <h1 class="text-gray-400 font-semibold text-lg">TailwindCSS</h1>
-      </div>
-      <div class="flex justify-start items-center gap-3 mx-auto">
-        <img class="h-12 aspect-square" src="./assets/images/supabase-logo.svg" alt="Supabase Logo" />
-        <h1 class="text-gray-400 font-semibold desktop:text-lg">Supabase</h1>
-      </div>
-      <div class="flex justify-start items-center gap-3 mx-auto">
-        <img class="h-12 aspect-square" src="./assets/images/node-js-logo.png" alt="NodeJS Logo" />
-        <h1 class="text-gray-400 font-semibold text-lg">NodeJS</h1>
-      </div>
-    </div>
-
-    <!-- top categories banner -->
-    <div class="py-16">
-      <h1 class="mx-8 mb-14 text-4xl font-normal leading-snug text-center text-gray-700">
-        Trending <span class="uppercase font-bold">Categories</span>
-      </h1>
-      <div class="mx-10 desktop:mx-28 grid grid-cols-1 desktop:grid-cols-3 gap-16">
-        <a href="#">
-          <div class="relative rounded-md overflow-hidden group">
-            <img class="block aspect-video group-hover:scale-110 transition"
-              src="./assets/images/portfolio-websites.jpg" alt="Portfolio Websites" />
-            <div
-              class="flex justify-center items-center absolute w-full h-full inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-30 transition">
-              <h1 class="font-semibold text-2xl text-gray-200">Portfolio</h1>
+    <!-- desktop navbar -->
+    <header class="hidden desktop:block">
+        <div class="py-4 mx-28 flex justify-between items-center">
+            <!-- logo -->
+            <a class="group" href="#">
+                <h1 class="font-space-grotesk text-[42px] font-bold tracking-tighter leading-tight text-brown group-hover:text-yellow-ochre transition"
+                    id="header-logo">
+                    Theme<span
+                        class="text-yellow-ochre font-space-grotesk group-hover:text-brown transition">Bucket</span>.
+                </h1>
+            </a>
+            <!-- searchbar -->
+            <div class="flex justify-start rounded-full items-center border-[1px] border-brown focus-within:ring-2 ring-yellow-ochre"
+                id="searchbar">
+                <select class="text-sm font-semibold py-2 px-4 focus:outline-none rounded-l-full text-brown">
+                    <option disabled selected hidden>Filter by</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+                <input class="py-[8.4px] px-4 focus:outline-none text-sm min-w-[320px]" placeholder="I'm looking for..."
+                    id="searchbar-input" />
+                <button class="flex justify-start items-center p-3 rounded-r-full bg-yellow-ochre">
+                    <svg class="flex justify-start items-center h-4 w-4 fill-white" xmlns="http://www.w3.org/2000/svg"
+                        height="1em" viewBox="0 0 512 512">
+                        <path
+                            d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+                    </svg>
+                </button>
             </div>
-          </div>
-        </a>
-        <a href="#">
-          <div class="relative rounded-md overflow-hidden group">
-            <img class="block aspect-video group-hover:scale-110 transition"
-              src="./assets/images/ecommerce-websites.jpg" alt="Portfolio Websites" />
-            <div
-              class="flex justify-center items-center absolute w-full h-full inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-30 transition">
-              <h1 class="font-semibold text-2xl text-gray-200">Ecommerce</h1>
+            <!-- cart, wishlist, login, profile -->
+            <div class="flex items-center justify-start gap-5">
+                <a class="flex justify-start items-center relative" href="#">
+                    <svg class="flex justify-start items-center h-6 w-6 stroke-brown" xmlns="http://www.w3.org/2000/svg"
+                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <div
+                        class="bg-yellow-ochre text-white absolute text-[10px] font-medium py-1 leading-none w-[18px] top-0 right-0 translate-x-[40%] translate-y-[-40%] text-center rounded-full">
+                        1
+                    </div>
+                </a>
+                <a class="flex justify-start items-center relative" href="#">
+                    <svg class="flex justify-start items-center h-6 w-6 stroke-brown" xmlns="http://www.w3.org/2000/svg"
+                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                        </path>
+                    </svg>
+                    <div
+                        class="absolute text-[10px] font-medium py-1 leading-none w-[18px] top-0 right-0 translate-x-[40%] translate-y-[-40%] text-center rounded-full bg-yellow-ochre text-white">
+                        1
+                    </div>
+                </a>
+                <a class="flex justify-start rounded-full border-[1px] border-yellow-ochre items-center gap-2 py-2 px-5 hover:bg-yellow-ochre group transition"
+                    href="#">
+                    <span class="font-medium text-sm text-yellow-ochre group-hover:text-white transition">Log in</span>
+                    <svg class="flex justify-start items-center h-5 w-5 stroke-yellow-ochre group-hover:stroke-white transition"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-user">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </a>
+                <a class="flex justify-center items-center rounded-full border-[2px] border-brown overflow-hidden"
+                    href="#">
+                    <img class="h-8 w-8 aspect-square object-cover" src="./assets/images/profile-placeholder.png"
+                        alt="User Name" />
+                </a>
             </div>
-          </div>
-        </a>
-        <a href="#">
-          <div class="relative rounded-md overflow-hidden group">
-            <img class="block aspect-video group-hover:scale-110 transition" src="./assets/images/blog-websites.jpg"
-              alt="Portfolio Websites" />
-            <div
-              class="flex justify-center items-center absolute w-full h-full inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-30 transition">
-              <h1 class="font-semibold text-2xl text-gray-200">Blog</h1>
+        </div>
+        <nav class="mt-3 px-28 bg-black-2">
+            <!-- navbar links -->
+            <div>
+                <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
+                    href="#">Home</a>
+                <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
+                    href="#">Collections</a>
+                <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
+                    href="#">Shop</a>
+                <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
+                    href="#">Journal</a>
+                <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
+                    href="#">About</a>
             </div>
-          </div>
-        </a>
-      </div>
-    </div>
+        </nav>
+    </header>
 
-    <!-- landing banner -->
-    <div class="bg-gray-100 py-12">
-      <div class="mx-10 desktop:mx-28 grid grid-cols-1 desktop:grid-cols-2 gap-6 desktop:gap-16">
-        <div class="self-center">
-          <h1 class="text-4xl font-normal leading-snug text-gray-700">
-            Take Your Website to
-            <span class="uppercase font-bold">New Heights</span> with us
-          </h1>
-          <p class="mt-6 text-gray-500 leading-normal">
-            ThemeBucket offers a diverse range of theme templates that are
-            designed to empower your online presence. Unlock limitless
-            possibilities and watch your business thrive!"
-          </p>
-          <div class="mt-8">
-            <a href="#"
-              class="inline-block px-8 py-3 bg-brown bg-opacity-90 hover:bg-opacity-100 transition text-white rounded-md">Get
-              Started</a>
-          </div>
+    <!-- mobile header -->
+    <header class=" z-50 desktop:hidden ">
+        <div class="py-4 mx-6 flex justify-between items-center">
+            <!-- logo -->
+            <a class="group" href="#">
+                <h1 class="font-space-grotesk text-4xl font-bold tracking-tighter leading-tight text-brown group-hover:text-yellow-ochre transition"
+                    id="header-logo">
+                    Theme<span
+                        class="text-yellow-ochre font-space-grotesk group-hover:text-brown transition">Bucket</span>.
+                </h1>
+            </a>
+            <!-- cart, open sidebar -->
+            <div class="flex items-center justify-start gap-5">
+                <a class="flex justify-start items-center relative" href="#">
+                    <svg class="flex justify-start items-center h-6 w-6 stroke-brown" xmlns="http://www.w3.org/2000/svg"
+                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <div
+                        class="bg-yellow-ochre text-white absolute text-[10px] font-medium py-1 leading-none w-[18px] top-0 right-0 translate-x-[40%] translate-y-[-40%] text-center rounded-full">
+                        1
+                    </div>
+                </a>
+                <button
+                    class="flex justify-start items-center p-1.5 rounded-sm bg-yellow-ochre bg-opacity-80 hover:bg-opacity-100 transition"
+                    id="open-sidebar">
+                    <svg class="flex justify-start items-center h-5 w-5 stroke-brown" xmlns="http://www.w3.org/2000/svg"
+                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
         </div>
-        <div class="mobile:row-start-1 mobile:row-end-2 desktop:col-start-2 desktop:col-end-2">
-          <img class="h-96 aspect-video object-contain" src="./assets/images/landing-image.jpg" />
+        <!-- searchbar -->
+        <div class="mt-4 mb-8 mx-6 flex justify-start rounded-full items-center border-[1px] border-brown focus-within:ring-2 ring-yellow-ochre"
+            id="searchbar">
+            <select class="text-sm font-semibold py-2 px-4 focus:outline-none rounded-l-full text-brown">
+                <option disabled selected hidden>Filter by</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
+            <input class="py-[8.4px] px-4 focus:outline-none text-sm block w-full" placeholder="I'm looking for..."
+                id="searchbar-input" />
+            <button class="flex justify-start items-center p-3 rounded-r-full bg-yellow-ochre">
+                <svg class="flex justify-start items-center h-4 w-4 fill-white" xmlns="http://www.w3.org/2000/svg"
+                    height="1em" viewBox="0 0 512 512">
+                    <path
+                        d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+                </svg>
+            </button>
         </div>
-      </div>
-    </div>
-  </main>
+    </header>
 
-  <!-- footer -->
-  <footer class="py-12 bg-black-2">
-    <div class="mx-10 desktop:mx-28 mb-10 flex flex-col desktop:flex-row justify-between items-center gap-1">
-      <a href="#">
-        <h1 class="font-space-grotesk text-4xl font-bold tracking-tighter leading-tight text-yellow-ochre"
-          id="header-logo">
-          Theme<span class="text-yellow-ochre font-space-grotesk">Bucket</span>.
-        </h1>
-      </a>
+    <!-- mobile sidebar  -->
+    <aside
+        class="opacity-50 scale-90 translate-x-[110%] py-16  desktop:hidden fixed top-0 right-0 bottom-0 h-screen w-4/5 min-w-[256px] max-w-[380px] bg-black-2 z-10 bg-opacity-95 transition-all duration-700 ease-in-out "
+        id="sidebar">
+        <div class=" h-full w-full flex flex-col justify-around items-center ">
+            <!-- logo -->
+            <a href="#">
+                <h1 class="font-space-grotesk text-[42px] font-bold tracking-tighter leading-tight text-yellow-ochre"
+                    id="header-logo">
+                    Theme<span class="text-yellow-ochre font-space-grotesk">Bucket</span>.
+                </h1>
+            </a>
+            <!-- sidebar links -->
+            <div>
+                <div class="flex flex-col justify-center items-center ">
+                    <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
+                        href="#">HOME</a>
+                    <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
+                        href="#">COLLECTIONS</a>
+                    <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
+                        href="#">SHOP</a>
+                    <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
+                        href="#">JOURNAL</a>
+                    <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
+                        href="#">ABOUT</a>
+                </div>
+                <!-- log in, profile -->
+                <div class="mt-4">
+                    <a class="flex justify-center rounded-full border-[1px] border-yellow-ochre items-center gap-2 py-2 px-5 hover:bg-yellow-ochre group transition "
+                        href="#">
+                        <span class="font-medium text-sm text-yellow-ochre group-hover:text-white transition">Log
+                            in</span>
+                        <svg class="flex justify-start items-center h-5 w-5 stroke-yellow-ochre group-hover:stroke-white transition"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-user">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>
+                    <a class="flex justify-center items-center rounded-full   w-fit mx-auto gap-3 group opacity-80 hover:opacity-100 transition overflow-hidden"
+                        href="#">
+                        <img class="h-8 w-8 aspect-square object-cover border-[2px] rounded-full border-brown"
+                            src="./assets/images/profile-placeholder.png" alt="User Name" /><span
+                            class="text-white font-semibold text-sm group-hover:text-yellow-ochre transition">User
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <!-- sidebar social links -->
+            <div class="flex justify-start items-center gap-3">
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-mail">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-github">
+                        <path
+                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                        </path>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-twitter">
+                        <path
+                            d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                        </path>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-facebook">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-linkedin">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-instagram">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+            </div>
+            <!-- close sidebar -->
+            <button
+                class="flex justify-start items-center p-1.5 rounded-full bg-yellow-ochre bg-opacity-80 hover:bg-opacity-100 transition"
+                id="close-sidebar">
+                <svg class="flex justify-start items-center h-5 w-5 stroke-brown" xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </aside>
 
-      <!-- social links -->
-      <div class="flex justify-start items-center gap-3">
-        <a href="#" class="flex justify-center items-center">
-          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
-            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-mail">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-            <polyline points="22,6 12,13 2,6"></polyline>
-          </svg>
-        </a>
-        <a href="#" class="flex justify-center items-center">
-          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
-            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-github">
-            <path
-              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-            </path>
-          </svg>
-        </a>
-        <a href="#" class="flex justify-center items-center">
-          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
-            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-twitter">
-            <path
-              d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
-            </path>
-          </svg>
-        </a>
-        <a href="#" class="flex justify-center items-center">
-          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
-            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-facebook">
-            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-          </svg>
-        </a>
-        <a href="#" class="flex justify-center items-center">
-          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
-            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-linkedin">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-            <rect x="2" y="9" width="4" height="12"></rect>
-            <circle cx="4" cy="4" r="2"></circle>
-          </svg>
-        </a>
-        <a href="#" class="flex justify-center items-center">
-          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
-            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-instagram">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-          </svg>
-        </a>
-      </div>
-    </div>
+    <main>
+        <!-- carousel slider -->
+        <div class="relative h-[480px]">
+            <div class="relative h-full overflow-hidden">
+                <ul class="relative h-full transition-all duration-700 ease-in-out" id="carousel-items-list">
+                    <li class="absolute top-0 bottom-0 w-full current-slide">
+                        <!-- slide content -->
+                        <div class="bg-yellow-ochre h-full">Slide 1</div>
+                    </li>
+                    <li class="absolute top-0 bottom-0 w-full">
+                        <!-- slide content -->
+                        <div class="bg-yellow-ochre h-full">Slide 2</div>
+                    </li>
+                    <li class="absolute top-0 bottom-0 w-full">
+                        <!-- slide content -->
+                        <div class="bg-yellow-ochre h-full">Slide 3</div>
+                    </li>
+                    <li class="absolute top-0 bottom-0 w-full">
+                        <!-- slide content -->
+                        <div class="bg-yellow-ochre h-full">Slide 4</div>
+                    </li>
+                </ul>
+            </div>
+            <!-- carousel indicators -->
+            <div class="absolute flex justify-start left-[50%] -translate-x-[50%] items-center gap-4 bottom-8"
+                id="carousel-indicators-container">
+                <button
+                    class="inline-block w-8 h-1 bg-white bg-opacity-50 hover:bg-brown hover:bg-opacity-100 transition rounded-sm current-indicator"></button>
+                <button
+                    class="inline-block w-8 h-1 bg-white bg-opacity-50 hover:bg-brown hover:bg-opacity-100 transition rounded-sm"></button>
+                <button
+                    class="inline-block w-8 h-1 bg-white bg-opacity-50 hover:bg-brown hover:bg-opacity-100 transition rounded-sm"></button>
+                <button
+                    class="inline-block w-8 h-1 bg-white bg-opacity-50 hover:bg-brown hover:bg-opacity-100 transition rounded-sm"></button>
+            </div>
+        </div>
 
-    <!-- footer links -->
-    <div class="mx-10 desktop:mx-28 grid grid-cols-2 desktop:grid-cols-4 gap-16">
-      <div>
-        <h1 class="uppercase mb-6 font-semibold text-gray-100 border-b-[1px] border-yellow-ochre">
-          Browse Categories
-        </h1>
-        <div>
-          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
-            href="#">Themes & Templates</a>
-          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
-            href="#">Categories</a>
+        <!-- technologies banner -->
+        <div class="py-10 px-8 desktop:px-64 bg-gray-lightest grid grid-cols-1 desktop:grid-cols-4 gap-y-8">
+            <div class="flex justify-start items-center gap-3 mx-auto">
+                <img class="h-12 aspect-square" src="./assets/images/react-logo.svg" alt="React Logo" />
+                <h1 class="text-gray-400 font-semibold text-lg">React</h1>
+            </div>
+            <div class="flex justify-start items-center gap-3 mx-auto">
+                <img class="h-12 aspect-square" src="./assets/images/tailwindcss-logo.svg" alt="TailwindCSS Logo" />
+                <h1 class="text-gray-400 font-semibold text-lg">TailwindCSS</h1>
+            </div>
+            <div class="flex justify-start items-center gap-3 mx-auto">
+                <img class="h-12 aspect-square" src="./assets/images/supabase-logo.svg" alt="Supabase Logo" />
+                <h1 class="text-gray-400 font-semibold desktop:text-lg">Supabase</h1>
+            </div>
+            <div class="flex justify-start items-center gap-3 mx-auto">
+                <img class="h-12 aspect-square" src="./assets/images/node-js-logo.png" alt="NodeJS Logo" />
+                <h1 class="text-gray-400 font-semibold text-lg">NodeJS</h1>
+            </div>
         </div>
-      </div>
-      <div>
-        <h1 class="uppercase mb-6 font-semibold text-gray-100 border-b-[1px] border-yellow-ochre">
-          How To Buy?
-        </h1>
-        <div>
-          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
-            href="#">Explore ThemeBucket</a>
-          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
-            href="#">Log in</a>
-          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
-            href="#">Create an Account</a>
-        </div>
-      </div>
-      <div>
-        <h1 class="uppercase mb-6 font-semibold text-gray-100 border-b-[1px] border-yellow-ochre">
-          How to Sell?
-        </h1>
-        <div>
-          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
-            href="#">Seller's Guide</a>
-          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
-            href="#">Upload Instructions</a>
-        </div>
-      </div>
-      <div>
-        <h1 class="uppercase mb-6 font-semibold text-gray-100 border-b-[1px] border-yellow-ochre">
-          Social
-        </h1>
-        <div>
-          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
-            href="#">Email</a>
-          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
-            href="#">GitHub</a>
-          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
-            href="#">Twitter</a>
-          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
-            href="#">Facebook</a>
-          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
-            href="#">LinkedIn</a>
-          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
-            href="#">Instagram</a>
-        </div>
-      </div>
-    </div>
-    <div class="text-center font-medium mt-10">
-      <span class="text-white text-xl block">&#169; 2023 ThemeBucket</span>
-      <span class="block font-normal text-lg text-gray-300">All rights reserved. Made in India</span>
-    </div>
-  </footer>
 
-  <script type="module" src="./js/index.js"></script>
-  <script type="module" src="./js/carousel.js"></script>
+        <!-- top categories banner -->
+        <div class="py-16">
+            <h1 class="mx-8 mb-14 text-4xl font-normal leading-snug text-center text-gray-700">
+                Trending <span class="uppercase font-bold">Categories</span>
+            </h1>
+            <div class="mx-10 desktop:mx-28 grid grid-cols-1 desktop:grid-cols-3 gap-16">
+                <a href="#">
+                    <div class="relative rounded-md overflow-hidden group">
+                        <img class="block aspect-video group-hover:scale-110 transition"
+                            src="./assets/images/portfolio-websites.jpg" alt="Portfolio Websites" />
+                        <div
+                            class="flex justify-center items-center absolute w-full h-full inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-30 transition">
+                            <h1 class="font-semibold text-2xl text-gray-200">Portfolio</h1>
+                        </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="relative rounded-md overflow-hidden group">
+                        <img class="block aspect-video group-hover:scale-110 transition"
+                            src="./assets/images/ecommerce-websites.jpg" alt="Portfolio Websites" />
+                        <div
+                            class="flex justify-center items-center absolute w-full h-full inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-30 transition">
+                            <h1 class="font-semibold text-2xl text-gray-200">Ecommerce</h1>
+                        </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="relative rounded-md overflow-hidden group">
+                        <img class="block aspect-video group-hover:scale-110 transition"
+                            src="./assets/images/blog-websites.jpg" alt="Portfolio Websites" />
+                        <div
+                            class="flex justify-center items-center absolute w-full h-full inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-30 transition">
+                            <h1 class="font-semibold text-2xl text-gray-200">Blog</h1>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- landing banner -->
+        <div class="bg-gray-100 py-12">
+            <div class="mx-10 desktop:mx-28 grid grid-cols-1 desktop:grid-cols-2 gap-6 desktop:gap-16">
+                <div class="self-center">
+                    <h1 class="text-4xl font-normal leading-snug text-gray-700">
+                        Take Your Website to
+                        <span class="uppercase font-bold">New Heights</span> with us
+                    </h1>
+                    <p class="mt-6 text-gray-500 leading-normal">
+                        ThemeBucket offers a diverse range of theme templates that are
+                        designed to empower your online presence. Unlock limitless
+                        possibilities and watch your business thrive!"
+                    </p>
+                    <div class="mt-8">
+                        <a href="#"
+                            class="inline-block px-8 py-3 bg-brown bg-opacity-90 hover:bg-opacity-100 transition text-white rounded-md">Get
+                            Started</a>
+                    </div>
+                </div>
+                <div class="mobile:row-start-1 mobile:row-end-2 desktop:col-start-2 desktop:col-end-2">
+                    <img class="h-96 aspect-video object-contain" src="./assets/images/landing-image.jpg" />
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- footer -->
+    <footer class="py-12 bg-black-2">
+        <div class="mx-10 desktop:mx-28 mb-10 flex flex-col desktop:flex-row justify-between items-center gap-1">
+            <!-- logo -->
+            <a href="#">
+                <h1 class="font-space-grotesk text-4xl font-bold tracking-tighter leading-tight text-yellow-ochre"
+                    id="header-logo">
+                    Theme<span class="text-yellow-ochre font-space-grotesk">Bucket</span>.
+                </h1>
+            </a>
+
+            <!-- footer social links -->
+            <div class="flex justify-start items-center gap-3">
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-mail">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-github">
+                        <path
+                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                        </path>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-twitter">
+                        <path
+                            d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                        </path>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-facebook">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-linkedin">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-instagram">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- footer links -->
+        <div class="mx-10 desktop:mx-28 grid grid-cols-2 desktop:grid-cols-4 gap-16">
+            <div>
+                <h1 class="uppercase mb-6 font-semibold text-gray-100 border-b-[1px] border-yellow-ochre">
+                    Browse Categories
+                </h1>
+                <div>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Themes & Templates</a>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Categories</a>
+                </div>
+            </div>
+            <div>
+                <h1 class="uppercase mb-6 font-semibold text-gray-100 border-b-[1px] border-yellow-ochre">
+                    How To Buy?
+                </h1>
+                <div>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Explore ThemeBucket</a>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Log in</a>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Create an Account</a>
+                </div>
+            </div>
+            <div>
+                <h1 class="uppercase mb-6 font-semibold text-gray-100 border-b-[1px] border-yellow-ochre">
+                    How to Sell?
+                </h1>
+                <div>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Seller's Guide</a>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Upload Instructions</a>
+                </div>
+            </div>
+            <div>
+                <h1 class="uppercase mb-6 font-semibold text-gray-100 border-b-[1px] border-yellow-ochre">
+                    Social
+                </h1>
+                <div>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Email</a>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">GitHub</a>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Twitter</a>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Facebook</a>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">LinkedIn</a>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Instagram</a>
+                </div>
+            </div>
+        </div>
+        <!-- footer content -->
+        <div class="text-center font-medium mt-10">
+            <span class="text-white text-xl block">&#169; 2023 ThemeBucket</span>
+            <span class="block font-normal text-lg text-gray-300">All rights reserved. Made in India</span>
+        </div>
+    </footer>
+
+    <script type="module" src="./js/index.js"></script>
+    <script type="module" src="./js/carousel.js"></script>
+    <script type="module" src="./js/sidebar.js"></script>
 </body>
 
 </html>
