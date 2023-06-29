@@ -108,7 +108,7 @@
     </header>
 
     <!-- mobile header -->
-    <header class=" z-50 desktop:hidden ">
+    <header class="desktop:hidden ">
         <div class="py-4 mx-6 flex justify-between items-center">
             <!-- logo -->
             <a class="group" href="#">
@@ -169,7 +169,7 @@
 
     <!-- mobile sidebar  -->
     <aside
-        class="opacity-50 scale-90 translate-x-[110%] py-16  desktop:hidden fixed top-0 right-0 bottom-0 h-screen w-4/5 min-w-[256px] max-w-[380px] bg-black-2 z-10 bg-opacity-95 transition-all duration-700 ease-in-out "
+        class="opacity-50 scale-90 translate-x-[110%] py-16  desktop:hidden fixed top-0 right-0 bottom-0 h-screen w-4/5 min-w-[256px] max-w-[380px] bg-black-2 z-10 bg-opacity-95 transition-all duration-400 ease-in-out "
         id="sidebar">
         <div class=" h-full w-full flex flex-col justify-around items-center ">
             <!-- logo -->
@@ -290,9 +290,48 @@
         </div>
     </aside>
 
+    <!-- login prompt -->
+    <div class="fixed w-full h-full inset-0 bg-black bg-opacity-50 z-10 flex justify-center items-center">
+        <div
+            class="bg-black-2 py-10 px-6 desktop:px-16 rounded-xl min-w-[320px] w-3/5 max-w-md flex flex-col justify-start items-center">
+            <a href="#">
+                <h1 class="font-space-grotesk text-4xl font-bold tracking-tighter leading-tight text-yellow-ochre"
+                    id="header-logo">
+                    Theme<span class="text-yellow-ochre font-space-grotesk">Bucket</span>.
+                </h1>
+            </a>
+            <p class="mt-4 text-md font-normal leading-snug text-gray-200">
+                Log in or
+                <span class="uppercase font-bold">Create an account</span>
+            </p>
+            <div class="mt-10 w-full flex flex-col justify-start items-center gap-3">
+                <button
+                    class="text-sm block w-full py-4 font-semibold text-white bg-black rounded-md relative bg-opacity-70 hover:bg-opacity-100">
+                    <img class="absolute h-5 top-[50%] -translate-y-[50%] left-4 aspect-square"
+                        src="./assets/images/github-logo.svg" />
+                    <span>Continue with
+                        GitHub</span>
+                </button>
+                <button
+                    class="text-sm block w-full py-4 font-semibold text-black bg-white rounded-md relative bg-opacity-90 hover:bg-opacity-100">
+                    <img class="absolute h-5 top-[50%] -translate-y-[50%] left-4 aspect-square"
+                        src="./assets/images/google-logo.svg" />
+                    <span>Continue with
+                        Google</span>
+                </button>
+            </div>
+            <div class="h-[1.5px] bg-gray-300 w-full mt-8"></div>
+            <p class="text-sm text-center mt-10 text-gray-200 leading-normal">Account creation signifies agreement to
+                our
+                <span class="underline font-semibold cursor-pointer"> Terms and
+                    Conditions.</span>
+            </p>
+        </div>
+    </div>
+
     <main>
         <!-- carousel slider -->
-        <div class="relative h-[480px]">
+        <div class="z-0 relative h-[480px]">
             <div class="relative h-full overflow-hidden">
                 <ul class="relative h-full transition-all duration-700 ease-in-out" id="carousel-items-list">
                     <li class="absolute top-0 bottom-0 w-full current-slide">
