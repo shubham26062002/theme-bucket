@@ -62,6 +62,7 @@ const Navbar = () => {
                     </div>
                 </div>
                 <Searchbar type="mobile" />
+                <div className="h-3 bg-black-2"></div>
             </header>
             {/* Mobile Sidebar */}
             <aside
