@@ -1,13 +1,12 @@
-import { useContext } from 'react'
 import React from 'react'
 import { FiUser } from 'react-icons/fi'
 import { twMerge } from 'tailwind-merge'
-import { LoginPromptContext } from '../../layouts/RootLayout'
+import { useLoginPrompt } from '../../hooks/useLoginPrompt'
 
 const LoginButton = ({
     type = 'desktop',
 }) => {
-    const { isLoginPromptOpen, setIsLoginPromptOpen } = useContext(LoginPromptContext)
+    const [isLoginPromptOpen, setIsLoginPromptOpen] = useLoginPrompt()
 
     return (
         <button className={twMerge('flex justify-start rounded-full border-[1px] border-yellow-ochre items-center gap-2 py-2 px-5 hover:bg-yellow-ochre group transition', type === 'mobile' && 'justify-center w-full text-center py-3')} onClick={() => { setIsLoginPromptOpen(true) }}>
