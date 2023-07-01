@@ -16,6 +16,9 @@ module.exports = {
         "brown": "#504538",
         "yellow-ochre": "#E8AA3D",
         "gray-lightest": "#FAFBFD",
+      },
+      boxShadow: {
+        'product-shadow': '0 0 5px 0 rgba(209, 213, 219, 1)',
       }
     },
   },
