@@ -1,11 +1,10 @@
-import { useContext } from 'react'
 import LogoLink from './LogoLink'
 import SocialLoginButton from './SocialLoginButton'
-import { LoginPromptContext } from '../../layouts/RootLayout'
 import { IoMdClose } from 'react-icons/io'
+import { useLoginPrompt } from '../../hooks/useLoginPrompt'
 
 const LoginPrompt = () => {
-    const { isLoginPromptOpen, setIsLoginPromptOpen } = useContext(LoginPromptContext)
+    const [isLoginPromptOpen, setIsLoginPromptOpen] = useLoginPrompt()
 
     const loginPromptStyles = {
         display: isLoginPromptOpen ? 'flex' : 'none',

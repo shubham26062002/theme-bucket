@@ -1,20 +1,19 @@
-import { useState, useContext, createContext } from 'react'
+import { useState, createContext } from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbar from '../components/general/Navbar'
 import Footer from '../components/general/Footer'
 import LoginPrompt from '../components/general/LoginPrompt'
+import { LoginPromptProvider } from '../hooks/useLoginPrompt'
 
 export const LoginPromptContext = createContext()
 
 const RootLayout = () => {
-    const [isLoginPromptOpen, setIsLoginPromptOpen] = useState(() => false)
-
     return (
         <div>
-            <LoginPromptContext.Provider value={{ isLoginPromptOpen, setIsLoginPromptOpen }}>
+            <LoginPromptProvider>
                 <LoginPrompt />
                 <Navbar />
-            </LoginPromptContext.Provider>
+            </LoginPromptProvider>
             <Outlet />
             <Footer />
         </div>
