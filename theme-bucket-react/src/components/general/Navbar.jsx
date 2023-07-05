@@ -11,8 +11,11 @@ import { FaGithub, FaTwitter, FaInstagram } from 'react-icons/fa'
 import { BsFacebook, BsLinkedin } from 'react-icons/bs'
 import { MdEmail } from 'react-icons/md'
 import { IoMdClose } from 'react-icons/io'
+import { useSession } from '../../hooks/useSession'
 
 const Navbar = () => {
+    const { session } = useSession()
+
     const [isSidebarOpen, setIsSidebarOpen] = useState(() => false)
 
     const sidebarStyles = {
@@ -31,13 +34,17 @@ const Navbar = () => {
                         <CartLink to="/cart" />
                         <WishlistLink to="/wishlist" />
 
-                        {/* When user is not authenticated */}
-                        <LoginButton />
-                        {/* When user is authenticated */}
-                        <Link className="flex justify-center items-center rounded-full border-[2px] border-brown overflow-hidden" to="#">
-                            <img className="h-8 w-8 aspect-square object-cover" src="/images/profile-placeholder.png"
-                                alt="User Name" />
-                        </Link>
+                        {
+                            session
+                                ?
+                                <Link className="flex justify-center items-center rounded-full overflow-hidden" to={`profile/${session?.user.id}`}>
+                                    <img className="h-8 w-8 aspect-square object-cover" src={session?.user.user_metadata.avatar_url}
+                                        alt="User Name" />
+                                </Link>
+                                :
+                                <LoginButton />
+                        }
+
                     </div>
                 </div>
                 <nav className="mt-3 px-28 bg-black-2">
@@ -75,12 +82,19 @@ const Navbar = () => {
                             <NavbarLink type="mobile" to="/categories" label="Categories" />
                         </div>
                         <div className="mt-4">
-                            <LoginButton type="mobile" />
-                            <Link className="flex justify-center items-center rounded-full   w-fit mx-auto gap-3 group opacity-80 hover:opacity-100 transition overflow-hidden"
-                                to="#">
-                                <img className="h-8 w-8 aspect-square object-cover border-[2px] rounded-full border-brown"
-                                    src="/images/profile-placeholder.png" alt="User Name" />
-                            </Link>
+
+                            {session
+                                ?
+                                <Link className="flex justify-center items-center rounded-full   w-fit mx-auto gap-3 group opacity-80 hover:opacity-100 transition overflow-hidden"
+                                    to="#">
+                                    <img className="h-8 w-8 aspect-square object-cover border-[2px] rounded-full border-brown"
+                                        src={session?.user.user_metadata.avatar_url} alt="User Name" />
+                                </Link>
+                                :
+                                <LoginButton type="mobile" />
+                            }
+
+
                         </div>
                     </div>
                     <div className="flex justify-start items-center gap-3">

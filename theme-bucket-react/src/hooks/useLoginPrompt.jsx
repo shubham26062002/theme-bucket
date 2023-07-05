@@ -1,6 +1,6 @@
 import { useState, createContext, useContext } from 'react'
 
-export const LoginPromptContext = createContext()
+const LoginPromptContext = createContext()
 
 export const useLoginPrompt = () => {
     return useContext(LoginPromptContext)
