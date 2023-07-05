@@ -20,7 +20,7 @@ const LoginPrompt = () => {
                     <span className="uppercase font-bold"> Create an account</span>
                 </p>
                 <div className="mt-10 w-full flex flex-col justify-start items-center gap-3">
-                    <SocialLoginButton imageUrl="/images/github-logo.svg" label="Continue with GitHub" />
+                    <SocialLoginButton imageUrl="/images/github-logo.svg" label="Continue with GitHub" provider="github" />
                     <SocialLoginButton imageUrl="/images/google-logo.svg" label="Continue with Google" className="bg-white text-black bg-opacity-90" />
                 </div>
                 <div className="h-[1.5px] bg-gray-300 w-full mt-8"></div>
