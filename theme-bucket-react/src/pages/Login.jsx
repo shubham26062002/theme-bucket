@@ -3,15 +3,22 @@ import SocialLoginButton from '../components/general/SocialLoginButton'
 import { IoMdClose } from 'react-icons/io'
 import { useNavigate } from 'react-router-dom'
 import { useSession } from '../hooks/useSession'
+import { useEffect, useCallback } from 'react'
 
 const Login = () => {
     const { session } = useSession()
 
     const navigate = useNavigate()
 
-    if (session) {
+    const handleRedirect = useCallback(() => {
         navigate('/')
-    }
+    }, [])
+
+    useEffect(() => {
+        if (session) {
+            navigate('/')
+        }
+    }, [session])
 
     return (
         <div className="fixed w-full h-full inset-0 bg-gray-lightest bg-opacity-50 z-20 flex justify-center items-center">
@@ -32,7 +39,7 @@ const Login = () => {
                     <span className="underline font-semibold cursor-pointer"> Terms and
                         Conditions.</span>
                 </p>
-                <button className="absolute top-6 right-6" onClick={() => navigate('/')}>
+                <button className="absolute top-6 right-6" onClick={handleRedirect}>
                     <IoMdClose className="flex justify-center items-center h-6 w-6 fill-yellow-ochre" />
                 </button>
             </div>

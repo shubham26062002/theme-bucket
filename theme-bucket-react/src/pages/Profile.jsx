@@ -2,7 +2,8 @@ import { useOutletContext } from 'react-router-dom'
 import FormInput from '../components/general/FormInput'
 import { useCallback, useState } from 'react'
 import FormButton from '../components/general/FormButton'
-import { useForm } from 'react-hook-form'
+import { get, useForm } from 'react-hook-form'
+import FormSelectInput from '../components/general/FormSelectInput'
 
 const Profile = () => {
     const { session, profile } = useOutletContext()
@@ -13,16 +14,20 @@ const Profile = () => {
         setEditDisabled((previousIsEditDisabled) => !previousIsEditDisabled)
     }, [isEditDisabled])
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors }, getValues } = useForm({
         defaultValues: {
             name: profile?.full_name,
             email: session?.user.email,
+            country: profile?.country_id,
+            city: profile?.city_id,
             githubProfile: profile?.github_url,
             linkedinProfile: profile?.linkedin_url,
         },
     })
 
     const onSubmit = (data) => {
+        setEditDisabled(true)
+
         console.log(data)
     }
 
@@ -41,28 +46,8 @@ const Profile = () => {
                         <div className="py-4 grid grid-cols-1 desktop:grid-cols-2 gap-x-12 gap-y-6">
                             <FormInput label="Name" id="name" disabled={isEditDisabled} register={register} errors={errors} />
                             <FormInput label="Email" id="email" disabled register={register} errors={errors} />
-                            {/* <div>
-                                <label className="font-medium text-neutral-900 block text-sm"
-                                    htmlFor="country">Country</label>
-                                <select
-                                    className="block w-full mt-2 py-2 rounded-md px-4 border-[1px] border-black-2 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-yellow-ochre"
-                                    id="country">
-                                    <option value="usa">United States</option>
-                                    <option value="canada">Canada</option>
-                                    <option value="mexico">Mexico</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label className="font-medium text-neutral-900 block text-sm"
-                                    htmlFor="country">Country</label>
-                                <select
-                                    className="block w-full mt-2 py-2 rounded-md px-4 border-[1px] border-black-2 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-yellow-ochre"
-                                    id="country">
-                                    <option value="usa">United States</option>
-                                    <option value="canada">Canada</option>
-                                    <option value="mexico">Mexico</option>
-                                </select>
-                            </div> */}
+                            <FormSelectInput label="Country" id="country" tableName="countries" register={register} errors={errors} disabled={isEditDisabled} selected={getValues().country} />
+                            <FormSelectInput label="City" id="city" tableName="cities" register={register} errors={errors} disabled={isEditDisabled} selected={getValues().city} countryId={getValues().country} />
                         </div>
                     </div>
                     <div className="mt-10">
