@@ -20,7 +20,7 @@ export const SessionProvider = ({
             }
         }
         handleSession()
-    }, [supabase])
+    }, [])
 
     return (
         <SessionContext.Provider value={{ session }}>
