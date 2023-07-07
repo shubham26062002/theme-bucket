@@ -70,8 +70,8 @@ const Profile = () => {
                             className="bg-black-2 bg-opacity-90 py-2 px-4 font-bold text-white uppercase tracking-widest">
                             Social</h1>
                         <div className="py-4 grid grid-cols-1 gap-x-12 gap-y-6">
-                            <FormInput label="GitHub Profile" id="github-profile" disabled={isEditDisabled} register={register} errors={errors} />
-                            <FormInput label="Linked-In Profile" id="linkedin-profile" disabled={isEditDisabled} register={register} errors={errors} />
+                            <FormInput label="GitHub Profile" id="githubProfile" disabled={isEditDisabled} register={register} errors={errors} />
+                            <FormInput label="Linked-In Profile" id="linkedinProfile" disabled={isEditDisabled} register={register} errors={errors} />
                         </div>
                     </div>
 

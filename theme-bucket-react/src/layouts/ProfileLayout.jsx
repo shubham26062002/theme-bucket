@@ -9,11 +9,20 @@ import { RiShutDownLine } from 'react-icons/ri'
 import { useEffect, useState } from 'react'
 
 const ProfileLayout = () => {
+    const { id } = useParams()
+
     const { session } = useSession()
 
+    console.log(session)
+
     if (!session) {
-        console.log('no session')
+        console.log('redirect because no session')
         return <Navigate to="/login" />
+    }
+
+    if (id !== session?.user.id) {
+        console.log('redirect because not same user')
+        return <Navigate to="/" />
     }
 
     const [profile, setProfile] = useState(() => null)
@@ -30,6 +39,8 @@ const ProfileLayout = () => {
         }
         getProfile()
     }, [session?.user.id])
+
+    console.log(profile)
 
     return (
         <main className="p-2">
@@ -91,7 +102,11 @@ const ProfileLayout = () => {
                 </div>
                 <div
                     className="col-start-3 col-end-13 desktop:col-start-2 desktop:col-end-6 rounded-md border-[1px] border-gray-400 shadow-sm shadow-gray-200 py-12 px-10 desktop:px-20">
-                    <Outlet context={{ session, profile }} />
+                    {session && profile ?
+                        <Outlet context={{ session, profile }} />
+                        :
+                        <p>Loading...</p>
+                    }
                 </div>
             </div>
         </main>
