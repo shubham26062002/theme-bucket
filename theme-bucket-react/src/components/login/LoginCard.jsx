@@ -10,8 +10,7 @@ const LoginCard = () => {
     const { session } = useSession()
 
     if (session) {
-        navigate(-1)
-        window.location.reload()
+        navigate('/')
     }
 
     return (
@@ -32,7 +31,7 @@ const LoginCard = () => {
                 <span className="underline font-semibold cursor-pointer"> Terms and
                     Conditions.</span>
             </p>
-            <button className="absolute top-6 right-6" onClick={() => navigate(-1)}>
+            <button className="absolute top-6 right-6" onClick={() => navigate('/')}>
                 <IoMdClose className="flex justify-center items-center h-6 w-6 fill-yellow-ochre" />
             </button>
         </div>

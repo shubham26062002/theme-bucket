@@ -85,9 +85,9 @@ const Navbar = () => {
 
                             {session
                                 ?
-                                <Link className="flex justify-center items-center rounded-full   w-fit mx-auto gap-3 group opacity-80 hover:opacity-100 transition overflow-hidden"
-                                    to="#">
-                                    <img className="h-8 w-8 aspect-square object-cover border-[2px] rounded-full border-brown"
+                                <Link className="flex justify-center items-center rounded-full w-fit mx-auto gap-3 group opacity-80 hover:opacity-100 transition overflow-hidden"
+                                    to={`profile/${session?.user.id}`}>
+                                    <img className="h-8 w-8 aspect-square object-cover rounded-full"
                                         src={session?.user.user_metadata.avatar_url} alt="User Name" />
                                 </Link>
                                 :
