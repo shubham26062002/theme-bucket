@@ -13,13 +13,14 @@ export const SessionProvider = ({
     const [session, setSession] = useState(() => null)
 
     useEffect(() => {
-        supabase.auth.getSession()
-            .then((response) => {
-                if (response.data.session) {
-                    setSession(response.data.session)
-                }
-            })
-    }, [])
+        const handleSession = async () => {
+            const { data, error } = await supabase.auth.getSession()
+            if (data.session) {
+                setSession(data.session)
+            }
+        }
+        handleSession()
+    }, [supabase])
 
     return (
         <SessionContext.Provider value={{ session }}>
