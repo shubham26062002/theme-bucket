@@ -2,7 +2,7 @@ import { useOutletContext } from 'react-router-dom'
 import FormInput from '../components/general/FormInput'
 import { useCallback, useState } from 'react'
 import FormButton from '../components/general/FormButton'
-import { get, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import FormSelectInput from '../components/general/FormSelectInput'
 
 const Profile = () => {
