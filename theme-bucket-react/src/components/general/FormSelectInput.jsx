@@ -22,6 +22,7 @@ const FormSelectInput = ({
     validate,
     tableName,
     selected,
+    countryID,
 }) => {
     const [selectOptions, setSelectOptions] = useState(() => [])
 
@@ -70,7 +71,12 @@ const FormSelectInput = ({
                     validate: validate
                 })}
             >
-                {selectOptions.map((option) => <option key={option.id} value={option.id} selected={option.id === selected}>{option.name}</option>)}
+                {!countryID ?
+                selectOptions.map((option) => <option key={option.id} value={option.id} selected={option.id === selected}>{option.name}</option>)
+                :
+                    selectOptions.filter((option)=>{if(countryID===option.country_id) return option;}).map((filteredoption)=>
+                         <option key={filteredoption.id} value={filteredoption.id} selected={filteredoption.id === selected}>{filteredoption.name}</option>)
+                    }
             </select>
             {errors[id] && <span className="text-red-500 text-sm">{errors[id].message}</span>}
         </div >

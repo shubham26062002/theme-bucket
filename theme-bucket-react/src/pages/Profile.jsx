@@ -10,11 +10,13 @@ const Profile = () => {
 
     const [isEditDisabled, setEditDisabled] = useState(() => true)
 
+
+
     const toggleIsEditDisabled = useCallback(() => {
         setEditDisabled((previousIsEditDisabled) => !previousIsEditDisabled)
     }, [isEditDisabled])
 
-    const { register, handleSubmit, formState: { errors }, getValues } = useForm({
+    const { register, handleSubmit, formState: { errors }, getValues,watch } = useForm({
         defaultValues: {
             name: profile?.full_name,
             email: session?.user.email,
@@ -24,7 +26,7 @@ const Profile = () => {
             linkedinProfile: profile?.linkedin_url,
         },
     })
-
+    
     const onSubmit = (data) => {
         setEditDisabled(true)
 
@@ -46,8 +48,8 @@ const Profile = () => {
                         <div className="py-4 grid grid-cols-1 desktop:grid-cols-2 gap-x-12 gap-y-6">
                             <FormInput label="Name" id="name" disabled={isEditDisabled} register={register} errors={errors} />
                             <FormInput label="Email" id="email" disabled register={register} errors={errors} />
-                            <FormSelectInput label="Country" id="country" tableName="countries" register={register} errors={errors} disabled={isEditDisabled} selected={getValues().country} />
-                            <FormSelectInput label="City" id="city" tableName="cities" register={register} errors={errors} disabled={isEditDisabled} selected={getValues().city} countryId={getValues().country} />
+                            <FormSelectInput label="Country" id="country" tableName="countries" register={register} errors={errors} disabled={isEditDisabled} selected={getValues().country} countryID={false} />
+                            <FormSelectInput label="City" id="city" tableName="cities" register={register} errors={errors} disabled={isEditDisabled} selected={getValues().city} countryID={watch().country} />
                         </div>
                     </div>
                     <div className="mt-10">
