@@ -4,6 +4,8 @@ import { useCallback, useState } from 'react'
 import FormButton from '../components/general/FormButton'
 import { useForm } from 'react-hook-form'
 import FormSelectInput from '../components/general/FormSelectInput'
+import { toast } from 'react-hot-toast'
+import { supabase } from '../libs/supabase-client'
 
 const Profile = () => {
     const { session, profile } = useOutletContext()
@@ -30,7 +32,23 @@ const Profile = () => {
     const onSubmit = (data) => {
         setEditDisabled(true)
 
-        console.log(data)
+        
+        toast.promise(
+            supabase.from("profiles").update({
+                    full_name:data.name || null,
+                    country_id:data.country || null,
+                    city_id:data.city || null,
+                    github_url: data.githubProfile || null,
+                    linkedin_url:data.linkedinProfile || null
+                }).eq("id",session?.user.id),
+             {
+               loading: 'Saving...',
+               success: "Profile updated succesfully",
+               error: "Error occurred while updating your profile"
+             }
+           ).finally(()=>{
+            setEditDisabled(false)
+           })
     }
 
     return (
