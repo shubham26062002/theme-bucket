@@ -7,6 +7,8 @@ import Profile from './pages/Profile'
 import ProfileLayout from './layouts/ProfileLayout'
 import { SessionProvider } from './hooks/useSession'
 import CategoriesLayout from './layouts/CategoriesLayout'
+import CategoryProducts from './pages/CategoryProducts'
+import Product from './pages/Product'
 
 const App = () => {
   return (
@@ -17,8 +19,10 @@ const App = () => {
           <Route path="/" element={<RootLayout />}>
             <Route index element={<Home />} />
             <Route path="categories" element={<CategoriesLayout />} >
-              <Route index element={<Categories/>}/>
-              </Route>
+              <Route index element={<Categories />} />
+              <Route path=":id/products" element={<CategoryProducts />} />
+              <Route path=":categoryId/products/:productId" element={<Product />} />
+            </Route>
             <Route path="/profile/:id" element={<ProfileLayout />}>
               <Route index element={<Profile />} />
             </Route>

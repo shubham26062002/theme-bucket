@@ -13,8 +13,6 @@ const ProfileLayout = () => {
 
     const { session } = useSession()
 
-    console.log(session)
-
     if (!session) {
         console.log('redirect because no session')
         return <Navigate to="/login" />
@@ -39,8 +37,6 @@ const ProfileLayout = () => {
         }
         getProfile()
     }, [session?.user.id])
-
-    console.log(profile)
 
     return (
         <main className="p-2">

@@ -1,6 +1,8 @@
 import ToolsStackInstance from '../components/home/ToolsStackInstance'
 import CategoryCard from '../components/home/CategoryCard'
 import { Link } from 'react-router-dom'
+import { useCategories } from '../hooks/useCategories'
+import { useEffect } from 'react'
 
 const Home = () => {
     const toolsStackData = [
@@ -22,23 +24,7 @@ const Home = () => {
         },
     ]
 
-    const trendingCategoriesData = [
-        {
-            name: 'Portfolio',
-            imageUrl: '/images/portfolio-website.jpg',
-            to: '#',
-        },
-        {
-            name: 'Ecommerce',
-            imageUrl: '/images/ecommerce-website.jpg',
-            to: '#',
-        },
-        {
-            name: 'Blog',
-            imageUrl: '/images/blog-website.jpg',
-            to: '#',
-        },
-    ]
+    const { categories } = useCategories()
 
     return (
         <main>
@@ -52,9 +38,15 @@ const Home = () => {
                     Trending <span className="uppercase font-bold">Categories</span>
                 </h1>
                 <div className="mx-10 desktop:mx-28 grid grid-cols-1 desktop:grid-cols-3 gap-16">
-                    {trendingCategoriesData.map((trendingCategoryData, index) =>
-                        <CategoryCard key={index} to={trendingCategoriesData.to} imageUrl={trendingCategoryData.imageUrl} name={trendingCategoryData.name} />
-                    )}
+                    {
+                        categories.map((category, index) => {
+                            if (index < 3) {
+                                return (
+                                    <CategoryCard key={index} to={`/categories/${category.id}/products`} imageUrl={category.image_url} name={category.name} />
+                                )
+                            }
+                        })
+                    }
                 </div>
             </div>
             <div className="bg-gray-100 py-12">
@@ -70,7 +62,7 @@ const Home = () => {
                             possibilities and watch your business thrive!"
                         </p>
                         <div className="mt-8">
-                            <Link to="#"
+                            <Link to="categories"
                                 className="inline-block px-8 py-3 bg-brown bg-opacity-90 hover:bg-opacity-100 transition text-white rounded-md">Get
                                 Started</Link>
                         </div>

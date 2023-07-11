@@ -2,7 +2,7 @@ import { useOutletContext } from 'react-router-dom'
 import FormInput from '../components/general/FormInput'
 import { useCallback, useState } from 'react'
 import FormButton from '../components/general/FormButton'
-import { useForm } from 'react-hook-form'
+import { set, useForm } from 'react-hook-form'
 import FormSelectInput from '../components/general/FormSelectInput'
 import { toast } from 'react-hot-toast'
 import { supabase } from '../libs/supabase-client'
@@ -18,7 +18,7 @@ const Profile = () => {
         setEditDisabled((previousIsEditDisabled) => !previousIsEditDisabled)
     }, [isEditDisabled])
 
-    const { register, handleSubmit, formState: { errors }, getValues,watch } = useForm({
+    const { register, handleSubmit, formState: { errors }, getValues, watch } = useForm({
         defaultValues: {
             name: profile?.full_name,
             email: session?.user.email,
@@ -28,27 +28,30 @@ const Profile = () => {
             linkedinProfile: profile?.linkedin_url,
         },
     })
-    
+
     const onSubmit = (data) => {
         setEditDisabled(true)
 
-        
         toast.promise(
-            supabase.from("profiles").update({
-                    full_name:data.name || null,
-                    country_id:data.country || null,
-                    city_id:data.city || null,
-                    github_url: data.githubProfile || null,
-                    linkedin_url:data.linkedinProfile || null
-                }).eq("id",session?.user.id),
-             {
-               loading: 'Saving...',
-               success: "Profile updated succesfully",
-               error: "Error occurred while updating your profile"
-             }
-           ).finally(()=>{
-            setEditDisabled(false)
-           })
+            supabase.from('profiles').update({
+                full_name: data.name || null,
+                country_id: data.country || null,
+                city_id: data.city || null,
+                github_url: data.githubProfile || null,
+                linkedin_url: data.linkedinProfile || null
+            }).eq("id", session?.user.id),
+            {
+                loading: 'Saving...',
+                success: () => {
+                    setEditDisabled(false)
+                    return "Profile updated successfully!"
+                },
+                error: () => {
+                    setEditDisabled(false)
+                    return "Error occurred while updating your profile."
+                }
+            }
+        )
     }
 
     return (
