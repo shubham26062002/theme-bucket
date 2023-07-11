@@ -12,6 +12,18 @@
     @apply font-poppins;
 }
 
+@media (min-width: 768px) {
+    :root {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 1024px) {
+    :root {
+        font-size: 18px;
+    }
+}
+
 *::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #FAFBFD;
