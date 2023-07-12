@@ -54,16 +54,16 @@ const ProfileLayout = () => {
                     <div
                         className="flex-1 h-full rounded-md border-[1px] overflow-y-auto border-gray-400 shadow-sm shadow-gray-200 overflow-hidden">
                         <div className="flex flex-col h-full gap-3 p-3">
-                            <ProfileLink to="#" icon={FiUser} label="My Profile" />
-                            <ProfileLink to="#" icon={FiCreditCard} label="My Purchases" />
-                            <ProfileLink to="#" icon={AiOutlineHeart} label="My Wishlist" />
+                            <ProfileLink to={`/profile/${session?.user.id}`} icon={FiUser} label="My Profile" />
+                            <ProfileLink to={`/profile/${session?.user.id}/purchases`} icon={FiCreditCard} label="My Purchases" />
+                            <ProfileLink to={`/profile/${session?.user.id}/wishlist`} icon={AiOutlineHeart} label="My Wishlist" />
 
                             {
                                 profile?.role === 'SELLER'
                                     ?
-                                    <ProfileLink to="#" icon={BiDollar} label="My Sales" />
+                                    <ProfileLink to={`/profile/${session?.user.id}/sales`} icon={BiDollar} label="My Sales" />
                                     :
-                                    <ProfileLink to="#" icon={BiDollar} label="Become a Seller" />
+                                    <ProfileLink to={`/profile/${session?.user.id}/become-a-seller`} icon={BiDollar} label="Become a Seller" />
                             }
 
                             <LogOutButton label="Log out" icon={RiShutDownLine} />
@@ -80,16 +80,16 @@ const ProfileLayout = () => {
                     <div
                         className="flex-1 h-full rounded-md border-[1px] overflow-y-auto border-gray-400 shadow-sm shadow-gray-200 overflow-hidden">
                         <div className="flex flex-col h-full gap-3 p-1.5">
-                            <ProfileLink to="#" icon={FiUser} label="My Profile" type="mobile" />
-                            <ProfileLink to="#" icon={FiCreditCard} label="My Purchases" type="mobile" />
-                            <ProfileLink to="#" icon={AiOutlineHeart} label="My Wishlist" type="mobile" />
+                            <ProfileLink to={`/profile/${session?.user.id}`}icon={FiUser} label="My Profile" type="mobile" />
+                            <ProfileLink to={`/profile/${session?.user.id}/purchases`} icon={FiCreditCard} label="My Purchases" type="mobile" />
+                            <ProfileLink to={`/profile/${session?.user.id}/wishlist`} icon={AiOutlineHeart} label="My Wishlist" type="mobile" />
 
                             {
                                 profile?.role === 'SELLER'
                                     ?
-                                    <ProfileLink to="#" icon={BiDollar} label="My Sales" type="mobile" />
+                                    <ProfileLink to={`/profile/${session?.user.id}/sales`} icon={BiDollar} label="My Sales" type="mobile" />
                                     :
-                                    <ProfileLink to="#" icon={BiDollar} label="Become a Seller" type="mobile" />
+                                    <ProfileLink to={`/profile/${session?.user.id}/become-a-seller`} icon={BiDollar} label="Become a Seller" type="mobile" />
                             }
 
                             <LogOutButton label="Log out" icon={RiShutDownLine} type="mobile" />

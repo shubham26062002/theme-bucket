@@ -9,6 +9,7 @@ import { SessionProvider } from './hooks/useSession'
 import CategoriesLayout from './layouts/CategoriesLayout'
 import CategoryProducts from './pages/CategoryProducts'
 import Product from './pages/Product'
+import Purchases from './pages/Purchases'
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
             </Route>
             <Route path="/profile/:id" element={<ProfileLayout />}>
               <Route index element={<Profile />} />
+              <Route path="purchases" element={<Purchases />} />
             </Route>
           </Route>
         </Routes>
