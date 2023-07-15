@@ -1,10 +1,23 @@
 import { useParams } from 'react-router-dom'
 import ProductTopCard from '../components/products/ProductTopCard'
 import ProductCard from '../components/products/ProductCard'
+import { useEffect, useState } from 'react'
+import {supabase } from '../libs/supabase-client'
 
 const CategoryProducts = () => {
     const { id } = useParams()
+    const [products, setproducts] = useState(() => [])
 
+    useEffect(() => {
+        const getProducts = async () => {
+            const { data, error } = await supabase
+                .from('products')
+                .select()
+                .eq('category_id',id)
+            setproducts(data)
+        }
+        getProducts()
+    }, [id])
     return (
         <>
             <div
@@ -16,15 +29,12 @@ const CategoryProducts = () => {
                     </h1>
                     <div class="grid grid-cols-1 desktop:grid-cols-3 mt-10 gap-8">
 
-                        <ProductTopCard name="  Tienda - eCommerce Joomla 4 Template
-                                    with Page Builder" publisher="JoomShaper" image="/images/ecommerce-website.jpg" averageratings="4.5"
-                            price="6000" ratingscount="100" />
-                             <ProductTopCard name="  Tienda - eCommerce Joomla 4 Template
-                                    with Page Builder" publisher="JoomShaper" image="/images/ecommerce-website.jpg" averageratings="4.5"
-                            price="6000" ratingscount="100" />
-                             <ProductTopCard name="  Tienda - eCommerce Joomla 4 Template
-                                    with Page Builder" publisher="JoomShaper" image="/images/ecommerce-website.jpg" averageratings="4.5"
-                            price="6000" ratingscount="100" />
+                    {products.map((product, index) => {
+                            if (index < 3) {
+                                return <ProductTopCard key={index} to={`/categories/${id}/products`} image={product.image_url} name={product.name} publisher={product.publisher_id} averagerating={product.avg_rating} price={product.price}  ratingscount="100" />
+                            }
+                        })}
+                        
                     </div>
                 </div>
 
@@ -36,19 +46,16 @@ const CategoryProducts = () => {
                         </h1>
                         <div class="flex justify-start items-center gap-4">
                             <p class="text-gray-700 font-medium text-lg">Total Products Available: </p>
-                            <p class="text-white bg-gray-700 inline-block py-2 px-4 font-bold text-lg">9</p>
+                            <p class="text-white bg-gray-700 inline-block py-2 px-4 font-bold text-lg">{products.length}</p>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 mt-10 desktop:px-24 gap-8">
-                        <ProductCard name="  Tienda - eCommerce Joomla 4 Template
-                                    with Page Builder" publisher="JoomShaper" image="/images/ecommerce-website.jpg" averagerating="4.5"
-                            price="6000" ratingscount="100" />
-                                <ProductCard name="  Tienda - eCommerce Joomla 4 Template
-                                    with Page Builder" publisher="JoomShaper" image="/images/ecommerce-website.jpg" averagerating="4.5"
-                            price="6000" ratingscount="100" />
-                                <ProductCard name="  Tienda - eCommerce Joomla 4 Template
-                                    with Page Builder" publisher="JoomShaper" image="/images/ecommerce-website.jpg" averagerating="4.5"
-                            price="6000" ratingscount="100" />
+                    {products.map((product, index) => {
+                            if (index >= 3) {
+                                return <ProductCard key={index} to={`/categories/${id}/products`} image={product.image_url} name={product.name} publisher={product.publisher_id} averagerating={product.avg_rating} price={product.price}  ratingscount="100" />
+                            }
+                        })}
+                       
                             
                     </div>
                 </div>

@@ -8,11 +8,12 @@ const ProductTopCard = ({
     averageratings,
     ratingscount,
     price,
+    to,
 
 }) => {
   return (
     <>
-    <Link class="group" to="#">
+    <Link class="group" to={to}>
                         <div
                             class="rounded-lg overflow-hidden shadow-sm shadow-gray-300 group-hover:shadow-md group-hover:-translate-y-1 transition">
                             <img class="block aspect-video" src={image}
