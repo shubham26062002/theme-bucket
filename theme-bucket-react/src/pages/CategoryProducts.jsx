@@ -12,12 +12,14 @@ const CategoryProducts = () => {
         const getProducts = async () => {
             const { data, error } = await supabase
                 .from('products')
-                .select()
+                .select(`*,profiles(full_name),ratings(count)`)
                 .eq('category_id',id)
+                .order('avg_rating',{ascending: false, nullsFirst: false})
             setproducts(data)
         }
         getProducts()
     }, [id])
+
     return (
         <>
             <div
@@ -31,7 +33,7 @@ const CategoryProducts = () => {
 
                     {products.map((product, index) => {
                             if (index < 3) {
-                                return <ProductTopCard key={index} to={`/categories/${id}/products`} image={product.image_url} name={product.name} publisher={product.publisher_id} averagerating={product.avg_rating} price={product.price}  ratingscount="100" />
+                                return <ProductTopCard key={index} to={`/categories/${id}/products/${product.id}`} image={product.image_url} name={product.name} publisher={product.profiles.full_name} averageratings={product.avg_rating} price={product.price}  ratingscount={product.ratings[0].count} />
                             }
                         })}
                         
@@ -52,7 +54,7 @@ const CategoryProducts = () => {
                     <div class="grid grid-cols-1 mt-10 desktop:px-24 gap-8">
                     {products.map((product, index) => {
                             if (index >= 3) {
-                                return <ProductCard key={index} to={`/categories/${id}/products`} image={product.image_url} name={product.name} publisher={product.publisher_id} averagerating={product.avg_rating} price={product.price}  ratingscount="100" />
+                                return <ProductCard key={index} to={`/categories/${id}/products/${product.id}`} image={product.image_url} name={product.name} publisher={product.profiles.full_name} averageratings={product.avg_rating} price={product.price}  ratingscount={product.ratings[0].count} />
                             }
                         })}
                        

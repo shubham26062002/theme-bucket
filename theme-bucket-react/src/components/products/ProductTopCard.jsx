@@ -27,7 +27,7 @@ const ProductTopCard = ({
                                     by {publisher}</p>
                                 <div class="mt-3 flex justify-between items-center">
                                     <div class="flex justify-start items-center gap-1.5">
-                                        <span class="text-sm font-semibold text-neutral-700 leading-none">{averageratings}</span>
+                                        <span class="text-sm font-semibold text-neutral-700 leading-none">{averageratings || 0}</span>
                                         <svg className="flex justify-center items-center w-4 h-4 fill-yellow-ochre stroke-yellow-ochre"
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
