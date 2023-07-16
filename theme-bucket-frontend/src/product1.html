@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" href="./assets/images/favicon.svg" />
+
+    <link rel="stylesheet" href="../dist/css/index.css" />
+
+    <!-- title -->
+    <title>ThemeBucket Frontend</title>
+</head>
+
+<body>
+    <!-- desktop navbar -->
+    <header class="hidden desktop:block">
+        <div class="py-4 mx-28 flex justify-between items-center">
+            <!-- logo -->
+            <a class="group" href="#">
+                <h1 class="font-space-grotesk text-[42px] font-bold tracking-tighter leading-tight text-brown group-hover:text-yellow-ochre transition"
+                    id="header-logo">
+                    Theme<span
+                        class="text-yellow-ochre font-space-grotesk group-hover:text-brown transition">Bucket</span>.
+                </h1>
+            </a>
+            <!-- searchbar -->
+            <div class="flex justify-start rounded-full items-center border-[1px] border-brown focus-within:ring-2 ring-yellow-ochre"
+                id="searchbar">
+                <select class="text-sm font-semibold py-2 px-4 focus:outline-none rounded-l-full text-brown">
+                    <option disabled selected hidden>Filter by</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+                <input class="py-[8.4px] px-4 focus:outline-none text-sm min-w-[320px]" placeholder="I'm looking for..."
+                    id="searchbar-input" />
+                <button class="flex justify-start items-center p-3 rounded-r-full bg-yellow-ochre">
+                    <svg class="flex justify-start items-center h-4 w-4 fill-white" xmlns="http://www.w3.org/2000/svg"
+                        height="1em" viewBox="0 0 512 512">
+                        <path
+                            d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+                    </svg>
+                </button>
+            </div>
+            <!-- cart, wishlist, login, profile -->
+            <div class="flex items-center justify-start gap-5">
+                <a class="flex justify-start items-center relative" href="#">
+                    <svg class="flex justify-start items-center h-6 w-6 stroke-brown" xmlns="http://www.w3.org/2000/svg"
+                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <div
+                        class="bg-yellow-ochre text-white absolute text-[10px] font-medium py-1 leading-none w-[18px] top-0 right-0 translate-x-[40%] translate-y-[-40%] text-center rounded-full">
+                        1
+                    </div>
+                </a>
+                <a class="flex justify-start items-center relative" href="#">
+                    <svg class="flex justify-start items-center h-6 w-6 stroke-brown" xmlns="http://www.w3.org/2000/svg"
+                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                        </path>
+                    </svg>
+                    <div
+                        class="absolute text-[10px] font-medium py-1 leading-none w-[18px] top-0 right-0 translate-x-[40%] translate-y-[-40%] text-center rounded-full bg-yellow-ochre text-white">
+                        1
+                    </div>
+                </a>
+                <a class="flex justify-start rounded-full border-[1px] border-yellow-ochre items-center gap-2 py-2 px-5 hover:bg-yellow-ochre group transition"
+                    href="#">
+                    <span class="font-medium text-sm text-yellow-ochre group-hover:text-white transition">Log in</span>
+                    <svg class="flex justify-start items-center h-5 w-5 stroke-yellow-ochre group-hover:stroke-white transition"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-user">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </a>
+                <a class="flex justify-center items-center rounded-full border-[2px] border-brown overflow-hidden"
+                    href="#">
+                    <img class="h-8 w-8 aspect-square object-cover" src="./assets/images/profile-placeholder.png"
+                        alt="User Name" />
+                </a>
+            </div>
+        </div>
+        <nav class="mt-3 px-28 bg-black-2">
+            <!-- navbar links -->
+            <div>
+                <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
+                    href="#">Home</a>
+                <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
+                    href="#">Collections</a>
+                <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
+                    href="#">Shop</a>
+                <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
+                    href="#">Journal</a>
+                <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
+                    href="#">About</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- mobile header -->
+    <header class="desktop:hidden ">
+        <div class="py-4 mx-6 flex justify-between items-center">
+            <!-- logo -->
+            <a class="group" href="#">
+                <h1 class="font-space-grotesk text-4xl font-bold tracking-tighter leading-tight text-brown group-hover:text-yellow-ochre transition"
+                    id="header-logo">
+                    Theme<span
+                        class="text-yellow-ochre font-space-grotesk group-hover:text-brown transition">Bucket</span>.
+                </h1>
+            </a>
+            <!-- cart, open sidebar -->
+            <div class="flex items-center justify-start gap-5">
+                <a class="flex justify-start items-center relative" href="#">
+                    <svg class="flex justify-start items-center h-6 w-6 stroke-brown" xmlns="http://www.w3.org/2000/svg"
+                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <div
+                        class="bg-yellow-ochre text-white absolute text-[10px] font-medium py-1 leading-none w-[18px] top-0 right-0 translate-x-[40%] translate-y-[-40%] text-center rounded-full">
+                        1
+                    </div>
+                </a>
+                <button
+                    class="flex justify-start items-center p-1.5 rounded-sm bg-yellow-ochre bg-opacity-80 hover:bg-opacity-100 transition"
+                    id="open-sidebar">
+                    <svg class="flex justify-start items-center h-5 w-5 stroke-brown" xmlns="http://www.w3.org/2000/svg"
+                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- searchbar -->
+        <div class="pt-4 pb-8 mx-6">
+            <div class="inline-flex w-full justify-start rounded-full items-center border-[1px] border-brown focus-within:ring-2 ring-yellow-ochre"
+                id="searchbar">
+                <select class="text-sm font-semibold py-2 px-4 focus:outline-none rounded-l-full text-brown">
+                    <option disabled selected hidden>Filter by</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+                <input class="py-[8.4px] px-4 focus:outline-none text-sm inline-block w-full"
+                    placeholder="I'm looking for..." id="searchbar-input" />
+                <button class="flex justify-start items-center p-3 rounded-r-full bg-yellow-ochre">
+                    <svg class="flex justify-start items-center h-4 w-4 fill-white" xmlns="http://www.w3.org/2000/svg"
+                        height="1em" viewBox="0 0 512 512">
+                        <path
+                            d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="h-3 bg-black-2"></div>
+    </header>
+
+    <!-- mobile sidebar  -->
+    <aside
+        class="opacity-50 scale-90 translate-x-[110%] py-16  desktop:hidden fixed top-0 right-0 bottom-0 h-screen w-4/5 min-w-[256px] max-w-[380px] bg-black-2 z-10 bg-opacity-95 transition-all duration-400 ease-in-out "
+        id="sidebar">
+        <div class=" h-full w-full flex flex-col justify-around items-center ">
+            <!-- logo -->
+            <a href="#">
+                <h1 class="font-space-grotesk text-[42px] font-bold tracking-tighter leading-tight text-yellow-ochre"
+                    id="header-logo">
+                    Theme<span class="text-yellow-ochre font-space-grotesk">Bucket</span>.
+                </h1>
+            </a>
+            <!-- sidebar links -->
+            <div>
+                <div class="flex flex-col justify-center items-center ">
+                    <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
+                        href="#">HOME</a>
+                    <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
+                        href="#">COLLECTIONS</a>
+                    <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
+                        href="#">SHOP</a>
+                    <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
+                        href="#">JOURNAL</a>
+                    <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
+                        href="#">ABOUT</a>
+                </div>
+                <!-- log in, profile -->
+                <div class="mt-4">
+                    <a class="flex justify-center rounded-full border-[1px] border-yellow-ochre items-center gap-2 py-2 px-5 hover:bg-yellow-ochre group transition "
+                        href="#">
+                        <span class="font-medium text-sm text-yellow-ochre group-hover:text-white transition">Log
+                            in</span>
+                        <svg class="flex justify-start items-center h-5 w-5 stroke-yellow-ochre group-hover:stroke-white transition"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-user">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>
+                    <a class="flex justify-center items-center rounded-full   w-fit mx-auto gap-3 group opacity-80 hover:opacity-100 transition overflow-hidden"
+                        href="#">
+                        <img class="h-8 w-8 aspect-square object-cover border-[2px] rounded-full border-brown"
+                            src="./assets/images/profile-placeholder.png" alt="User Name" /><span
+                            class="text-white font-semibold text-sm group-hover:text-yellow-ochre transition">User
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <!-- sidebar social links -->
+            <div class="flex justify-start items-center gap-3">
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-mail">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-github">
+                        <path
+                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                        </path>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-twitter">
+                        <path
+                            d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                        </path>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-facebook">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-linkedin">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-instagram">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+            </div>
+            <!-- close sidebar -->
+            <button
+                class="flex justify-start items-center p-1.5 rounded-full bg-yellow-ochre bg-opacity-80 hover:bg-opacity-100 transition"
+                id="close-sidebar">
+                <svg class="flex justify-start items-center h-5 w-5 stroke-brown" xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </aside>
+
+    <!-- categories page content -->
+    <main class="bg-gray-lightest p-2">
+        <div class="bg-white shadow-sm shadow-gray-400 rounded-md h-full py-12 px-6 desktop:px-28">
+            <div class="grid grid-cols-1 desktop:grid-cols-3 desktop:gap-8">
+                <div class="flex flex-col desktop:flex-row gap-6 desktop:col-start-1 desktop:col-end-3">
+                    <div class="flex-1">
+                        <div class="rounded-md overflow-hidden">
+                            <img class="w-full aspect-video object-cover" src="./assets/images/blog-websites.jpg"
+                                alt="Blog Website" />
+                        </div>
+                        <div class="mt-3 flex justify-center items-center gap-3">
+                            <img class="rounded-sm w-[16%] aspect-video object-cover ring-2 ring-gray-600"
+                                src="./assets/images/blog-websites.jpg" alt="Blog Website" />
+                            <img class="rounded-sm w-[16%] aspect-video object-cover"
+                                src="./assets/images/blog-websites.jpg" alt="Blog Website" />
+                            <img class="rounded-sm w-[16%] aspect-video object-cover"
+                                src="./assets/images/blog-websites.jpg" alt="Blog Website" />
+                            <img class="rounded-sm w-[16%] aspect-video object-cover"
+                                src="./assets/images/blog-websites.jpg" alt="Blog Website" />
+                        </div>
+                    </div>
+                    <div class="mt-14 mb-3 desktop:mt-3">
+                        <button>
+                            <!-- <svg class="flex justify-center items-center stroke-2 stroke-rose-600 h-7 w-7"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-heart">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                </path>
+                            </svg> -->
+                            <svg class="flex justify-center items-center stroke-2 stroke-rose-500 fill-rose-500 h-7 w-7"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-heart">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-neutral-700 leading-normal">
+                        Tienda - eCommerce Joomla 4 Template
+                        with Page Builder</h1>
+                    <p class="text-gray-500">
+                        by JoomShaper</p>
+                    <div class="mt-4 flex justify-start items-center gap-1.5">
+                        <span class="font-semibold text-neutral-700 leading-none">4.5</span>
+                        <svg class="flex justify-center items-center w-5 h-5 fill-yellow-ochre stroke-yellow-ochre"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-star">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                            </polygon>
+                        </svg>
+                        <span class="font-light text-neutral-500 leading-none">(100)</span>
+                    </div>
+                    <p class="mt-6 font-bold text-2xl text-neutral-700">Rs. 5000
+                    </p>
+                    <div class="space-y-3 pt-6 max-w-sm">
+                        <button
+                            class="inline-flex w-full justify-center items-center gap-2 py-2 rounded-md border-[1px] border-gray-300 hover:bg-gray-50 hover:border-gray-500 transition">
+                            <svg class="flex justify-start items-center h-5 w-5 stroke-brown"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-shopping-bag">
+                                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                <line x1="3" y1="6" x2="21" y2="6"></line>
+                                <path d="M16 10a4 4 0 0 1-8 0"></path>
+                            </svg>
+                            <span class="font-bold uppercase tracking-widest text-xs text-neutral-700">Add to
+                                Cart</span>
+                        </button>
+                        <a href="#"
+                            class="inline-flex w-full justify-center items-center gap-2 py-2 rounded-md border-[1px] border-gray-300 hover:bg-gray-50 hover:border-gray-500 transition">
+                            <svg class="flex justify-start items-center h-5 w-5 stroke-brown"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-layout">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="3" y1="9" x2="21" y2="9"></line>
+                                <line x1="9" y1="21" x2="9" y2="9"></line>
+                            </svg>
+                            <span class="font-bold uppercase tracking-widest text-xs text-neutral-700">Live
+                                Preview</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-14 grid grid-cols-1 desktop:grid-cols-3 gap-14">
+                <div class="desktop:col-start-1 desktop:col-end-3">
+                    <p class="text-lg font-bold text-black-2">
+                        Description</p>
+
+                    <div class="py-6 space-y-5">
+                        <p class="text-neutral-600 text-sm leading-relaxed">You don’t need to do much effort, as
+                            LaTulipe has pre-made
+                            page
+                            templates for you. The theme
+                            includes 7 homepages, 9 food menu pages with variations ( with / without images, categories
+                            etc. ), 10+ portfolio pages, 7 gallery pages, reservation contact form, about us, team,
+                            pricing, services, faq pages to name a few. The ready-made page templates created with
+                            Elementor page builder will speed up finishing completing your fresh restaurant site.
+                        </p>
+                    </div>
+                    <!-- comment box -->
+                    <div class="flex flex-col">
+                        <div class="flex gap-4">
+                            <label for="comment">
+                                Write your review:
+                            </label>
+                            <div>
+                                <input
+                                    class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-gray-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-gray-500 focus:ring-gray-500 focus:ring-1 sm:text-sm"
+                                    placeholder="Search for anything..." type="text" name="search" />
+                            </div>
+                            <div>
+                                <button class="bg-yellow-ochre rounded-md px-2 py-1 hover:bg-amber-500"><span
+                                        class="text-gray-700 hover:text-black ">send</span></button>
+                            </div>
+                        </div>
+                        <div>All comments:</div>
+                        <div class="my-4 h-96 overflow-auto flex flex-col gap-4">
+
+                            <div class="bg-gray-200 py-2 px-4 rounded-xl w-[650px] self-center">
+                                <div
+                                    class="flex w-40 gap-2 bg-gray-400 rounded-3xl px-1 py-[2px] align-middle border-solid border-[2px] border-gray-500 ">
+                                    <img class="h-8 w-8 aspect-square object-cover border-[2px] rounded-full border-brown"
+                                        src="./assets/images/profile-placeholder.png" alt="User Name"><span
+                                        class="align-middle ">user
+                                        name</span>
+                                </div>
+                                <div>very nice and suffiecient work good to see this Lorem ipsum dolor sit amet
+                                    consectetur,
+                                    adipisicing elit. Dolores temporibus facilis eveniet quibusdam quam facere
+                                    voluptatibus
+                                    quae molestiae ex fugiat!</div>
+                            </div>
+                            <div class="bg-gray-200 py-2 px-4 rounded-md w-[650px] self-center">
+                                <div
+                                    class="flex w-40 gap-2 bg-gray-400 rounded-3xl px-1 py-[2px] align-middle border-solid border-[2px] border-gray-500 ">
+                                    <img class="h-8 w-8 aspect-square object-cover border-[2px] rounded-full border-brown"
+                                        src="./assets/images/profile-placeholder.png" alt="User Name"><span
+                                        class="align-middle">user
+                                        name</span>
+                                </div>
+                                <div>very nice and suffiecient work good to see this Lorem ipsum dolor sit amet
+                                    consectetur,
+                                    adipisicing elit. Dolores temporibus facilis eveniet quibusdam quam facere
+                                    voluptatibus
+                                    quae molestiae ex fugiat!</div>
+                            </div>
+                            <div class="bg-gray-200 py-2 px-4 rounded-md w-[650px] self-center">
+                                <div
+                                    class="flex w-40 gap-2 bg-gray-400 rounded-3xl px-1 py-[2px] align-middle border-solid border-[2px] border-gray-500 ">
+                                    <img class="h-8 w-8 aspect-square object-cover border-[2px] rounded-full border-brown"
+                                        src="./assets/images/profile-placeholder.png" alt="User Name"><span
+                                        class="align-middle">user
+                                        name</span>
+                                </div>
+                                <div>very nice and suffiecient work good to see this Lorem ipsum dolor sit amet
+                                    consectetur,
+                                    adipisicing elit. Dolores temporibus facilis eveniet quibusdam quam facere
+                                    voluptatibus
+                                    quae molestiae ex fugiat!</div>
+                            </div>
+                            <div class="bg-gray-200 py-2 px-4 rounded-md w-[650px] self-center">
+                                <div
+                                    class="flex w-40 gap-2 bg-gray-400 rounded-3xl px-1 py-[2px] align-middle border-solid border-[2px] border-gray-500 ">
+                                    <img class="h-8 w-8 aspect-square object-cover border-[2px] rounded-full border-brown"
+                                        src="./assets/images/profile-placeholder.png" alt="User Name"><span
+                                        class="align-middle">user
+                                        name</span>
+                                </div>
+                                <div>very nice and suffiecient work good to see this Lorem ipsum dolor sit amet
+                                    consectetur,
+                                    adipisicing elit. Dolores temporibus facilis eveniet quibusdam quam facere
+                                    voluptatibus
+                                    quae molestiae ex fugiat!</div>
+                            </div>
+                            <div class="bg-gray-200 py-2 px-4 rounded-md w-[650px] self-center">
+                                <div
+                                    class="flex w-40 gap-2 bg-gray-400 rounded-3xl px-1 py-[2px] align-middle border-solid border-[2px] border-gray-500 ">
+                                    <img class="h-8 w-8 aspect-square object-cover border-[2px] rounded-full border-brown"
+                                        src="./assets/images/profile-placeholder.png" alt="User Name"><span
+                                        class="align-middle">user
+                                        name</span>
+                                </div>
+                                <div>very nice and suffiecient work good to see this Lorem ipsum dolor sit amet
+                                    consectetur,
+                                    adipisicing elit. Dolores temporibus facilis eveniet quibusdam quam facere
+                                    voluptatibus
+                                    quae molestiae ex fugiat!</div>
+                            </div>
+                            <div class="bg-gray-200 py-2 px-4 rounded-md w-[650px] self-center">
+                                <div
+                                    class="flex w-40 gap-2 bg-gray-400 rounded-3xl px-1 py-[2px] align-middle border-solid border-[2px] border-gray-500 ">
+                                    <img class="h-8 w-8 aspect-square object-cover border-[2px] rounded-full border-brown"
+                                        src="./assets/images/profile-placeholder.png" alt="User Name"><span
+                                        class="align-middle">user
+                                        name</span>
+                                </div>
+                                <div>very nice and suffiecient work good to see this Lorem ipsum dolor sit amet
+                                    consectetur,
+                                    adipisicing elit. Dolores temporibus facilis eveniet quibusdam quam facere
+                                    voluptatibus
+                                    quae molestiae ex fugiat!</div>
+                            </div>
+                            <div class="bg-gray-200 py-2 px-4 rounded-md w-[650px] self-center">
+                                <div
+                                    class="flex w-40 gap-2 bg-gray-400 rounded-3xl px-1 py-[2px] align-middle border-solid border-[2px] border-gray-500 ">
+                                    <img class="h-8 w-8 aspect-square object-cover border-[2px] rounded-full border-brown"
+                                        src="./assets/images/profile-placeholder.png" alt="User Name"><span
+                                        class="align-middle">user
+                                        name</span>
+                                </div>
+                                <div>very nice and suffiecient work good to see this Lorem ipsum dolor sit amet
+                                    consectetur,
+                                    adipisicing elit. Dolores temporibus facilis eveniet quibusdam quam facere
+                                    voluptatibus
+                                    quae molestiae ex fugiat!</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="row-start-1 row-end-2 desktop:col-start-3 desktop:col-span-4 border-[1px] py-6 px-4 border-gray-300 rounded-lg space-y-4">
+                    <div>
+                        <h1 class="text-neutral-700 font-bold uppercase inline-block">Published At: </h1>
+                        <span>30 Feburary, 20000 </span>
+                    </div>
+                    <div class="h-[1px] bg-gray-300"></div>
+                    <div>
+                        <h1 class="text-neutral-700 font-bold uppercase">Tools Stack</h1>
+                        <div class="mt-4 space-y-2">
+                            <span
+                                class="px-6 text-xs py-2 inline-block rounded-l-full rounded-r-full border-[1px] border-neutral-400">HTML</span>
+                            <span
+                                class="px-6 text-xs py-2 inline-block rounded-l-full rounded-r-full border-[1px] border-neutral-400">CSS</span>
+                            <span
+                                class="px-6 text-xs py-2 inline-block rounded-l-full rounded-r-full border-[1px] border-neutral-400">JavaScript</span>
+                            <span
+                                class="px-6 text-xs py-2 inline-block rounded-l-full rounded-r-full border-[1px] border-neutral-400">React</span>
+                            <span
+                                class="px-6 text-xs py-2 inline-block rounded-l-full rounded-r-full border-[1px] border-neutral-400">SQL</span>
+                        </div>
+                    </div>
+                    <div class="h-[1px] bg-gray-300"></div>
+                    <div>
+                        <h1 class="text-neutral-700 font-bold uppercase">Categories</h1>
+                        <div class="mt-4 space-y-2">
+                            <span
+                                class="px-6 text-xs py-2 inline-block rounded-l-full rounded-r-full border-[1px] border-neutral-400">E-Commerce</span>
+                            <span
+                                class="px-6 text-xs py-2 inline-block rounded-l-full rounded-r-full border-[1px] border-neutral-400">Business</span>
+                            <span
+                                class="px-6 text-xs py-2 inline-block rounded-l-full rounded-r-full border-[1px] border-neutral-400">CMS</span>
+                        </div>
+                    </div>
+                    <div class="h-[1px] bg-gray-300"></div>
+                    <div>
+                        <h1 class="text-neutral-700 font-bold uppercase inline-block">Responsive: </h1>
+                        <span>HULK</span>
+                    </div>
+                    <div class="h-[1px] bg-gray-300"></div>
+                    <div>
+                        <h1 class="text-neutral-700 font-bold uppercase">Compatible Browsers</h1>
+                        <div class="mt-4 space-y-2">
+                            <span
+                                class="px-6 text-xs py-2 inline-block rounded-l-full rounded-r-full border-[1px] border-neutral-400">Safari</span>
+                            <span
+                                class="px-6 text-xs py-2 inline-block rounded-l-full rounded-r-full border-[1px] border-neutral-400">Chrome</span>
+                            <span
+                                class="px-6 text-xs py-2 inline-block rounded-l-full rounded-r-full border-[1px] border-neutral-400">Edge</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- footer -->
+    <footer class="py-12 bg-black-2">
+        <div class="mx-10 desktop:mx-28 mb-10 flex flex-col desktop:flex-row justify-between items-center gap-1">
+            <!-- logo -->
+            <a href="#">
+                <h1 class="font-space-grotesk text-4xl font-bold tracking-tighter leading-tight text-yellow-ochre"
+                    id="header-logo">
+                    Theme<span class="text-yellow-ochre font-space-grotesk">Bucket</span>.
+                </h1>
+            </a>
+
+            <!-- footer social links -->
+            <div class="flex justify-start items-center gap-3">
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-mail">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-github">
+                        <path
+                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                        </path>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-twitter">
+                        <path
+                            d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                        </path>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-facebook">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-linkedin">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+                <a href="#" class="flex justify-center items-center">
+                    <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-instagram">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- footer links -->
+        <div class="mx-10 desktop:mx-28 grid grid-cols-2 desktop:grid-cols-4 gap-16">
+            <div>
+                <h1 class="uppercase mb-6 font-semibold text-gray-100 border-b-[1px] border-yellow-ochre">
+                    Browse Categories
+                </h1>
+                <div>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Themes & Templates</a>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Categories</a>
+                </div>
+            </div>
+            <div>
+                <h1 class="uppercase mb-6 font-semibold text-gray-100 border-b-[1px] border-yellow-ochre">
+                    How To Buy?
+                </h1>
+                <div>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Explore ThemeBucket</a>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Log in</a>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Create an Account</a>
+                </div>
+            </div>
+            <div>
+                <h1 class="uppercase mb-6 font-semibold text-gray-100 border-b-[1px] border-yellow-ochre">
+                    How to Sell?
+                </h1>
+                <div>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Seller's Guide</a>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Upload Instructions</a>
+                </div>
+            </div>
+            <div>
+                <h1 class="uppercase mb-6 font-semibold text-gray-100 border-b-[1px] border-yellow-ochre">
+                    Social
+                </h1>
+                <div>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Email</a>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">GitHub</a>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Twitter</a>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Facebook</a>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">LinkedIn</a>
+                    <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+                        href="#">Instagram</a>
+                </div>
+            </div>
+        </div>
+        <!-- footer content -->
+        <div class="text-center font-medium mt-10">
+            <span class="text-white text-xl block">&#169; 2023 ThemeBucket</span>
+            <span class="block font-normal text-lg text-gray-300">All rights reserved. Made in India</span>
+        </div>
+    </footer>
+
+    <script type="module" src="./js/index.js"></script>
+    <script type="module" src="./js/carousel.js"></script>
+    <script type="module" src="./js/sidebar.js"></script>
+</body>
+
+</html>
