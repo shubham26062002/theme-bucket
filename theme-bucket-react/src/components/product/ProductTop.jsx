@@ -1,32 +1,22 @@
-import { useParams } from 'react-router'
-import ProductTop from '../components/product/ProductTop'
-import ProductDetails from '../components/product/ProductDetails'
-import ProductImages from '../components/product/ProductImages'
-import {supabase } from '../libs/supabase-client'
-import { useEffect, useState } from 'react'
+import React from 'react'
+import ProductImages from './ProductImages'
+import ProductDetails from './ProductDetails'
 
-const Product = () => {
-    const { categoryId, productId } = useParams()
-    const [product, setproduct] = useState(() => [])
-
-    useEffect(() => {
-        const getproduct = async () => {
-            const { data, error } = await supabase
-                .from('products')
-                .select(`*,profiles(full_name),ratings(count)`)
-               .eq("id", productId)
-            setproduct(data[0])
-        }
-        getproduct()
-    }, [])
-
-    return (
-        <>
+const ProductTop = ({
+    name,
+    publisher,
+    price,
+    averagerating,
+    ratingcount,
+    description,
     
-         <main class="bg-gray-lightest p-2">
+}) => {
+  return (
+    <>
+        <main class="bg-gray-lightest p-2">
         <div class="bg-white shadow-sm shadow-gray-400 rounded-md h-full py-12 px-6 desktop:px-28">
             <div class="grid grid-cols-1 desktop:grid-cols-3 desktop:gap-8">
-                <div className="flex flex-col desktop:flex-row gap-6 desktop:col-start-1 desktop:col-end-3">
+                <div class="flex flex-col desktop:flex-row gap-6 desktop:col-start-1 desktop:col-end-3">
                         <ProductImages topimage="/images/blog-website.jpg"/>
                     <div class="mt-14 mb-3 desktop:mt-3">
                         <button>
@@ -44,11 +34,11 @@ const Product = () => {
                 </div>
                 <div>
                     <h1 class="text-2xl font-bold text-neutral-700 leading-normal">
-                    {product.name}</h1>
+                        {name}</h1>
                     <p class="text-gray-500">
-                    by {product.profiles?.full_name}</p>
+                        by {publisher}</p>
                     <div class="mt-4 flex justify-start items-center gap-1.5">
-                        <span class="font-semibold text-neutral-700 leading-none">{product.avg_rating || 0}</span>
+                        <span class="font-semibold text-neutral-700 leading-none">{averagerating}</span>
                         <svg className="flex justify-center items-center w-5 h-5 fill-yellow-ochre stroke-yellow-ochre"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -57,10 +47,9 @@ const Product = () => {
                                 points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
                             </polygon>
                         </svg>
-                        <span class="font-light text-neutral-500 leading-none">({product.ratings?product.ratings[0].count:0 })</span>
-                        {/* <span class="font-light text-neutral-500 leading-none">(100)</span> */}
+                        <span class="font-light text-neutral-500 leading-none">({ratingcount})</span>
                     </div>
-                    <p class="mt-6 font-bold text-2xl text-neutral-700">Rs. {product.price}
+                    <p class="mt-6 font-bold text-2xl text-neutral-700">Rs. {price}
                     </p>
                     <div class="space-y-3 pt-6 max-w-sm">
                         <button
@@ -98,20 +87,16 @@ const Product = () => {
                         Description</p>
                     <div class="h-[2px] bg-gray-500 mt-2"></div>
                     <div class="py-6 space-y-5">
-                        <p class="text-neutral-600 text-sm leading-relaxed">{product.description}</p>
+                        <p class="text-neutral-600 text-sm leading-relaxed">{description}</p>
                     </div>
                 </div>
-                <ProductDetails toolstack={product.tools_stack} compatiblebrowsers={product.compatible_browsers} category={categoryId} publishedat={product.created_at} responsive={product.is_responsive}/>
+                <ProductDetails publishedat="30 February 2090" responsive="Hulk"/>
                 </div>
          
                 </div>
                 </main>
-
-       
-
-
-        </>
-    )
+    </>
+  )
 }
 
-export default Product
+export default ProductTop
