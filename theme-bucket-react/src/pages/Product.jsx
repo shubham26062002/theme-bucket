@@ -1,5 +1,4 @@
 import { useParams } from 'react-router'
-import ProductTop from '../components/product/ProductTop'
 import ProductDetails from '../components/product/ProductDetails'
 import ProductImages from '../components/product/ProductImages'
 import {supabase } from '../libs/supabase-client'
@@ -13,13 +12,13 @@ const Product = () => {
         const getproduct = async () => {
             const { data, error } = await supabase
                 .from('products')
-                .select(`*,profiles(full_name),ratings(count)`)
+                .select(`*,profiles(full_name),ratings(count),categories(name)`)
                .eq("id", productId)
             setproduct(data[0])
         }
         getproduct()
     }, [])
-
+    console.log(product)
     return (
         <>
     
@@ -101,7 +100,7 @@ const Product = () => {
                         <p class="text-neutral-600 text-sm leading-relaxed">{product.description}</p>
                     </div>
                 </div>
-                <ProductDetails toolstack={product.tools_stack} compatiblebrowsers={product.compatible_browsers} category={categoryId} publishedat={product.created_at} responsive={product.is_responsive}/>
+                <ProductDetails toolstack={product.tools_stack} compatiblebrowsers={product.compatible_browsers} category={product.categories?.name} publishedat={product.created_at} responsive={product.is_responsive}/>
                 </div>
          
                 </div>

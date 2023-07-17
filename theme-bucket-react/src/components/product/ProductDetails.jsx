@@ -28,14 +28,15 @@ const ProductDetails = ({
       
     }, [compatiblebrowsers])
 
-    
+    const timestamp = publishedat; // example timestamp
+    const date = new Date(timestamp);
     return (
         <>
                <div
                     class="row-start-1 row-end-2 desktop:col-start-3 desktop:col-span-4 border-[1px] py-6 px-4 border-gray-300 rounded-lg space-y-4">
                     <div>
                         <h1 class="text-neutral-700 font-bold uppercase inline-block">Published At:&nbsp;&nbsp; </h1>
-                        <span>{publishedat}</span>
+                        <span>{date.getDate()}-{date.getMonth()+1}-{date.getFullYear()}</span>
                     </div>
                     <div class="h-[1px] bg-gray-300"></div>
                     <div>
