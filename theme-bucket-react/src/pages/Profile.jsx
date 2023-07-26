@@ -43,11 +43,11 @@ const Profile = () => {
             {
                 loading: 'Saving...',
                 success: () => {
-                    setEditDisabled(false)
+                    setEditDisabled(true)
                     return "Profile updated successfully!"
                 },
                 error: () => {
-                    setEditDisabled(false)
+                    setEditDisabled(true)
                     return "Error occurred while updating your profile."
                 }
             }
