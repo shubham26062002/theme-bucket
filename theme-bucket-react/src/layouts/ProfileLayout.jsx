@@ -80,7 +80,7 @@ const ProfileLayout = () => {
                     <div
                         className="flex-1 h-full rounded-md border-[1px] overflow-y-auto border-gray-400 shadow-sm shadow-gray-200 overflow-hidden">
                         <div className="flex flex-col h-full gap-3 p-1.5">
-                            <ProfileLink to={`/profile/${session?.user.id}`}icon={FiUser} label="My Profile" type="mobile" />
+                            <ProfileLink to={`/profile/${session?.user.id}`} icon={FiUser} label="My Profile" type="mobile" />
                             <ProfileLink to={`/profile/${session?.user.id}/purchases`} icon={FiCreditCard} label="My Purchases" type="mobile" />
                             <ProfileLink to={`/profile/${session?.user.id}/wishlist`} icon={AiOutlineHeart} label="My Wishlist" type="mobile" />
 
