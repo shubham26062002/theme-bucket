@@ -17,7 +17,7 @@ const Profile = () => {
         setEditDisabled((previousIsEditDisabled) => !previousIsEditDisabled)
     }, [isEditDisabled])
 
-    const { register, handleSubmit, formState: { errors }, getValues, watch } = useForm({
+    const { register, handleSubmit, formState: { errors }, watch, reset } = useForm({
         defaultValues: {
             name: profile?.full_name,
             email: session?.user.email,
@@ -89,7 +89,10 @@ const Profile = () => {
                         ?
                         <FormButton label="Edit" onClick={toggleIsEditDisabled} />
                         :
-                        <FormButton label="Cancel" onClick={toggleIsEditDisabled} />
+                        <FormButton label="Cancel" onClick={() => {
+                            toggleIsEditDisabled()
+                            reset()
+                        }} />
                 }
             </div>
         </div>
