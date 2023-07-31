@@ -17,6 +17,7 @@ import { loader as appLayoutloader } from './layouts/AppLayout'
 import AuthRequiredLayout from './layouts/AuthRequiredLayout'
 import { loader as profileLayoutLoader } from './layouts/ProfileLayout'
 import { loader as authRequireadLayoutLoader } from './layouts/AuthRequiredLayout'
+import { loader as salesLoader } from './pages/Sales'
 
 // const App = () => {
 //   return (
@@ -53,7 +54,7 @@ const router = createBrowserRouter(createRoutesFromElements(
         <Route path="/profile/:id" element={<ProfileLayout />} loader={profileLayoutLoader}>
           <Route index element={<Profile />} />
           <Route path="/profile/:id/become-a-seller" element={<BecomeASeller />} />
-          <Route path="/profile/:id/sales" element={<Sales />} />
+          <Route path="/profile/:id/sales" element={<Sales />} loader={salesLoader} />
         </Route>
       </Route>
     </Route>
