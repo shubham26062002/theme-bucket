@@ -10,6 +10,9 @@ import CategoriesLayout from './layouts/CategoriesLayout'
 import CategoryProducts from './pages/CategoryProducts'
 import Product from './pages/Product'
 import Purchases from './pages/Purchases'
+import BecomeASeller from './pages/BecomeASeller'
+import Sales from './pages/Sales'
+import Wishlist from './pages/Wishlist'
 
 const App = () => {
   return (
@@ -27,6 +30,9 @@ const App = () => {
             <Route path="/profile/:id" element={<ProfileLayout />}>
               <Route index element={<Profile />} />
               <Route path="purchases" element={<Purchases />} />
+              <Route path="wishlist" element={<Wishlist />} />
+              <Route path="become-a-seller" element={<BecomeASeller />} />
+              <Route path="sales" element={<Sales />} />
             </Route>
           </Route>
         </Routes>
