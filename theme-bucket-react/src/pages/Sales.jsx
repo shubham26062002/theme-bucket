@@ -28,8 +28,6 @@ export const loader = async () => {
             throw new Error('ERROR_AT_SALES', 'PRODUCTS_ERROR', productsError)
         }
 
-        console.log(productsData)
-
         return productsData
     } catch (error) {
         console.log('ERROR_AT_SALES', 'ERROR', error)
@@ -68,7 +66,7 @@ const Sales = () => {
                         <div className="flex w-full gap-2">
                             <button
                                 className="inline-block py-2 px-6 bg-gray-700 bg-opacity-90 text-white rounded-md font-semibold hover:bg-opacity-100 transition text-opacity-90 hover:text-opacity-100" onClick={() => { }}>
-                                <AiOutlinePlus className="text-white inline-flex justify-center items-center h-5 w-5" />
+                                <AiOutlinePlus className="text-white inline-flex justify-center items-center h-5 w-5 mr-2" />
                                 <span>Add More</span>
                             </button>
                         </div>
