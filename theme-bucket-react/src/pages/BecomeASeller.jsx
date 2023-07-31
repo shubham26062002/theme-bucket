@@ -4,7 +4,7 @@ import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import FormButton from '../components/general/FormButton'
 import FormCheckbox from '../components/general/FormCheckbox'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '../libs/supabase-client'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
@@ -20,9 +20,11 @@ const BecomeASeller = () => {
 
     const navigate = useNavigate()
 
-    if (profile.role === 'SELLER') {
-        navigate(`/profile/${profile.id}/sales`)
-    }
+    useEffect(() => {
+        if (profile.role === 'SELLER' || profile.role === 'ADMIN') {
+            navigate(`/profile/${profile.id}/sales`)
+        }
+    }, [])
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(schema),
@@ -45,9 +47,7 @@ const BecomeASeller = () => {
                 toast.error('Something went wrong! Please try again.')
             }
 
-            navigate(`/profile/${profile.id}/sales`)
-            toast.success('Congratulations! You joined as a seller.')
-
+            window.location.reload()
         } catch {
             toast.error('Something went wrong! Please try again.')
         } finally {

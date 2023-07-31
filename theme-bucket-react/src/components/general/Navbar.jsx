@@ -11,11 +11,10 @@ import { FaGithub, FaTwitter, FaInstagram } from 'react-icons/fa'
 import { BsFacebook, BsLinkedin } from 'react-icons/bs'
 import { MdEmail } from 'react-icons/md'
 import { IoMdClose } from 'react-icons/io'
-import { useSession } from '../../hooks/useSession'
 
-const Navbar = () => {
-    const { session } = useSession()
-
+const Navbar = ({
+    session,
+}) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(() => false)
 
     const sidebarStyles = {

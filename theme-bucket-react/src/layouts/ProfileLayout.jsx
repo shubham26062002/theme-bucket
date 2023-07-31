@@ -1,4 +1,4 @@
-import { Outlet, Navigate, useParams } from 'react-router-dom'
+import { Outlet, useNavigate, useParams, useOutletContext, useLoaderData } from 'react-router-dom'
 import { useSession } from '../hooks/useSession'
 import ProfileLink from '../components/profile/ProfileLink'
 import LogOutButton from '../components/profile/LogOutButton'
@@ -7,36 +7,40 @@ import { BiDollar } from 'react-icons/bi'
 import { AiOutlineHeart } from 'react-icons/ai'
 import { RiShutDownLine } from 'react-icons/ri'
 import { useEffect, useState } from 'react'
+import { supabase } from '../libs/supabase-client'
+
+export const loader = async () => {
+    const { data: sessionData, error: sessionError } = await supabase.auth.getSession()
+
+    if (sessionError) {
+        console.log('ERROR_AT_PROFILE_LAYOUT', 'SESSION_ERROR', sessionError)
+        throw new Error('ERROR_AT_PROFILE_LAYOUT', 'SESSION_ERROR', sessionError)
+    }
+
+    const { data: profileData, error: profileError } = await supabase.from('profiles').select().eq('id', sessionData.session?.user.id)
+
+    if (profileError) {
+        console.log('ERROR_AT_PROFILE_LAYOUT', 'PROFILE_ERROR', profileError)
+        throw new Error('ERROR_AT_PROFILE_LAYOUT', 'PROFILE_ERROR', profileError)
+    }
+
+    return profileData[0]
+}
 
 const ProfileLayout = () => {
+    const { session } = useOutletContext()
+
     const { id } = useParams()
 
-    const { session } = useSession()
+    const navigate = useNavigate()
 
-    if (!session) {
-        console.log('redirect because no session')
-        return <Navigate to="/login" />
-    }
-
-    if (id !== session?.user.id) {
-        console.log('redirect because not same user')
-        return <Navigate to="/" />
-    }
-
-    const [profile, setProfile] = useState(() => null)
+    const profile = useLoaderData()
 
     useEffect(() => {
-        const getProfile = async () => {
-            if (session) {
-                const { data, error } = await supabase
-                    .from('profiles')
-                    .select()
-                    .eq('id', session?.user.id)
-                setProfile(data[0])
-            }
+        if (id !== profile.id) {
+            navigate('/')
         }
-        getProfile()
-    }, [session?.user.id])
+    })
 
     return (
         <main className="p-2">
@@ -98,11 +102,7 @@ const ProfileLayout = () => {
                 </div>
                 <div
                     className="col-start-3 col-end-13 desktop:col-start-2 desktop:col-end-6 rounded-md border-[1px] border-gray-400 shadow-sm shadow-gray-200 py-12 px-10 desktop:px-20">
-                    {session && profile ?
-                        <Outlet context={{ session, profile }} />
-                        :
-                        <p>Loading...</p>
-                    }
+                    <Outlet context={{ session, profile }} />
                 </div>
             </div>
         </main>

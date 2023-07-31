@@ -1,18 +1,15 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useOutletContext } from 'react-router-dom'
 import Navbar from '../components/general/Navbar'
 import Footer from '../components/general/Footer'
-import ToasterContext from '../hooks/ToasterContext'
-import { CategoriesProvider } from '../hooks/useCategories'
 
 const RootLayout = () => {
+    const { session } = useOutletContext()
+
     return (
         <div>
-            <CategoriesProvider>
-                <ToasterContext />
-                <Navbar />
-                <Outlet />
-                <Footer />
-            </CategoriesProvider>
+            <Navbar session={session} />
+            <Outlet context={{ session }} />
+            <Footer />
         </div>
     )
 }
