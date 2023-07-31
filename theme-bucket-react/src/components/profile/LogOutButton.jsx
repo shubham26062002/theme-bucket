@@ -1,16 +1,20 @@
-import { useNavigate } from 'react-router-dom'
 import { twMerge } from "tailwind-merge"
+import { supabase } from '../../libs/supabase-client'
 
 const LogOutButton = ({
     label,
     icon: Icon,
     type = 'desktop',
 }) => {
-    const navigate = useNavigate()
-
     const onClick = async () => {
         const { error } = await supabase.auth.signOut()
-        window.location.reload()
+
+        if (error) {
+            console.log('ERROR_AT_LOG_OUT', error)
+            throw new Error('ERROR_AT_LOG_OUT', error)
+        }
+
+        window.location.assign('/login')
     }
 
     return (

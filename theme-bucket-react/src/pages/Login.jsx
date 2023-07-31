@@ -1,28 +1,19 @@
 import LogoLink from '../components/general/LogoLink'
 import SocialLoginButton from '../components/general/SocialLoginButton'
 import { IoMdClose } from 'react-icons/io'
-import { Navigate, useNavigate } from 'react-router-dom'
-import { useSession } from '../hooks/useSession'
-import { useEffect, useCallback } from 'react'
+import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const Login = () => {
-    const { session } = useSession()
+    const { session } = useOutletContext()
+
+    useEffect(() => {
+        if (session) {
+            navigate('/')
+        }
+    }, [session])
 
     const navigate = useNavigate()
-
-    const handleRedirect = useCallback(() => {
-        navigate('/')
-    }, [])
-
-    // useEffect(() => {
-    //     if (session) {
-    //         navigate('/')
-    //     }
-    // }, [session])
-
-    if (session) {
-        return <Navigate to={`/profile/${session?.user.id}`} />
-    }
 
     return (
         <div className="fixed w-full h-full inset-0 bg-gray-lightest bg-opacity-50 z-20 flex justify-center items-center">
@@ -43,7 +34,7 @@ const Login = () => {
                     <span className="underline font-semibold cursor-pointer"> Terms and
                         Conditions.</span>
                 </p>
-                <button className="absolute top-6 right-6" onClick={handleRedirect}>
+                <button className="absolute top-6 right-6" onClick={() => navigate('/')}>
                     <IoMdClose className="flex justify-center items-center h-6 w-6 fill-yellow-ochre" />
                 </button>
             </div>
