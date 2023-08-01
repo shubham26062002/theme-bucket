@@ -1,10 +1,10 @@
 import CategoriesLinks from '../components/categories/CategoriesLinks'
-import { Outlet } from 'react-router-dom'
-import { useCategories } from '../hooks/useCategories'
+import { Outlet, useOutletContext } from 'react-router-dom'
+import {supabase} from '../libs/supabase-client'
+import {useLoaderData} from 'react-router-dom'
 
 const CategoriesLayout = () => {
-  const { categories } = useCategories()
-
+  const {session, categories}= useOutletContext()
   return (
     <>
       <main className="bg-gray-lightest grid grid-cols-1 desktop:grid-cols-5 gap-2 py-2">
