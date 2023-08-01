@@ -6,18 +6,17 @@ const Searchbar = ({
     type = 'desktop',
     placeholder = 'I\'m looking for...',
     id,
+    categories,
 }) => {
-    // const { categories } = useCategories()
-
     return (
         <div className={twMerge(type === 'mobile' && 'pt-4 pb-8 mx-6')}>
             <div className={twMerge('flex justify-start rounded-full items-center border-[1px] border-brown focus-within:ring-2 ring-yellow-ochre', type === 'mobile' && 'inline-flex w-full')}
                 id="searchbar">
                 <select className="text-sm font-semibold py-2 px-4 focus:outline-none rounded-l-full text-brown" defaultValue="Filter by">
                     <option value="Filter by" disabled hidden>Filter by</option>
-                    {/* {
+                    {
                         categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)
-                    } */}
+                    }
                 </select>
                 <input className={twMerge('py-[8.4px] px-4 focus:outline-none text-sm min-w-[320px]', type === 'mobile' && 'inline-block w-full min-w-0')} placeholder={placeholder}
                     id={id} />

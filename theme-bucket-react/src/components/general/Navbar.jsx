@@ -14,6 +14,7 @@ import { IoMdClose } from 'react-icons/io'
 
 const Navbar = ({
     session,
+    categories,
 }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(() => false)
 
@@ -28,7 +29,7 @@ const Navbar = ({
             <header className="hidden desktop:block">
                 <div className="py-4 mx-28 flex justify-between items-center">
                     <LogoLink to="/" />
-                    <Searchbar />
+                    <Searchbar categories={categories} />
                     <div className="flex items-center justify-start gap-5">
                         <CartLink to="/cart" />
                         <WishlistLink to="/wishlist" />
@@ -67,7 +68,7 @@ const Navbar = ({
                         </button>
                     </div>
                 </div>
-                <Searchbar type="mobile" />
+                <Searchbar type="mobile" categories={categories} />
                 <div className="h-3 bg-black-2"></div>
             </header>
             {/* Mobile Sidebar */}
