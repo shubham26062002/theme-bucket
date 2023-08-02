@@ -1,8 +1,9 @@
-import { useLoaderData,useOutletContext } from 'react-router-dom'
+import { useLoaderData, useOutletContext } from 'react-router-dom'
 import ProductCardHorizontal from '../components/general/ProductCardHorizontal'
 import { Link } from 'react-router-dom'
 
 const IMAGE_URL_PREFIX = 'https://tscfkijpiauszqdkuody.supabase.co/storage/v1/object/public/product_images'
+const SRC_URL_PREFIX = 'https://tscfkijpiauszqdkuody.supabase.in/storage/v1/object/public/product_src'
 
 export const loader = async () => {
     try {
@@ -13,16 +14,16 @@ export const loader = async () => {
             throw new Error('ERROR_AT_PURCHASES', 'SESSION_ERROR', sessionError)
         }
         const { data: purchasedProductsData, error: purchasedProductsError } = await supabase.from('purchased_products')
-        .select(`*,
+            .select(`*,
         product:products(*,
         ratings(count),
         product_images(*),
         profiles(full_name))`).eq('user_id', sessionData.session?.user.id)
 
         if (purchasedProductsError) {
-        console.log('ERROR_AT_PURCHASES', 'PURCHASEDPRODUCTS_ERROR', productsError)
-        throw new Error('ERROR_AT_PURCHASES', 'PURCHASEDPRODUCTS_ERROR', productsError)
-      }
+            console.log('ERROR_AT_PURCHASES', 'PURCHASEDPRODUCTS_ERROR', productsError)
+            throw new Error('ERROR_AT_PURCHASES', 'PURCHASEDPRODUCTS_ERROR', productsError)
+        }
         return purchasedProductsData
     } catch (error) {
         console.log('ERROR_AT_PURCHASES', 'ERROR', error)
@@ -31,7 +32,6 @@ export const loader = async () => {
 }
 
 const Purchases = () => {
-    const { profile } = useOutletContext()
     const purchased_products = useLoaderData()
 
     return (
@@ -51,7 +51,7 @@ const Purchases = () => {
                     <>
 
                         {purchased_products.map((purchased_product, index) => (
-                            <ProductCardHorizontal key={index} to={`/categories/${purchased_product.product.category_id}/products/${purchased_product.product.id}`} imageUrl={`${IMAGE_URL_PREFIX}/${purchased_product.product.product_images[0].image_url}`} name={purchased_product.product.name} type="purchased" publisherName={purchased_product.product.profiles.full_name} avgRating={purchased_product.product.avg_rating} ratingsCount={purchased_product.product.ratings.length} price={purchased_product.product.price} />
+                            <ProductCardHorizontal key={index} to={`/categories/${purchased_product.product.category_id}/products/${purchased_product.product.id}`} imageUrl={`${IMAGE_URL_PREFIX}/${purchased_product.product.product_images[0].image_url}`} name={purchased_product.product.name} type="purchased" publisherName={purchased_product.product.profiles.full_name} avgRating={purchased_product.product.avg_rating} ratingsCount={purchased_product.product.ratings.length} price={purchased_product.product.price} createdAt={purchased_product.created_at} srcUrl={`${SRC_URL_PREFIX}/${purchased_product.product.src_url}`} />
                         ))}
                     </>
                 ) : (
