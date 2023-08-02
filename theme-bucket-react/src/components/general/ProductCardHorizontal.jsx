@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { BsStarFill } from 'react-icons/bs'
+import { AiOutlineDownload } from 'react-icons/ai'
 import { FiEdit, FiShoppingBag } from 'react-icons/fi'
 
 const ProductCardHorizontal = ({
@@ -23,11 +24,11 @@ const ProductCardHorizontal = ({
                         className="font-semibold text-neutral-700 whitespace-nowrap overflow-hidden text-ellipsis max-w-full leading-relaxed desktop:text-lg">
                         {name}</h1>
 
-                    {type === 'product' &&
+                    {((type === 'product')||(type === 'purchased') &&
                         <p
                             className="text-xs text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis max-w-full desktop:text-sm">
                             by {publisherName}</p>
-                    }
+                    )}
 
                     <div className="mt-3 flex justify-between items-center">
                         <div className="flex justify-start items-center gap-1.5">
@@ -45,12 +46,15 @@ const ProductCardHorizontal = ({
 
                         {type === 'product' ? (
                             <FiShoppingBag className="flex justify-center items-center h-5 w-5 text-brown" />
-                        ) : (
+                        ) :type === 'purchased' ?
+                        (
+                            <AiOutlineDownload className="flex justify-center items-center h-5 w-5 text-brown" />
+                        ):(
                             <FiEdit className="flex justify-center items-center h-5 w-5 text-brown" />
                         )}
 
                         <span
-                            className="font-bold uppercase text-xs tracking-widest text-neutral-700">{type === 'product' ? 'Add To Cart' : 'Edit'}</span>
+                            className="font-bold uppercase text-xs tracking-widest text-neutral-700">{type === 'product' ? 'Add To Cart' : type==='purchased'?'Download':'Edit'}</span>
                     </button>
                 </div>
             </div>

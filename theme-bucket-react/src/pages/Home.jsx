@@ -1,8 +1,6 @@
 import ToolsStackInstance from '../components/home/ToolsStackInstance'
 import CategoryCard from '../components/home/CategoryCard'
-import { Link } from 'react-router-dom'
-import { useCategories } from '../hooks/useCategories'
-import { useEffect } from 'react'
+import { Link, useOutletContext } from 'react-router-dom'
 
 const Home = () => {
     const toolsStackData = [
@@ -24,7 +22,7 @@ const Home = () => {
         },
     ]
 
-    // const { categories } = useCategories()
+    const {session,categories} = useOutletContext()
 
     return (
         <main>
@@ -37,7 +35,7 @@ const Home = () => {
                 <h1 className="mx-8 mb-14 text-4xl font-normal leading-snug text-center text-gray-700">
                     Trending <span className="uppercase font-bold">Categories</span>
                 </h1>
-                {/* <div className="mx-10 desktop:mx-28 grid grid-cols-1 desktop:grid-cols-3 gap-16">
+                <div className="mx-10 desktop:mx-28 grid grid-cols-1 desktop:grid-cols-3 gap-16">
                     {
                         categories.map((category, index) => {
                             if (index < 3) {
@@ -47,7 +45,7 @@ const Home = () => {
                             }
                         })
                     }
-                </div> */}
+                </div>
             </div>
             <div className="bg-gray-100 py-12">
                 <div className="mx-10 desktop:mx-28 grid grid-cols-1 desktop:grid-cols-2 gap-6 desktop:gap-16">
