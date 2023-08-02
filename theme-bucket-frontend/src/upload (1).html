@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="icon" href="./assets/images/favicon.svg" />
+
+  <link rel="stylesheet" href="../dist/css/index.css" />
+
+  <!-- title -->
+  <title>ThemeBucket Frontend</title>
+</head>
+
+<body>
+  <!-- desktop navbar -->
+  <header class="hidden desktop:block">
+    <div class="py-4 mx-28 flex justify-between items-center">
+      <!-- logo -->
+      <a class="group" href="#">
+        <h1
+          class="font-space-grotesk text-[42px] font-bold tracking-tighter leading-tight text-brown group-hover:text-yellow-ochre transition"
+          id="header-logo">
+          Theme<span class="text-yellow-ochre font-space-grotesk group-hover:text-brown transition">Bucket</span>.
+        </h1>
+      </a>
+      <!-- searchbar -->
+      <div
+        class="flex justify-start rounded-full items-center border-[1px] border-brown focus-within:ring-2 ring-yellow-ochre"
+        id="searchbar">
+        <select class="text-sm font-semibold py-2 px-4 focus:outline-none rounded-l-full text-brown">
+          <option disabled selected hidden>Filter by</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+        <input class="py-[8.4px] px-4 focus:outline-none text-sm min-w-[320px]" placeholder="I'm looking for..."
+          id="searchbar-input" />
+        <button class="flex justify-start items-center p-3 rounded-r-full bg-yellow-ochre">
+          <svg class="flex justify-start items-center h-4 w-4 fill-white" xmlns="http://www.w3.org/2000/svg"
+            height="1em" viewBox="0 0 512 512">
+            <path
+              d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+          </svg>
+        </button>
+      </div>
+      <!-- cart, wishlist, login, profile -->
+      <div class="flex items-center justify-start gap-5">
+        <a class="flex justify-start items-center relative" href="#">
+          <svg class="flex justify-start items-center h-6 w-6 stroke-brown" xmlns="http://www.w3.org/2000/svg"
+            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <div
+            class="bg-yellow-ochre text-white absolute text-[10px] font-medium py-1 leading-none w-[18px] top-0 right-0 translate-x-[40%] translate-y-[-40%] text-center rounded-full">
+            1
+          </div>
+        </a>
+        <a class="flex justify-start items-center relative" href="#">
+          <svg class="flex justify-start items-center h-6 w-6 stroke-brown" xmlns="http://www.w3.org/2000/svg"
+            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+            </path>
+          </svg>
+          <div
+            class="absolute text-[10px] font-medium py-1 leading-none w-[18px] top-0 right-0 translate-x-[40%] translate-y-[-40%] text-center rounded-full bg-yellow-ochre text-white">
+            1
+          </div>
+        </a>
+        <a class="flex justify-start rounded-full border-[1px] border-yellow-ochre items-center gap-2 py-2 px-5 hover:bg-yellow-ochre group transition"
+          href="#">
+          <span class="font-medium text-sm text-yellow-ochre group-hover:text-white transition">Log in</span>
+          <svg class="flex justify-start items-center h-5 w-5 stroke-yellow-ochre group-hover:stroke-white transition"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-user">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
+        <a class="flex justify-center items-center rounded-full border-[2px] border-brown overflow-hidden" href="#">
+          <img class="h-8 w-8 aspect-square object-cover" src="./assets/images/profile-placeholder.png"
+            alt="User Name" />
+        </a>
+      </div>
+    </div>
+    <nav class="mt-3 px-28 bg-black-2">
+      <!-- navbar links -->
+      <div>
+        <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
+          href="#">Home</a>
+        <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
+          href="#">Collections</a>
+        <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
+          href="#">Shop</a>
+        <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
+          href="#">Journal</a>
+        <a class="py-3 px-6 inline-block uppercase text-white text-sm tracking-widest hover:bg-yellow-ochre hover:text-brown transition font-semibold"
+          href="#">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- mobile header -->
+  <header class="desktop:hidden ">
+    <div class="py-4 mx-6 flex justify-between items-center">
+      <!-- logo -->
+      <a class="group" href="#">
+        <h1
+          class="font-space-grotesk text-4xl font-bold tracking-tighter leading-tight text-brown group-hover:text-yellow-ochre transition"
+          id="header-logo">
+          Theme<span class="text-yellow-ochre font-space-grotesk group-hover:text-brown transition">Bucket</span>.
+        </h1>
+      </a>
+      <!-- cart, open sidebar -->
+      <div class="flex items-center justify-start gap-5">
+        <a class="flex justify-start items-center relative" href="#">
+          <svg class="flex justify-start items-center h-6 w-6 stroke-brown" xmlns="http://www.w3.org/2000/svg"
+            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <div
+            class="bg-yellow-ochre text-white absolute text-[10px] font-medium py-1 leading-none w-[18px] top-0 right-0 translate-x-[40%] translate-y-[-40%] text-center rounded-full">
+            1
+          </div>
+        </a>
+        <button
+          class="flex justify-start items-center p-1.5 rounded-sm bg-yellow-ochre bg-opacity-80 hover:bg-opacity-100 transition"
+          id="open-sidebar">
+          <svg class="flex justify-start items-center h-5 w-5 stroke-brown" xmlns="http://www.w3.org/2000/svg"
+            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <!-- searchbar -->
+    <div
+      class="mt-4 mb-8 mx-6 flex justify-start rounded-full items-center border-[1px] border-brown focus-within:ring-2 ring-yellow-ochre"
+      id="searchbar">
+      <select class="text-sm font-semibold py-2 px-4 focus:outline-none rounded-l-full text-brown">
+        <option disabled selected hidden>Filter by</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+      </select>
+      <input class="py-[8.4px] px-4 focus:outline-none text-sm block w-full" placeholder="I'm looking for..."
+        id="searchbar-input" />
+      <button class="flex justify-start items-center p-3 rounded-r-full bg-yellow-ochre">
+        <svg class="flex justify-start items-center h-4 w-4 fill-white" xmlns="http://www.w3.org/2000/svg" height="1em"
+          viewBox="0 0 512 512">
+          <path
+            d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- mobile sidebar  -->
+  <aside
+    class="opacity-50 scale-90 translate-x-[110%] py-16  desktop:hidden fixed top-0 right-0 bottom-0 h-screen w-4/5 min-w-[256px] max-w-[380px] bg-black-2 z-10 bg-opacity-95 transition-all duration-400 ease-in-out "
+    id="sidebar">
+    <div class=" h-full w-full flex flex-col justify-around items-center ">
+      <!-- logo -->
+      <a href="#">
+        <h1 class="font-space-grotesk text-[42px] font-bold tracking-tighter leading-tight text-yellow-ochre"
+          id="header-logo">
+          Theme<span class="text-yellow-ochre font-space-grotesk">Bucket</span>.
+        </h1>
+      </a>
+      <!-- sidebar links -->
+      <div>
+        <div class="flex flex-col justify-center items-center ">
+          <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
+            href="#">HOME</a>
+          <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
+            href="#">COLLECTIONS</a>
+          <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
+            href="#">SHOP</a>
+          <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
+            href="#">JOURNAL</a>
+          <a class="inline-block py-3 px-6 hover:bg-yellow-ochre hover:text-brown transition font-semibold  uppercase text-white text-sm tracking-widest w-full text-center "
+            href="#">ABOUT</a>
+        </div>
+        <!-- log in, profile -->
+        <div class="mt-4">
+          <a class="flex justify-center rounded-full border-[1px] border-yellow-ochre items-center gap-2 py-2 px-5 hover:bg-yellow-ochre group transition "
+            href="#">
+            <span class="font-medium text-sm text-yellow-ochre group-hover:text-white transition">Log
+              in</span>
+            <svg class="flex justify-start items-center h-5 w-5 stroke-yellow-ochre group-hover:stroke-white transition"
+              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="feather feather-user">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </a>
+          <a class="flex justify-center items-center rounded-full   w-fit mx-auto gap-3 group opacity-80 hover:opacity-100 transition overflow-hidden"
+            href="#">
+            <img class="h-8 w-8 aspect-square object-cover border-[2px] rounded-full border-brown"
+              src="./assets/images/profile-placeholder.png" alt="User Name" /><span
+              class="text-white font-semibold text-sm group-hover:text-yellow-ochre transition">User
+            </span>
+          </a>
+        </div>
+      </div>
+      <!-- sidebar social links -->
+      <div class="flex justify-start items-center gap-3">
+        <a href="#" class="flex justify-center items-center">
+          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-mail">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+        </a>
+        <a href="#" class="flex justify-center items-center">
+          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-github">
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+            </path>
+          </svg>
+        </a>
+        <a href="#" class="flex justify-center items-center">
+          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-twitter">
+            <path
+              d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+            </path>
+          </svg>
+        </a>
+        <a href="#" class="flex justify-center items-center">
+          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-facebook">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+          </svg>
+        </a>
+        <a href="#" class="flex justify-center items-center">
+          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-linkedin">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+        </a>
+        <a href="#" class="flex justify-center items-center">
+          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-instagram">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+      </div>
+      <!-- close sidebar -->
+      <button
+        class="flex justify-start items-center p-1.5 rounded-full bg-yellow-ochre bg-opacity-80 hover:bg-opacity-100 transition"
+        id="close-sidebar">
+        <svg class="flex justify-start items-center h-5 w-5 stroke-brown" xmlns="http://www.w3.org/2000/svg" width="24"
+          height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" class="feather feather-x">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- main content -->
+  <main class="p-2">
+    <div class="grid grid-cols-12 desktop:grid-cols-5 gap-2">
+      <div class="hidden desktop:flex flex-col gap-2 min-h-screen h-fit sticky inset-0 top-2">
+        <div
+          class="rounded-md border-[1px] border-gray-400 shadow-md shadow-gray-300 py-4 px-6 flex items-center gap-6">
+          <img class="aspect-square w-14 object-cover" src="./assets/images/profile-placeholder.png" alt="User Name" />
+          <div>
+            <p class="text-gray-500 font-medium text-sm">Welcome Back!</p>
+            <h1 class="text-lg text-gray-700 font-semibold">Elon Musk</h1>
+          </div>
+        </div>
+        <div
+          class="flex-1 h-full rounded-md border-[1px] overflow-y-auto border-gray-400 shadow-sm shadow-gray-200 overflow-hidden">
+          <div class="flex flex-col h-full gap-3 p-3">
+            <a class="w-full py-4 bg-gray-lightest rounded-md border-[1px] border-gray-400 hover:bg-black-2 hover:bg-opacity-90 hover:text-white px-6 text-sm font-medium text-gray-500 flex items-center gap-4"
+              href="#">
+              <svg class="flex justify-center items-center w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span>
+                Profile
+              </span>
+            </a>
+            <a class="w-full py-4 bg-gray-lightest rounded-md border-[1px] border-gray-400 hover:bg-black-2 hover:bg-opacity-90 hover:text-white px-6 text-sm font-medium text-gray-500 flex items-center gap-4"
+              href="#">
+              <svg class="flex justify-center items-center w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                <line x1="1" y1="10" x2="23" y2="10"></line>
+              </svg>
+
+              <span class="">
+                My Purchases
+              </span>
+            </a>
+            <a class="w-full py-4 bg-gray-lightest rounded-md border-[1px] border-gray-400 hover:bg-black-2 hover:bg-opacity-90 hover:text-white px-6 text-sm font-medium text-gray-500 flex items-center gap-4"
+              href="#">
+              <svg class="flex justify-center items-center w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                </path>
+              </svg>
+
+              <span class="">
+                My Wishlist
+              </span>
+            </a>
+            <a class="w-full py-4 bg-gray-lightest rounded-md border-[1px] border-gray-400 hover:bg-black-2 hover:bg-opacity-90 hover:text-white px-6 text-sm font-medium text-gray-500 flex items-center gap-4"
+              href="#">
+              <svg class="flex justify-center items-center w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+
+              <span class="">
+                Become a Seller
+              </span>
+            </a>
+            <a class="w-full py-4 bg-gray-lightest rounded-md border-[1px] border-gray-400 hover:bg-black-2 hover:bg-opacity-90 hover:text-white px-6 text-sm font-medium text-gray-500 flex items-center gap-4"
+              href="#">
+              <svg class="flex justify-center items-center w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+
+              <span class="">
+                My Sales
+              </span>
+            </a>
+            <a class="mt-auto w-full py-4 bg-yellow-ochre bg-opacity-90 text-opacity-90 hover:text-opacity-100 rounded-full hover:bg-opacity-100 hover:text-white px-6 text-sm font-medium text-white flex items-center gap-4"
+              href="#">
+              <svg class="flex justify-center items-center w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+              <span class="">
+                Log out
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="flex desktop:hidden flex-col gap-2 min-h-screen h-fit sticky inset-0 top-2 col-start-1 col-end-3">
+        <div class="rounded-md border-[1px] border-gray-400 shadow-md shadow-gray-300 p-3">
+          <img class="mx-auto aspect-square w-14 object-cover" src="./assets/images/profile-placeholder.png"
+            alt="User Name" />
+        </div>
+
+        <div
+          class="flex-1 h-full rounded-md border-[1px] overflow-y-auto border-gray-400 shadow-sm shadow-gray-200 overflow-hidden">
+          <div class="flex flex-col h-full gap-3 p-1.5">
+            <a class="w-full bg-gray-lightest rounded-md border-[1px] border-gray-400 hover:bg-black-2 hover:bg-opacity-90 hover:text-white text-sm font-medium text-gray-500 py-2"
+              href="#">
+              <svg className="mx-auto flex justify-center items-center w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </a>
+            <a class="w-full bg-gray-lightest rounded-md border-[1px] border-gray-400 hover:bg-black-2 hover:bg-opacity-90 hover:text-white text-sm font-medium text-gray-500 py-2"
+              href="#">
+              <svg class="mx-auto flex justify-center items-center w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                <line x1="1" y1="10" x2="23" y2="10"></line>
+              </svg>
+            </a>
+            <a class="w-full bg-gray-lightest rounded-md border-[1px] border-gray-400 hover:bg-black-2 hover:bg-opacity-90 hover:text-white text-sm font-medium text-gray-500 py-2"
+              href="#">
+              <svg class="mx-auto flex justify-center items-center w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                </path>
+              </svg>
+            </a>
+            <a class="w-full bg-gray-lightest rounded-md border-[1px] border-gray-400 hover:bg-black-2 hover:bg-opacity-90 hover:text-white text-sm font-medium text-gray-500 py-2"
+              href="#">
+              <svg class="mx-auto flex justify-center items-center w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </a>
+            <a class="w-full bg-gray-lightest rounded-md border-[1px] border-gray-400 hover:bg-black-2 hover:bg-opacity-90 hover:text-white text-sm font-medium text-gray-500 py-2"
+              href="#">
+              <svg class="mx-auto flex justify-center items-center w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </a>
+            <a class="mt-auto w-full py-2 bg-yellow-ochre bg-opacity-90 text-opacity-90 hover:text-opacity-100 rounded-full hover:bg-opacity-100 hover:text-white text-sm font-medium text-white"
+              href="#">
+              <svg class="mx-auto flex justify-center items-center w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-start-3 col-end-13 desktop:col-start-2 desktop:col-end-6 rounded-md border-[1px] border-gray-400 shadow-sm shadow-gray-200 py-12 px-10 desktop:px-20">
+        <div>
+          <h1 class="text-3xl font-normal leading-snug text-gray-700 text-center">
+            Provide your <span class="uppercase font-bold">product info! </span>and
+            <span class="uppercase font-bold">upload</span>
+          </h1>
+          <div class="mt-14">
+            <div>
+              <div class="flex flex-col gap-x-12 gap-y-6">
+                <div class="flex gap-6">
+                  <div class="flex-1">
+                    <label class="font-medium text-neutral-900 block text-sm" for="itemName">Item Title</label>
+                    <input
+                      class="block w-full mt-2 py-2 rounded-md px-4 border-[1px] border-black-2 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-yellow-ochre"
+                      id="itemName" />
+                  </div>
+                  <div class="flex-1">
+                    <label class="font-medium text-neutral-900 block text-sm" for="itemPrice">Item Price</label>
+                    <input
+                      class="block w-full mt-2 py-2 rounded-md px-4 border-[1px] border-black-2 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-yellow-ochre"
+                      id="itemName" />
+                  </div>
+                </div>
+                <div>
+                  <label for="catagory" class="block mb-2 text-sm font-medium text-gray-900">Select a catagory:</label>
+                  <select id="countries_multiple"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-ochre focus:border-yellow-ochre block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-yellow-ochre dark:focus:border-yellow-ochre">
+                    <option selected>Choose catagory</option>
+                    <option class="focus:bg-yellow-ochre" value="resume">Resume</option>
+                    <option value="">Canada</option>
+                    <option value="FR">France</option>
+                    <option value="DE">Germany</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="font-medium text-neutral-900 block text-sm" for="itemName">Description</label>
+                  <textarea
+                    class="block w-full h-48 mt-2 py-2 rounded-md px-4 border-[1px] border-black-2 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-yellow-ochre"
+                    id="itemName"></textarea>
+                </div>
+                <div class="flex-1">
+                  <label class="font-medium text-neutral-900 block text-sm" for="demoUrl">Demo URL</label>
+                  <input
+                    class="block w-full mt-2 py-2 rounded-md px-4 border-[1px] border-black-2 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-yellow-ochre"
+                    placeholder="https://example.com" id="demoUrl" />
+                </div>
+
+                <div>
+                  <label class="font-medium text-neutral-900 block text-sm" for="demoUrl">Tools and Technology
+                    used:</label>
+                  <input
+                    class="block w-full mt-2 py-2 rounded-md px-4 border-[1px] border-black-2 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-yellow-ochre"
+                    placeholder="HTML,CSS, etc...." id="toolsUsed" />
+                </div>
+                <div>
+                  <label class="font-medium text-neutral-900 block text-sm" for="demoUrl">Compatible Browsers:</label>
+                  <input
+                    class="block w-full mt-2 py-2 rounded-md px-4 border-[1px] border-black-2 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-yellow-ochre"
+                    placeholder="Chrome,Edge etc...." id="CompatibleBrowsers" />
+                </div>
+                <div>
+                  <label class="font-medium text-neutral-900 block text-sm" for="demoUrl">Compatible Browsers:</label>
+                  <div
+                    class="flex justify-around w-full mt-2 py-2 px-4 text-sm text-neutral-700 focus:outline-none focus:ring-2 focus:ring-yellow-ochre">
+                    <div class="flex items-center mr-4">
+                      <input id="inline-radio" type="radio" value="yes" name="inline-radio-group"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ">
+                      <label for="inline-radio" class="ml-2 text-sm font-medium text-gray-900 ">Yes</label>
+                    </div>
+                    <div class="flex items-center mr-4">
+                      <input id="inline-radio" type="radio" value="no" name="inline-radio-group"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ">
+                      <label for="inline-radio" class="ml-2 text-sm font-medium text-gray-900 ">No</label>
+                    </div>
+
+                  </div>
+                </div>
+                <div>
+                  <label class=" font-medium text-neutral-900 block text-sm" for="demoUrl">Place your files
+                    here:</label>
+                  <div class="mt-2 bg-gray-100 h-screen w-full sm:px-8 md:px-16 sm:py-8">
+                    <main class="container mx-auto max-w-screen-lg h-full">
+                      <!-- file upload modal -->
+                      <article aria-label="File Upload Modal"
+                        class="relative h-full flex flex-col bg-white shadow-xl rounded-md" ondrop="dropHandler(event);"
+                        ondragover="dragOverHandler(event);" ondragleave="dragLeaveHandler(event);"
+                        ondragenter="dragEnterHandler(event);">
+                        <!-- overlay -->
+                        <div id="overlay"
+                          class="w-full h-full absolute top-0 left-0 pointer-events-none z-50 flex flex-col items-center justify-center rounded-md">
+                          <i>
+                            <svg class="fill-current w-12 h-12 mb-3 text-blue-700" xmlns="http://www.w3.org/2000/svg"
+                              width="24" height="24" viewBox="0 0 24 24">
+                              <path
+                                d="M19.479 10.092c-.212-3.951-3.473-7.092-7.479-7.092-4.005 0-7.267 3.141-7.479 7.092-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.521-5.408zm-7.479-1.092l4 4h-3v4h-2v-4h-3l4-4z" />
+                            </svg>
+                          </i>
+                          <p class="text-lg text-blue-700">Drop files to upload</p>
+                        </div>
+
+                        <!-- scroll area -->
+                        <section class=" overflow-auto p-8 w-full h-full flex flex-col">
+                          <header
+                            class="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
+                            <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
+                              <span>Drag and drop your</span>&nbsp;<span>files anywhere or</span>
+                            </p>
+                            <input id="hidden-input" type="file" multiple class="hidden" />
+                            <button id="button"
+                              class="mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
+                              Upload a file
+                            </button>
+                          </header>
+
+                          <h1 class="pt-8 pb-3 font-semibold sm:text-lg text-gray-900">
+                            To Upload
+                          </h1>
+
+                          <ul id="gallery" class="flex flex-1 flex-wrap -m-1">
+                            <li id="empty" class="h-full w-full text-center flex flex-col items-center justify-center ">
+                              <img class="mx-auto w-32"
+                                src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png"
+                                alt="no data" />
+                              <span class="text-small text-gray-500">No files selected</span>
+                            </li>
+                          </ul>
+                        </section>
+
+                        <!-- sticky footer -->
+                        <footer class="flex gap-2 justify-end px-8 pb-8 pt-4">
+                          <button id="submit"
+                            class=" px-3 py-1inline-block mt-10 py-2  bg-yellow-ochre bg-opacity-90 text-white rounded-md font-semibold hover:bg-opacity-100 transition text-opacity-90 hover:text-opacity-100">
+                            Upload files
+                          </button>
+                          <button id="cancel"
+                            class="px-3 py-1inline-block mt-10 py-2 bg-opacity-90 text-black rounded-md font-semibold hover:bg-gray-200  transition text-opacity-90 hover:text-opacity-100">
+                            Cancel
+                          </button>
+                        </footer>
+                      </article>
+                    </main>
+                  </div>
+
+                  <!-- using two similar templates for simplicity in js code -->
+                  <template id="file-template">
+                    <li class="block p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24">
+                      <article tabindex="0"
+                        class="group w-full h-full rounded-md focus:outline-none focus:shadow-outline elative bg-gray-100 cursor-pointer relative shadow-sm">
+                        <img alt="upload preview"
+                          class="img-preview hidden w-full h-full sticky object-cover rounded-md bg-fixed" />
+
+                        <section
+                          class="flex flex-col rounded-md text-xs break-words w-full h-full z-20 absolute top-0 py-2 px-3">
+                          <h1 class="flex-1 group-hover:text-blue-800"></h1>
+                          <div class="flex">
+                            <span class="p-1 text-blue-800">
+                              <i>
+                                <svg class="fill-current w-4 h-4 ml-auto pt-1" xmlns="http://www.w3.org/2000/svg"
+                                  width="24" height="24" viewBox="0 0 24 24">
+                                  <path d="M15 2v5h5v15h-16v-20h11zm1-2h-14v24h20v-18l-6-6z" />
+                                </svg>
+                              </i>
+                            </span>
+                            <p class="p-1 size text-xs text-gray-700"></p>
+                            <button
+                              class="delete ml-auto focus:outline-none hover:bg-gray-300 p-1 rounded-md text-gray-800">
+                              <svg class="pointer-events-none fill-current w-4 h-4 ml-auto"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path class="pointer-events-none"
+                                  d="M3 6l3 18h12l3-18h-18zm19-4v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.316c0 .901.73 2 1.631 2h5.711z" />
+                              </svg>
+                            </button>
+                          </div>
+                        </section>
+                      </article>
+                    </li>
+                  </template>
+
+                  <template id="image-template">
+                    <li class="block p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24">
+                      <article tabindex="0"
+                        class="group hasImage w-full h-full rounded-md focus:outline-none focus:shadow-outline bg-gray-100 cursor-pointer relative text-transparent hover:text-white shadow-sm">
+                        <img alt="upload preview"
+                          class="img-preview w-full h-full sticky object-cover rounded-md bg-fixed" />
+
+                        <section
+                          class="flex flex-col rounded-md text-xs break-words w-full h-full z-20 absolute top-0 py-2 px-3">
+                          <h1 class="flex-1"></h1>
+                          <div class="flex">
+                            <span class="p-1">
+                              <i>
+                                <svg class="fill-current w-4 h-4 ml-auto pt-" xmlns="http://www.w3.org/2000/svg"
+                                  width="24" height="24" viewBox="0 0 24 24">
+                                  <path
+                                    d="M5 8.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5zm9 .5l-2.519 4-2.481-1.96-4 5.96h14l-5-8zm8-4v14h-20v-14h20zm2-2h-24v18h24v-18z" />
+                                </svg>
+                              </i>
+                            </span>
+
+                            <p class="p-1 size text-xs"></p>
+                            <button class="delete ml-auto focus:outline-none hover:bg-gray-300 p-1 rounded-md">
+                              <svg class="pointer-events-none fill-current w-4 h-4 ml-auto"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path class="pointer-events-none"
+                                  d="M3 6l3 18h12l3-18h-18zm19-4v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.316c0 .901.73 2 1.631 2h5.711z" />
+                              </svg>
+                            </button>
+                          </div>
+                        </section>
+                      </article>
+                    </li>
+                  </template>
+
+                  <script>
+                    const fileTempl = document.getElementById("file-template"),
+                      imageTempl = document.getElementById("image-template"),
+                      empty = document.getElementById("empty");
+
+                    // use to store pre selected files
+                    let FILES = {};
+
+                    // check if file is of type image and prepend the initialied
+                    // template to the target element
+                    function addFile(target, file) {
+                      const isImage = file.type.match("image.*"),
+                        objectURL = URL.createObjectURL(file);
+
+                      const clone = isImage
+                        ? imageTempl.content.cloneNode(true)
+                        : fileTempl.content.cloneNode(true);
+
+                      clone.querySelector("h1").textContent = file.name;
+                      clone.querySelector("li").id = objectURL;
+                      clone.querySelector(".delete").dataset.target = objectURL;
+                      clone.querySelector(".size").textContent =
+                        file.size > 1024
+                          ? file.size > 1048576
+                            ? Math.round(file.size / 1048576) + "mb"
+                            : Math.round(file.size / 1024) + "kb"
+                          : file.size + "b";
+
+                      isImage &&
+                        Object.assign(clone.querySelector("img"), {
+                          src: objectURL,
+                          alt: file.name
+                        });
+
+                      empty.classList.add("hidden");
+                      target.prepend(clone);
+
+                      FILES[objectURL] = file;
+                    }
+
+                    const gallery = document.getElementById("gallery"),
+                      overlay = document.getElementById("overlay");
+
+                    // click the hidden input of type file if the visible button is clicked
+                    // and capture the selected files
+                    const hidden = document.getElementById("hidden-input");
+                    document.getElementById("button").onclick = () => hidden.click();
+                    hidden.onchange = (e) => {
+                      for (const file of e.target.files) {
+                        addFile(gallery, file);
+                      }
+                    };
+
+                    // use to check if a file is being dragged
+                    const hasFiles = ({ dataTransfer: { types = [] } }) =>
+                      types.indexOf("Files") > -1;
+
+                    // use to drag dragenter and dragleave events.
+                    // this is to know if the outermost parent is dragged over
+                    // without issues due to drag events on its children
+                    let counter = 0;
+
+                    // reset counter and append file to gallery when file is dropped
+                    function dropHandler(ev) {
+                      ev.preventDefault();
+                      for (const file of ev.dataTransfer.files) {
+                        addFile(gallery, file);
+                        overlay.classList.remove("draggedover");
+                        counter = 0;
+                      }
+                    }
+
+                    // only react to actual files being dragged
+                    function dragEnterHandler(e) {
+                      e.preventDefault();
+                      if (!hasFiles(e)) {
+                        return;
+                      }
+                      ++counter && overlay.classList.add("draggedover");
+                    }
+
+                    function dragLeaveHandler(e) {
+                      1 > --counter && overlay.classList.remove("draggedover");
+                    }
+
+                    function dragOverHandler(e) {
+                      if (hasFiles(e)) {
+                        e.preventDefault();
+                      }
+                    }
+
+                    // event delegation to caputre delete events
+                    // fron the waste buckets in the file preview cards
+                    gallery.onclick = ({ target }) => {
+                      if (target.classList.contains("delete")) {
+                        const ou = target.dataset.target;
+                        document.getElementById(ou).remove(ou);
+                        gallery.children.length === 1 && empty.classList.remove("hidden");
+                        delete FILES[ou];
+                      }
+                    };
+
+                    // print all selected files
+                    document.getElementById("submit").onclick = () => {
+                      alert(`Submitted Files:\n${JSON.stringify(FILES)}`);
+                      console.log(FILES);
+                    };
+
+                    // clear entire selection
+                    document.getElementById("cancel").onclick = () => {
+                      while (gallery.children.length > 0) {
+                        gallery.lastChild.remove();
+                      }
+                      FILES = {};
+                      empty.classList.remove("hidden");
+                      gallery.append(empty);
+                    };
+
+                  </script>
+
+                  <style>
+                    .hasImage:hover section {
+                      background-color: rgba(5, 5, 5, 0.4);
+                    }
+
+                    .hasImage:hover button:hover {
+                      background: rgba(5, 5, 5, 0.45);
+                    }
+
+                    #overlay p,
+                    i {
+                      opacity: 0;
+                    }
+
+                    #overlay.draggedover {
+                      background-color: rgba(255, 255, 255, 0.7);
+                    }
+
+                    #overlay.draggedover p,
+                    #overlay.draggedover i {
+                      opacity: 1;
+                    }
+
+                    .group:hover .group-hover\:text-blue-800 {
+                      color: #2b6cb0;
+                    }
+                  </style>
+                </div>
+              </div>
+
+
+            </div>
+            <button
+              class="inline-block mt-10 py-2 px-6 bg-yellow-ochre bg-opacity-90 text-white rounded-md font-semibold hover:bg-opacity-100 transition text-opacity-90 hover:text-opacity-100">Upload</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- footer -->
+  <footer class="py-12 bg-black-2">
+    <div class="mx-10 desktop:mx-28 mb-10 flex flex-col desktop:flex-row justify-between items-center gap-1">
+      <!-- logo -->
+      <a href="#">
+        <h1 class="font-space-grotesk text-4xl font-bold tracking-tighter leading-tight text-yellow-ochre"
+          id="header-logo">
+          Theme<span class="text-yellow-ochre font-space-grotesk">Bucket</span>.
+        </h1>
+      </a>
+
+      <!-- footer social links -->
+      <div class="flex justify-start items-center gap-3">
+        <a href="#" class="flex justify-center items-center">
+          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-mail">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+        </a>
+        <a href="#" class="flex justify-center items-center">
+          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-github">
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+            </path>
+          </svg>
+        </a>
+        <a href="#" class="flex justify-center items-center">
+          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-twitter">
+            <path
+              d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+            </path>
+          </svg>
+        </a>
+        <a href="#" class="flex justify-center items-center">
+          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-facebook">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+          </svg>
+        </a>
+        <a href="#" class="flex justify-center items-center">
+          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-linkedin">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+        </a>
+        <a href="#" class="flex justify-center items-center">
+          <svg class="flex justify-center items-center h-4 w-4 stroke-[1.5px] stroke-gray-100"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-instagram">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- footer links -->
+    <div class="mx-10 desktop:mx-28 grid grid-cols-2 desktop:grid-cols-4 gap-16">
+      <div>
+        <h1 class="uppercase mb-6 font-semibold text-gray-100 border-b-[1px] border-yellow-ochre">
+          Browse Categories
+        </h1>
+        <div>
+          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+            href="#">Themes & Templates</a>
+          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+            href="#">Categories</a>
+        </div>
+      </div>
+      <div>
+        <h1 class="uppercase mb-6 font-semibold text-gray-100 border-b-[1px] border-yellow-ochre">
+          How To Buy?
+        </h1>
+        <div>
+          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+            href="#">Explore ThemeBucket</a>
+          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+            href="#">Log in</a>
+          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+            href="#">Create an Account</a>
+        </div>
+      </div>
+      <div>
+        <h1 class="uppercase mb-6 font-semibold text-gray-100 border-b-[1px] border-yellow-ochre">
+          How to Sell?
+        </h1>
+        <div>
+          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+            href="#">Seller's Guide</a>
+          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+            href="#">Upload Instructions</a>
+        </div>
+      </div>
+      <div>
+        <h1 class="uppercase mb-6 font-semibold text-gray-100 border-b-[1px] border-yellow-ochre">
+          Social
+        </h1>
+        <div>
+          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+            href="#">Email</a>
+          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+            href="#">GitHub</a>
+          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+            href="#">Twitter</a>
+          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+            href="#">Facebook</a>
+          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+            href="#">LinkedIn</a>
+          <a class="block leading-normal font-medium text-gray-400 hover:text-gray-100 transition w-fit mb-1.5"
+            href="#">Instagram</a>
+        </div>
+      </div>
+    </div>
+    <!-- footer content -->
+    <div class="text-center font-medium mt-10">
+      <span class="text-white text-xl block">&#169; 2023 ThemeBucket</span>
+      <span class="block font-normal text-lg text-gray-300">All rights reserved. Made in India</span>
+    </div>
+  </footer>
+
+  <!-- <script type="module" src="./js/index.js"></script>
+    <script type="module" src="./js/carousel.js"></script>
+    <script type="module" src="./js/sidebar.js"></script> -->
+</body>
+
+</html>

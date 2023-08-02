@@ -21,6 +21,7 @@ import { loader as authRequireadLayoutLoader } from './layouts/AuthRequiredLayou
 import { loader as CategoriesLoader } from './layouts/RootLayout'
 import { loader as salesLoader } from './pages/Sales'
 import { loader as purchasesLoader } from './pages/Purchases'
+import AddProduct from './pages/AddProduct'
 
 // const App = () => {
 //   return (
@@ -56,15 +57,16 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path="/categories" element={<CategoriesLayout />}>
         <Route index element={<Categories />} />
         <Route path="/categories/:id/products" element={<CategoryProducts />} />
-        </Route>
+      </Route>
       <Route path="/categories/:categoryId/products/:productId" element={<Product />} />
       <Route path="/profile/:id" element={<AuthRequiredLayout />} loader={authRequireadLayoutLoader}>
         <Route path="/profile/:id" element={<ProfileLayout />} loader={profileLayoutLoader}>
           <Route index element={<Profile />} />
-          <Route path="/profile/:id/purchases" element={<Purchases/>} loader={purchasesLoader}/>
-          <Route path="/profile/:id/wishlist" element={<Wishlist/>}/>
+          <Route path="/profile/:id/purchases" element={<Purchases />} loader={purchasesLoader} />
+          <Route path="/profile/:id/wishlist" element={<Wishlist />} />
           <Route path="/profile/:id/become-a-seller" element={<BecomeASeller />} />
           <Route path="/profile/:id/sales" element={<Sales />} loader={salesLoader} />
+          <Route path="/profile/:id/:productId" element={<AddProduct />} />
         </Route>
       </Route>
     </Route>
