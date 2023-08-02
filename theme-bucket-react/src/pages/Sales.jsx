@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useLoaderData, useNavigate, useOutletContext } from 'react-router-dom'
 import { useEffect } from 'react'
 import FormButton from '../components/general/FormButton'
@@ -28,7 +29,29 @@ export const loader = async () => {
             throw new Error('ERROR_AT_SALES', 'PRODUCTS_ERROR', productsError)
         }
 
-        return productsData
+        const calculateGrandTotal = async () => {
+            let grandTotal = 0;
+
+            for (const product of productsData) {
+                const { data: purchasedProductsData, error: purchasedProductsError } = await supabase
+                    .from('purchased_products')
+                    .select('*')
+                    .eq('product_id', product.id)
+
+                if (purchasedProductsError) {
+                    console.log('ERROR_AT_SALES', 'PURCHASED_PRODUCTS_ERROR', purchasedProductsError)
+                    throw new Error('ERROR_AT_SALES', 'PURCHASED_PRODUCTS_ERROR', purchasedProductsError)
+                }
+
+                grandTotal += purchasedProductsData.length * product.price
+            }
+
+            return grandTotal
+        }
+
+        const grandTotal = await calculateGrandTotal()
+
+        return [productsData, grandTotal]
     } catch (error) {
         console.log('ERROR_AT_SALES', 'ERROR', error)
         throw new Error('ERROR_AT_SALES', 'ERROR', error)
@@ -46,7 +69,7 @@ const Sales = () => {
         }
     }, [])
 
-    const products = useLoaderData()
+    const [products, grandTotal] = useLoaderData()
 
     return (
         <div>
@@ -63,12 +86,16 @@ const Sales = () => {
             <div className="grid grid-cols-1 mt-10 desktop:px-24 gap-8">
                 {products.length > 0 ? (
                     <>
-                        <div className="flex w-full gap-2">
-                            <button
+                        <div className="flex justify-between items-center w-full gap-2">
+                            <Link to={`/profile/${profile.id}/add-product`}
                                 className="inline-block py-2 px-6 bg-gray-700 bg-opacity-90 text-white rounded-md font-semibold hover:bg-opacity-100 transition text-opacity-90 hover:text-opacity-100" onClick={() => { }}>
                                 <AiOutlinePlus className="text-white inline-flex justify-center items-center h-5 w-5 mr-2" />
                                 <span>Add More</span>
-                            </button>
+                            </Link>
+                            <div className="flex justify-start items-center gap-4">
+                                <p className="text-gray-700 font-medium">Total Earnings: </p>
+                                <p className="text-white bg-gray-700 inline-block py-2 px-4 font-bold">Rs. {grandTotal}</p>
+                            </div>
                         </div>
 
                         {products.map((product, index) => (
@@ -78,7 +105,7 @@ const Sales = () => {
                 ) : (
                     <div className="shadow-product-shadow shadow-gray-300 rounded-lg py-8 text-center">
                         <p className="text-gray-700 font-medium">You haven't added any products yet.</p>
-                        <FormButton label="Add" onClick={() => { }} />
+                        <FormButton label="Add" type="button" onClick={() => navigate(`/profile/${profile.id}/add-product`)} />
                     </div>
                 )}
 
