@@ -87,7 +87,7 @@ const Sales = () => {
                 {products.length > 0 ? (
                     <>
                         <div className="flex justify-between items-center w-full gap-2">
-                            <Link to={`/profile/${profile.id}/add-product`}
+                            <Link to={`/profile/${profile.id}/sales/add-product`}
                                 className="inline-block py-2 px-6 bg-gray-700 bg-opacity-90 text-white rounded-md font-semibold hover:bg-opacity-100 transition text-opacity-90 hover:text-opacity-100" onClick={() => { }}>
                                 <AiOutlinePlus className="text-white inline-flex justify-center items-center h-5 w-5 mr-2" />
                                 <span>Add More</span>
@@ -99,13 +99,13 @@ const Sales = () => {
                         </div>
 
                         {products.map((product, index) => (
-                            <ProductCardHorizontal key={index} to="#" imageUrl={`${IMAGE_URL_PREFIX}/${product.product_images[0].image_url}`} name={product.name} type="seller" avgRating={product.avg_rating} ratingsCount={product.ratings.length} price={product.price} />
+                            <ProductCardHorizontal key={index} to="#" imageUrl={`${IMAGE_URL_PREFIX}/${product.product_images[0].image_url}`} name={product.name} type="seller" avgRating={product.avg_rating} ratingsCount={product.ratings.length} price={product.price} linkToEditPage={`/profile/${profile.id}/sales/${product.id}`} />
                         ))}
                     </>
                 ) : (
                     <div className="shadow-product-shadow shadow-gray-300 rounded-lg py-8 text-center">
                         <p className="text-gray-700 font-medium">You haven't added any products yet.</p>
-                        <FormButton label="Add" type="button" onClick={() => navigate(`/profile/${profile.id}/add-product`)} />
+                        <FormButton label="Add" type="button" onClick={() => navigate(`/profile/${profile.id}/sales/add-product`)} />
                     </div>
                 )}
 

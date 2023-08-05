@@ -14,6 +14,7 @@ import { twMerge } from 'tailwind-merge'
 import convertToKebabCase from '../utils/convertToKebabCase'
 import uniqid from 'uniqid'
 import { toast } from 'react-hot-toast'
+import { supabase } from '../libs/supabase-client'
 
 const schema = z.object({
     name: z.string().nonempty({
@@ -46,28 +47,55 @@ const schema = z.object({
     })
 })
 
-const AddProduct = () => {
+const EditProduct = () => {
     const { profile } = useOutletContext()
 
+    const { productId } = useParams()
+
     const navigate = useNavigate()
+
+    const [product, setProduct] = useState(null)
 
     useEffect(() => {
         if (profile.role === 'BUYER') {
             navigate(`/profile/${profile.id}/become-a-seller`)
         }
-    }, [profile])
 
-    const { register, handleSubmit, setValue, getValues, watch, formState: { errors } } = useForm({
+        const getProduct = async () => {
+            const { data, error } = await supabase
+                .from('products')
+                .select()
+                .eq('id', productId)
+                .eq('publisher_id', profile.id)
+
+            if (error) {
+                console.log('ERROR_AT_EDIT_PRODUCT', 'GET_PRODUCT_ERROR', error)
+                throw new Error('ERROR_AT_EDIT_PRODUCT', 'GET_PRODUCT_ERROR', error)
+            }
+
+            if (data.length === 0) {
+                navigate(`/profile/${profile.id}/sales`)
+            }
+
+            setProduct(data[0])
+        }
+
+        getProduct()
+    }, [profile, productId])
+
+    console.log(product)
+
+    const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm({
         resolver: zodResolver(schema),
         defaultValues: {
-            name: '',
-            price: '',
-            category: 'Select a category',
-            description: '',
-            livePreviewUrl: '',
-            toolsStack: '',
-            compatibleBrowsers: '',
-            isResponsive: false,
+            name: product?.name,
+            price: product?.price,
+            category: product?.category,
+            description: product?.description,
+            livePreviewUrl: product?.live_preview_url,
+            toolsStack: product?.tools_stack,
+            compatibleBrowsers: product?.compatible_browsers,
+            isResponsive: product?.is_responsive,
             images: [],
             src: [],
         }
@@ -260,4 +288,4 @@ const AddProduct = () => {
     )
 }
 
-export default AddProduct
+export default EditProduct
