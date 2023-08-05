@@ -24,7 +24,6 @@ import { loader as purchasesLoader } from './pages/Purchases'
 import { loader as wishlistLoader } from './pages/Wishlist'
 import AddProduct from './pages/AddProduct'
 import EditProduct from './pages/EditProduct'
-
 // const App = () => {
 //   return (
 //     <BrowserRouter>
