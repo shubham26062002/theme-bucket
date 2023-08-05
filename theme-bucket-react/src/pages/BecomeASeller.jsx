@@ -24,7 +24,7 @@ const BecomeASeller = () => {
         if (profile.role === 'SELLER' || profile.role === 'ADMIN') {
             navigate(`/profile/${profile.id}/sales`)
         }
-    }, [])
+    }, [profile])
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(schema),

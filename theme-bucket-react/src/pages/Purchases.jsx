@@ -21,8 +21,8 @@ export const loader = async () => {
         profiles(full_name))`).eq('user_id', sessionData.session?.user.id)
 
         if (purchasedProductsError) {
-            console.log('ERROR_AT_PURCHASES', 'PURCHASEDPRODUCTS_ERROR', purchasedProductsError)
-            throw new Error('ERROR_AT_PURCHASES', 'PURCHASEDPRODUCTS_ERROR', purchasedProductsError)
+            console.log('ERROR_AT_PURCHASES', 'PURCHASED_PRODUCTS_ERROR', purchasedProductsError)
+            throw new Error('ERROR_AT_PURCHASES', 'PURCHASED_PRODUCTS_ERROR', purchasedProductsError)
         }
         return purchasedProductsData
     } catch (error) {

@@ -13,17 +13,14 @@ const ProductCardHorizontal = ({
     ratingsCount,
     price,
     createdAt,
-    srcUrl
+    srcUrl,
+    linkToEditPage,
 }) => {
     const download = async () => {
         window.location.assign(srcUrl)
     }
 
     const addToCart = async () => {
-
-    }
-
-    const editProduct = async () => {
 
     }
 
@@ -70,11 +67,11 @@ const ProductCardHorizontal = ({
                             className="font-bold uppercase text-xs tracking-widest text-neutral-700">Download</span>
                     </button>
                 ) : (
-                    <button type="button" className="mt-8 inline-flex w-full justify-center items-center gap-2 py-2 rounded-md border-[1px] border-gray-300 hover:bg-gray-50 hover:border-gray-500 transition" onClick={editProduct}>
+                    <Link className="mt-8 inline-flex w-full justify-center items-center gap-2 py-2 rounded-md border-[1px] border-gray-300 hover:bg-gray-50 hover:border-gray-500 transition" to={linkToEditPage}>
                         <FiEdit className="flex justify-center items-center h-5 w-5 text-brown" />
                         <span
                             className="font-bold uppercase text-xs tracking-widest text-neutral-700">Edit</span>
-                    </button>
+                    </Link>
                 )}
 
                 {type === 'purchased' && (
