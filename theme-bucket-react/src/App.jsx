@@ -22,6 +22,7 @@ import { loader as CategoriesLoader } from './layouts/RootLayout'
 import { loader as salesLoader } from './pages/Sales'
 import { loader as purchasesLoader } from './pages/Purchases'
 import { loader as wishlistLoader } from './pages/Wishlist'
+import { loader as categoryProductsLoader } from './pages/CategoryProducts'
 import AddProduct from './pages/AddProduct'
 import EditProduct from './pages/EditProduct'
 // const App = () => {
@@ -57,7 +58,7 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path="/" element={<Home />} />
       <Route path="/categories" element={<CategoriesLayout />}>
         <Route index element={<Categories />} />
-        <Route path="/categories/:id/products" element={<CategoryProducts />} />
+        <Route path="/categories/:id/products" element={<CategoryProducts />} loader={categoryProductsLoader} />
       </Route>
       <Route path="/categories/:categoryId/products/:productId" element={<Product />} />
       <Route path="/profile/:id" element={<AuthRequiredLayout />} loader={authRequireadLayoutLoader}>
