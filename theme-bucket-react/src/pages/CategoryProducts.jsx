@@ -4,6 +4,7 @@ import ProductCard from '../components/products/ProductCard'
 import { useEffect, useState } from 'react'
 import { supabase } from '../libs/supabase-client'
 import ProductCardVertical from '../components/general/ProductCardVertical'
+import ProductCardHorizontal from '../components/general/ProductCardHorizontal'
 
 const IMAGE_URL_PREFIX = 'https://tscfkijpiauszqdkuody.supabase.co/storage/v1/object/public/product_images'
 const SRC_URL_PREFIX = 'https://tscfkijpiauszqdkuody.supabase.in/storage/v1/object/public/product_src'
@@ -91,10 +92,19 @@ const CategoryProducts = () => {
                         </div>
                         <div className="grid grid-cols-1 mt-10 desktop:px-24 gap-8">
                             {products.map((product, index) => {
-                                if (index >= 3) {
-                                    return <ProductCard key={index} to={`/categories/${id}/products/${product.id}`} image={product.image_url} name={product.name} publisher={product.profiles.full_name} averageratings={product.avg_rating} price={product.price} ratingscount={product.ratings[0].count} />
+                            if (index >= 3) {
+                                for (let purchasedProduct of purchasedProducts) {
+                                    if (purchasedProduct.product_id === product.id) {
+                                        return (
+                                            <ProductCardHorizontal key={index} to={`/categories/${id}/products/${product.id}`} imageUrl={`${IMAGE_URL_PREFIX}/${product.product_images[0].image_url}`} name={product.name} publisherName={product.profiles.full_name} avgRating={product.avg_rating} ratingsCount={product.ratings.length} price={product.price} cardType="purchased" srcUrl={`${SRC_URL_PREFIX}/${product.src_url}`} />
+                                        )
+                                    }
                                 }
-                            })}
+                                return (
+                                    <ProductCardHorizontal key={index} to={`/categories/${id}/products/${product.id}`} imageUrl={`${IMAGE_URL_PREFIX}/${product.product_images[0].image_url}`} name={product.name} publisherName={product.profiles.full_name} avgRating={product.avg_rating} ratingsCount={product.ratings.length} price={product.price} />
+                                )
+                            }
+                        })}
                         </div>
                     </div>
                 )}

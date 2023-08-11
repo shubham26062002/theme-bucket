@@ -12,7 +12,7 @@ const ProductCardVertical = ({
     avgRating,
     ratingsCount,
     price,
-    cardType,
+    cardType="product",
     srcUrl,
 }) => {
     const download = async () => {
