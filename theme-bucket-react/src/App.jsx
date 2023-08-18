@@ -25,6 +25,9 @@ import { loader as wishlistLoader } from './pages/Wishlist'
 import { loader as categoryProductsLoader } from './pages/CategoryProducts'
 import AddProduct from './pages/AddProduct'
 import EditProduct from './pages/EditProduct'
+import Cart from './pages/Cart'
+import { loader as cartLoader } from './pages/Cart'
+
 // const App = () => {
 //   return (
 //     <BrowserRouter>
@@ -72,6 +75,7 @@ const router = createBrowserRouter(createRoutesFromElements(
           <Route path="/profile/:id/sales/:productId" element={<EditProduct />} />
         </Route>
       </Route>
+      <Route path="/cart" element={<Cart />} loader={cartLoader} />
     </Route>
     <Route path="/login" element={<Login />} />
   </Route>
