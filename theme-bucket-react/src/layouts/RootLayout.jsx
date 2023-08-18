@@ -15,11 +15,12 @@ export const loader = async () => {
     return data
 }
 const RootLayout = () => {
-    const { session } = useOutletContext()
+    const { session, order } = useOutletContext()
     const categories = useLoaderData()
+
     return (
         <div>
-            <Navbar session={session} categories={categories} />
+            <Navbar session={session} categories={categories} order={order} />
             <Outlet context={{ session, categories }} />
             <Footer />
         </div>
