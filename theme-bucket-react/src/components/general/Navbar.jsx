@@ -15,6 +15,7 @@ import { IoMdClose } from 'react-icons/io'
 const Navbar = ({
     session,
     categories,
+    order,
 }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(() => false)
 
@@ -31,7 +32,7 @@ const Navbar = ({
                     <LogoLink to="/" />
                     <Searchbar categories={categories} />
                     <div className="flex items-center justify-start gap-5">
-                        <CartLink to="/cart" />
+                        <CartLink to="/cart" order={order} />
                         <WishlistLink to="/wishlist" />
 
                         {
@@ -59,7 +60,7 @@ const Navbar = ({
                 <div className="py-4 mx-6 flex justify-between items-center">
                     <LogoLink className="text-4xl" to="/" />
                     <div className="flex items-center justify-start gap-5">
-                        <CartLink to="/cart" />
+                        <CartLink to="/cart" order={order} />
                         <WishlistLink to="/wishlist" />
                         <button
                             className="flex justify-start items-center p-1.5 rounded-sm bg-yellow-ochre bg-opacity-80 hover:bg-opacity-100 transition"
