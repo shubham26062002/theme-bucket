@@ -10,6 +10,10 @@ export const loader = async () => {
         throw new Error('ERROR_AT_APP_LAYOUT', error)
     }
 
+    if (!sessionData.session) {
+        return [null, null]
+    }
+
     const { data: orderData, error: orderError } = await supabase
         .from('orders')
         .select('*, order_items(*)')
