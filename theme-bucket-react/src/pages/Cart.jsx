@@ -37,6 +37,8 @@ const IMAGE_URL_PREFIX = 'https://tscfkijpiauszqdkuody.supabase.co/storage/v1/ob
 const Cart = () => {
     const order = useLoaderData()
 
+    console.log('order', order)
+
     return (
         <main>
             <div className="py-16">

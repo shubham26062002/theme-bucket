@@ -27,6 +27,7 @@ import AddProduct from './pages/AddProduct'
 import EditProduct from './pages/EditProduct'
 import Cart from './pages/Cart'
 import { loader as cartLoader } from './pages/Cart'
+import { loader as productLoader } from './pages/Product'
 
 // const App = () => {
 //   return (
@@ -63,7 +64,7 @@ const router = createBrowserRouter(createRoutesFromElements(
         <Route index element={<Categories />} />
         <Route path="/categories/:id/products" element={<CategoryProducts />} loader={categoryProductsLoader} />
       </Route>
-      <Route path="/categories/:categoryId/products/:productId" element={<Product />} />
+      <Route path="/categories/:categoryId/products/:productId" element={<Product />} loader={productLoader} />
       <Route path="/profile/:id" element={<AuthRequiredLayout />} loader={authRequireadLayoutLoader}>
         <Route path="/profile/:id" element={<ProfileLayout />} loader={profileLayoutLoader}>
           <Route index element={<Profile />} />

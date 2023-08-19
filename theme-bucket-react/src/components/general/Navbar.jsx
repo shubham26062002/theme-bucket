@@ -16,6 +16,7 @@ const Navbar = ({
     session,
     categories,
     order,
+    wishlist,
 }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(() => false)
 
@@ -33,7 +34,10 @@ const Navbar = ({
                     <Searchbar categories={categories} />
                     <div className="flex items-center justify-start gap-5">
                         <CartLink to="/cart" order={order} />
-                        <WishlistLink to="/wishlist" />
+
+                        {session && (
+                            <WishlistLink to={`/profile/${session.user.id}/wishlist`} itemsTotal={wishlist.length} />
+                        )}
 
                         {
                             session
@@ -61,7 +65,11 @@ const Navbar = ({
                     <LogoLink className="text-4xl" to="/" />
                     <div className="flex items-center justify-start gap-5">
                         <CartLink to="/cart" order={order} />
-                        <WishlistLink to="/wishlist" />
+
+                        {session && (
+                            <WishlistLink to={`/profile/${session.user.id}/wishlist`} itemsTotal={wishlist.length} />
+                        )}
+
                         <button
                             className="flex justify-start items-center p-1.5 rounded-sm bg-yellow-ochre bg-opacity-80 hover:bg-opacity-100 transition"
                             id="open-sidebar" onClick={() => setIsSidebarOpen(true)}>

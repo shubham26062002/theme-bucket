@@ -32,9 +32,7 @@ export const loader = async () => {
 
 
 const Wishlist = () => {
-    const liked_products = useLoaderData()
-
-    console.log('liked_products', liked_products)
+    const liked_products = useLoaderData() || []
 
     return (
         <div>
@@ -52,7 +50,7 @@ const Wishlist = () => {
                     <>
 
                         {liked_products.map((liked_product, index) => (
-                            <ProductCardVertical key={index} to={`/categories/${liked_product.product.category_id}/products/${liked_product.product.id}`} imageUrl={`${IMAGE_URL_PREFIX}/${liked_product.product.product_images[0].image_url}`} name={liked_product.product.name} publisherName={liked_product.product.profiles.full_name} avgRating={liked_product.product.avg_rating} ratingsCount={liked_product.product.ratings.length} price={liked_product.product.price} />
+                            <ProductCardVertical key={index} to={`/categories/${liked_product.product.category_id}/products/${liked_product.product.id}`} imageUrl={`${IMAGE_URL_PREFIX}/${liked_product.product.product_images[0].image_url}`} name={liked_product.product.name} publisherName={liked_product.product.profiles.full_name} avgRating={liked_product.product.avg_rating} ratingsCount={liked_product.product.ratings.length} price={liked_product.product.price} productId={liked_product.product.id} />
                         ))}
                     </>
                 ) : (
