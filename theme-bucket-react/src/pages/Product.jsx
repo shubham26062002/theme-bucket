@@ -1,4 +1,4 @@
-import { useParams } from 'react-router'
+import { useParams, useLoaderData, useNavigate, useLocation } from 'react-router-dom'
 import ProductDetails from '../components/product/ProductDetails'
 import ProductImages from '../components/product/ProductImages'
 import { supabase } from '../libs/supabase-client'
@@ -7,10 +7,33 @@ import { FiHeart, FiShoppingBag } from 'react-icons/fi'
 import { BsStar } from 'react-icons/bs'
 import { CgBrowser } from 'react-icons/cg'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
+import { twMerge } from 'tailwind-merge'
+
+export const loader = async () => {
+    try {
+        const { data: sessionData } = await supabase.auth.getSession()
+
+        if (!sessionData.session) {
+            return [null, null]
+        }
+
+        const { data: purchasedProductsData, error: purchasedProductsError } = await supabase.from('purchased_products').select('*').eq('user_id', sessionData.session.user.id)
+
+        const { data: likedProductsData, error: likedProductsError } = await supabase.from('liked_products').select('*').eq('user_id', sessionData.session.user.id)
+
+        return [purchasedProductsData, likedProductsData]
+    } catch (error) {
+        console.log('ERROR_AT_PRODUCT_LOADER', error)
+        throw new Error('ERROR_AT_PRODUCT_LOADER', error)
+    }
+}
 
 const Product = () => {
     const { categoryId, productId } = useParams()
     const [product, setProduct] = useState(() => null)
+
+    const [purchasedProducts, likedProducts] = useLoaderData()
 
     useEffect(() => {
         const getProduct = async () => {
@@ -23,7 +46,47 @@ const Product = () => {
         getProduct()
     }, [])
 
-    console.log(product)
+    const [isLoading, setIsLoading] = useState(false)
+
+    const navigate = useNavigate()
+
+    const location = useLocation()
+
+    const likeProduct = async () => {
+        setIsLoading(true)
+
+        try {
+            const { data: sessionData } = await supabase.auth.getSession()
+
+            if (!sessionData.session) {
+                navigate('/login')
+            } else {
+
+                const { error: likedProductError } = await supabase.from('liked_products').insert({
+                    user_id: sessionData.session.user.id,
+                    product_id: product.id,
+                })
+
+                if (likedProductError) {
+                    await supabase
+                        .from('liked_products')
+                        .delete()
+                        .eq('user_id', sessionData.session.user.id)
+                        .eq('product_id', product.id)
+
+                    toast.success('Product is removed from your wishlist.')
+                    navigate(location.pathname)
+                } else {
+                    toast.success('Product is added to your wishlist.')
+                    navigate(location.pathname)
+                }
+            }
+        } catch (error) {
+            toast.error('Something went wrong.')
+        } finally {
+            setIsLoading(false)
+        }
+    }
 
     if (!product) {
         return null
@@ -38,8 +101,19 @@ const Product = () => {
                         <div className="flex flex-col desktop:flex-row gap-6 desktop:col-start-1 desktop:col-end-3">
                             <ProductImages imagesData={product.product_images} />
                             <div className="mt-14 mb-3 desktop:mt-3">
-                                <button>
-                                    <FiHeart className="flex justify-center items-center stroke-2 stroke-rose-500 fill-rose-500 h-7 w-7" />
+                                <button className={twMerge(isLoading && 'cursor-not-allowed')} disabled={isLoading} onClick={likeProduct}>
+                                    {!likedProducts && (
+                                        <FiHeart className="flex justify-center items-center stroke-2 stroke-rose-500 fill-white h-7 w-7" />
+                                    )}
+
+                                    {likedProducts && (
+                                        likedProducts.find((likedProduct) => likedProduct.product_id === product.id) ? (
+                                            <FiHeart className="flex justify-center items-center stroke-2 stroke-rose-500 fill-rose-500 h-7 w-7" />
+                                        ) : (
+                                            <FiHeart className="flex justify-center items-center stroke-2 stroke-rose-500 fill-white h-7 w-7" />
+                                        )
+                                    )}
+
                                 </button>
                             </div>
                         </div>

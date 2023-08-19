@@ -11,7 +11,7 @@ export const loader = async () => {
     }
 
     if (!sessionData.session) {
-        return [null, null]
+        return [null, null, null]
     }
 
     const { data: orderData, error: orderError } = await supabase
@@ -20,16 +20,21 @@ export const loader = async () => {
         .eq('user_id', sessionData.session.user.id)
         .eq('is_completed', false).single()
 
-    return [sessionData.session, orderData]
+    const { data: wishlistData, error: wishlistError } = await supabase
+        .from('liked_products')
+        .select('*')
+        .eq('user_id', sessionData.session.user.id)
+
+    return [sessionData.session, orderData, wishlistData]
 }
 
 const AppLayout = () => {
-    const [session, order] = useLoaderData()
+    const [session, order, wishlist] = useLoaderData()
 
     return (
         <>
             <ToasterContext />
-            <Outlet context={{ session, order }} />
+            <Outlet context={{ session, order, wishlist }} />
         </>
     )
 }

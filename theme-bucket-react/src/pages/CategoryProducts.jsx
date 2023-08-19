@@ -33,9 +33,7 @@ const CategoryProducts = () => {
 
     const [products, setproducts] = useState(() => [])
 
-    const purchasedProducts = useLoaderData()
-
-    // console.log('purchasedProducts', purchasedProducts)
+    const purchasedProducts = useLoaderData() || []
 
     useEffect(() => {
         const getProducts = async () => {
@@ -70,7 +68,7 @@ const CategoryProducts = () => {
                                     }
                                 }
                                 return (
-                                    <ProductCardVertical key={index} to={`/categories/${id}/products/${product.id}`} imageUrl={`${IMAGE_URL_PREFIX}/${product.product_images[0].image_url}`} name={product.name} publisherName={product.profiles.full_name} avgRating={product.avg_rating} ratingsCount={product.ratings.length} price={product.price} />
+                                    <ProductCardVertical key={index} to={`/categories/${id}/products/${product.id}`} imageUrl={`${IMAGE_URL_PREFIX}/${product.product_images[0].image_url}`} name={product.name} publisherName={product.profiles.full_name} avgRating={product.avg_rating} ratingsCount={product.ratings.length} price={product.price} productId={product.id} />
                                 )
                             }
                         })}
@@ -92,19 +90,19 @@ const CategoryProducts = () => {
                         </div>
                         <div className="grid grid-cols-1 mt-10 desktop:px-24 gap-8">
                             {products.map((product, index) => {
-                            if (index >= 3) {
-                                for (let purchasedProduct of purchasedProducts) {
-                                    if (purchasedProduct.product_id === product.id) {
-                                        return (
-                                            <ProductCardHorizontal key={index} to={`/categories/${id}/products/${product.id}`} imageUrl={`${IMAGE_URL_PREFIX}/${product.product_images[0].image_url}`} name={product.name} publisherName={product.profiles.full_name} avgRating={product.avg_rating} ratingsCount={product.ratings.length} price={product.price} cardType="purchased" srcUrl={`${SRC_URL_PREFIX}/${product.src_url}`} />
-                                        )
+                                if (index >= 3) {
+                                    for (let purchasedProduct of purchasedProducts) {
+                                        if (purchasedProduct.product_id === product.id) {
+                                            return (
+                                                <ProductCardHorizontal key={index} to={`/categories/${id}/products/${product.id}`} imageUrl={`${IMAGE_URL_PREFIX}/${product.product_images[0].image_url}`} name={product.name} publisherName={product.profiles.full_name} avgRating={product.avg_rating} ratingsCount={product.ratings.length} price={product.price} cardType="purchased" srcUrl={`${SRC_URL_PREFIX}/${product.src_url}`} />
+                                            )
+                                        }
                                     }
+                                    return (
+                                        <ProductCardHorizontal key={index} to={`/categories/${id}/products/${product.id}`} imageUrl={`${IMAGE_URL_PREFIX}/${product.product_images[0].image_url}`} name={product.name} publisherName={product.profiles.full_name} avgRating={product.avg_rating} ratingsCount={product.ratings.length} price={product.price} />
+                                    )
                                 }
-                                return (
-                                    <ProductCardHorizontal key={index} to={`/categories/${id}/products/${product.id}`} imageUrl={`${IMAGE_URL_PREFIX}/${product.product_images[0].image_url}`} name={product.name} publisherName={product.profiles.full_name} avgRating={product.avg_rating} ratingsCount={product.ratings.length} price={product.price} />
-                                )
-                            }
-                        })}
+                            })}
                         </div>
                     </div>
                 )}
