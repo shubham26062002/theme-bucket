@@ -99,7 +99,7 @@ const CategoryProducts = () => {
                                         }
                                     }
                                     return (
-                                        <ProductCardHorizontal key={index} to={`/categories/${id}/products/${product.id}`} imageUrl={`${IMAGE_URL_PREFIX}/${product.product_images[0].image_url}`} name={product.name} publisherName={product.profiles.full_name} avgRating={product.avg_rating} ratingsCount={product.ratings.length} price={product.price} />
+                                        <ProductCardHorizontal key={index} to={`/categories/${id}/products/${product.id}`} imageUrl={`${IMAGE_URL_PREFIX}/${product.product_images[0].image_url}`} name={product.name} publisherName={product.profiles.full_name} avgRating={product.avg_rating} ratingsCount={product.ratings.length} price={product.price} productId={product.id} />
                                     )
                                 }
                             })}
