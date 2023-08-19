@@ -21,13 +21,56 @@ const ProductCardHorizontal = ({
     linkToEditPage,
     addedAt,
     orderItemId,
+    productId,
 }) => {
     const download = async () => {
         window.location.assign(srcUrl)
     }
-
     const addToCart = async () => {
+        try {
+            const { data: sessionData } = await supabase.auth.getSession()
 
+            if (!sessionData.session) {
+                navigate('/login')
+            }
+
+            const { data: orderData, error: orderError } = await supabase.from('orders').select('*').eq('user_id', sessionData.session.user.id).eq('is_completed', false).single()
+
+            if (orderError) {
+                const { data: createdOrderData } = await supabase.from('orders').insert({
+                    is_completed: false,
+                    is_paid: false,
+                    user_id: sessionData.session.user.id,
+                }).select('*').single()
+
+                const { error: createdOrderItemError } = await supabase.from('order_items').insert({
+                    order_id: createdOrderData.id,
+                    product_id: productId,
+                })
+
+                if (createdOrderItemError) {
+                    toast.error('Product is already in cart or you have already purchased it!')
+                } else {
+                    toast.success('Product added to cart successfully!')
+                    navigate(location.pathname)
+                }
+            } else {
+                const { error: createdOrderItemError } = await supabase.from('order_items').insert({
+                    order_id: orderData.id,
+                    product_id: productId,
+                })
+
+                if (createdOrderItemError) {
+                    toast.error('Product is already in cart or you have already purchased it!')
+                } else {
+                    toast.success('Product added to cart successfully!')
+                    navigate(location.pathname)
+                }
+            }
+        } catch (error) {
+            console.log('ERROR_AT_PRODUCT_CARD_HORIZONTAL_ADD_TO_CART', error)
+            toast.error('Something went wrong!')
+        }
     }
 
     const [isLoading, setIsLoading] = useState(false)
