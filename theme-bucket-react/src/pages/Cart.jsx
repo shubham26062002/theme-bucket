@@ -36,7 +36,12 @@ const IMAGE_URL_PREFIX = 'https://tscfkijpiauszqdkuody.supabase.co/storage/v1/ob
 
 const Cart = () => {
     const order = useLoaderData()
-
+    const [totalAmount, setTotalAmount] = useState(0)
+    useEffect(() => {
+        setTotalAmount(order.order_items.reduce((acc, item) => acc + item.products.price, 0));
+    })
+    
+    console.log('totalAmount', totalAmount)
     console.log('order', order)
 
     return (
@@ -74,7 +79,7 @@ const Cart = () => {
                             <div className="h-px bg-gray-700 my-2"></div>
                             <div className="my-2 flex justify-between items-center">
                                 <p className="text-gray-700 font-medium">Total Amount</p>
-                                <p className="text-gray-700 font-medium">Rs. {order.total_amount || 0}</p>
+                                <p className="text-gray-700 font-medium">Rs. {totalAmount}</p>
                             </div>
                             <div className="h-px bg-gray-700 my-2"></div>
                         </div>
