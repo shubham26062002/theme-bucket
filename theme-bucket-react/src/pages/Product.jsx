@@ -3,43 +3,53 @@ import ProductDetails from '../components/product/ProductDetails'
 import ProductImages from '../components/product/ProductImages'
 import { supabase } from '../libs/supabase-client'
 import { useEffect, useState } from 'react'
-import { FiHeart, FiShoppingBag } from 'react-icons/fi'
+import { FiHeart, FiShoppingBag, FiStar } from 'react-icons/fi'
 import { BsStar } from 'react-icons/bs'
 import { CgBrowser } from 'react-icons/cg'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import { twMerge } from 'tailwind-merge'
+import * as z from 'zod'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import FormTextarea from '../components/general/FormTextarea'
+import FormButton from '../components/general/FormButton'
 
 export const loader = async () => {
     try {
         const { data: sessionData } = await supabase.auth.getSession()
 
         if (!sessionData.session) {
-            return [null, null]
+            return [null, null, null, null, null]
         }
 
         const { data: purchasedProductsData, error: purchasedProductsError } = await supabase.from('purchased_products').select('*').eq('user_id', sessionData.session.user.id)
 
         const { data: likedProductsData, error: likedProductsError } = await supabase.from('liked_products').select('*').eq('user_id', sessionData.session.user.id)
 
-        return [purchasedProductsData, likedProductsData]
+        return [sessionData.session, purchasedProductsData, likedProductsData]
     } catch (error) {
         console.log('ERROR_AT_PRODUCT_LOADER', error)
         throw new Error('ERROR_AT_PRODUCT_LOADER', error)
     }
 }
 
+const schema = z.object({
+    rating: z.number().int().min(0).max(5),
+    comment: z.string(),
+})
+
 const Product = () => {
     const { categoryId, productId } = useParams()
     const [product, setProduct] = useState(() => null)
 
-    const [purchasedProducts, likedProducts] = useLoaderData()
+    const [session, purchasedProducts, likedProducts] = useLoaderData()
 
     useEffect(() => {
         const getProduct = async () => {
             const { data, error } = await supabase
                 .from('products')
-                .select(`*,profiles(*),ratings(*),categories(*),product_images(*)`)
+                .select(`*,profiles(*),ratings(*),categories(*),product_images(*),comments(*, profiles(*))`)
                 .eq("id", productId)
             setProduct(data[0])
         }
@@ -87,6 +97,63 @@ const Product = () => {
             setIsLoading(false)
         }
     }
+
+    const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm({
+        resolver: zodResolver(schema),
+        defaultValues: {
+            rating: 0,
+            comment: '',
+        },
+    })
+
+    const [isRatingLoading, setIsRatingLoading] = useState(false)
+
+    const onSubmit = async (values) => {
+        setIsRatingLoading(true)
+
+        try {
+            const { data: commentsData, error: commentsError } = await supabase
+                .from('comments').insert({
+                    user_id: session.user.id,
+                    product_id: product.id,
+                    message: values.comment,
+                })
+
+            if (commentsError) {
+                toast.error('Something went wrong. Please try again.')
+            } else {
+                const { error: createdRatingsError } = await supabase
+                    .from('ratings').insert({
+                        user_id: session.user.id,
+                        product_id: product.id,
+                        rating: values.rating,
+                    })
+
+                if (createdRatingsError) {
+                    const { data: updatedRatingsData, error: updatedRatingsError } = await supabase
+                        .from('ratings').update({
+                            rating: values.rating,
+                        }).eq('user_id', session.user.id).eq('product_id', product.id)
+
+                    if (updatedRatingsError) {
+                        toast.error('Something went wrong. Please try again.')
+                    } else {
+                        toast.success('Your review is successfully saved.')
+                        window.location.reload()
+                    }
+                } else {
+                    toast.success('Your review is successfully saved.')
+                    window.location.reload()
+                }
+            }
+        } catch (error) {
+            toast.error('Something went wrong.')
+        } finally {
+            setIsRatingLoading(false)
+        }
+    }
+
+    console.log('product', product)
 
     if (!product) {
         return null
@@ -157,12 +224,76 @@ const Product = () => {
                             <div className="py-6 space-y-5">
                                 <p className="text-neutral-600 text-sm leading-relaxed">{product.description}</p>
                             </div>
+                            <p className="text-lg font-bold text-black-2">
+                                Reviews</p>
+                            <div className="h-[2px] bg-gray-500 mt-2"></div>
+                            <div className="mt-6">
+
+                                {session && (
+                                    <div className="flex flex-col gap-2">
+                                        <form onSubmit={handleSubmit(onSubmit)}>
+                                            <div className="flex gap-2">
+
+                                                <FiStar className={twMerge('flex justify-center items-center stroke-2 stroke-yellow-ochre fill-transparent h-7 w-7', watch('rating') >= 1 && 'fill-yellow-ochre')} onClick={() => watch('rating') === 0 ? setValue('rating', 1) : setValue('rating', 0)} />
+                                                <FiStar className={twMerge('flex justify-center items-center stroke-2 stroke-yellow-ochre fill-transparent h-7 w-7', watch('rating') >= 2 && 'fill-yellow-ochre')} onClick={() => setValue('rating', 2)} />
+                                                <FiStar className={twMerge('flex justify-center items-center stroke-2 stroke-yellow-ochre fill-transparent h-7 w-7', watch('rating') >= 3 && 'fill-yellow-ochre')} onClick={() => setValue('rating', 3)} />
+                                                <FiStar className={twMerge('flex justify-center items-center stroke-2 stroke-yellow-ochre fill-transparent h-7 w-7', watch('rating') >= 4 && 'fill-yellow-ochre')} onClick={() => setValue('rating', 4)} />
+                                                <FiStar className={twMerge('flex justify-center items-center stroke-2 stroke-yellow-ochre fill-transparent h-7 w-7', watch('rating') >= 5 && 'fill-yellow-ochre')} onClick={() => setValue('rating', 5)} />
+
+                                            </div>
+                                            <div className="mt-6">
+                                                <FormTextarea id="comment" label="Add Review" placeholder="Write your comment here..." register={register} errors={errors} disabled={isRatingLoading} />
+                                            </div>
+                                            <div>
+                                                <FormButton label="Add" type="submit" disabled={isRatingLoading} />
+                                            </div>
+                                        </form>
+                                    </div>
+                                )}
+
+                                {product.comments.length > 0 && (
+                                    <div className='p-6 rounded-md bg-white shadow-lg shadow-neutral-200 border border-neutral-200 my-6'>
+                                        {product.comments.map((comment, index) => (
+                                            <>
+                                                <div key={index} className="flex flex-col gap-2 mt-6">
+                                                    <div className="flex justify-between items-center">
+                                                        <div className="flex gap-2">
+
+                                                            {product.ratings.find((rating) => rating.user_id === comment.user_id) && (
+
+                                                                <div className="flex gap-1.5">
+                                                                    <BsStar className="flex justify-center items-center w-5 h-5 stroke-1 text-neutral-700" />
+                                                                    <span className="font-semibold text-neutral-700 leading-none">{product.ratings.find((rating) => rating.user_id === comment.user_id).rating}</span>
+                                                                </div>
+
+                                                            )}
+
+                                                        </div>
+                                                        <div className="flex gap-2">
+                                                            <span className="text-sm text-neutral-500">Review by {comment.profiles?.full_name} on</span>
+                                                            {/* <span className="text-sm text-neutral-500">{comment.created_at}</span> */}
+                                                            <span className="text-sm text-neutral-500">{new Date(comment.created_at).getDate()}-{new Date(comment.created_at).getMonth() + 1}-{new Date(comment.created_at).getFullYear()}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex flex-col gap-2 mt-6">
+                                                        <p className="text-sm text-neutral-600">{comment.message}</p>
+                                                    </div>
+                                                </div >
+
+                                                {index !== product.comments.length - 1 && (
+                                                    <div className="h-[1px] bg-neutral-200 mt-6"></div>
+                                                )}
+                                            </>
+                                        ))}
+                                    </div>
+                                )}
+
+                            </div>
                         </div>
                         <ProductDetails toolstack={product.tools_stack} compatiblebrowsers={product.compatible_browsers} category={product.categories?.name} publishedat={product.created_at} responsive={product.is_responsive} />
                     </div>
-
                 </div>
-            </main>
+            </main >
 
 
 
