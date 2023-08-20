@@ -4,6 +4,7 @@ import ProductImages from '../components/product/ProductImages'
 import { supabase } from '../libs/supabase-client'
 import { useEffect, useState } from 'react'
 import { FiHeart, FiShoppingBag, FiStar } from 'react-icons/fi'
+import { AiOutlineDownload } from 'react-icons/ai'
 import { BsStar } from 'react-icons/bs'
 import { CgBrowser } from 'react-icons/cg'
 import { Link } from 'react-router-dom'
@@ -40,6 +41,7 @@ const schema = z.object({
 })
 
 const Product = () => {
+    const SRC_URL_PREFIX = 'https://tscfkijpiauszqdkuody.supabase.in/storage/v1/object/public/product_src'
     const { categoryId, productId } = useParams()
     const [product, setProduct] = useState(() => null)
 
@@ -112,6 +114,7 @@ const Product = () => {
         setIsRatingLoading(true)
 
         try {
+            if(values.comment.length){
             const { data: commentsData, error: commentsError } = await supabase
                 .from('comments').insert({
                     user_id: session.user.id,
@@ -145,6 +148,32 @@ const Product = () => {
                     toast.success('Your review is successfully saved.')
                     window.location.reload()
                 }
+            }}
+            else
+            {
+                const { error: createdRatingsError } = await supabase
+                .from('ratings').insert({
+                    user_id: session.user.id,
+                    product_id: product.id,
+                    rating: values.rating,
+                })
+
+            if (createdRatingsError) {
+                const { data: updatedRatingsData, error: updatedRatingsError } = await supabase
+                    .from('ratings').update({
+                        rating: values.rating,
+                    }).eq('user_id', session.user.id).eq('product_id', product.id)
+
+                if (updatedRatingsError) {
+                    toast.error('Something went wrong. Please try again.')
+                } else {
+                    toast.success('Your review is successfully saved.')
+                    window.location.reload()
+                }
+            } else {
+                toast.success('Your review is successfully saved.')
+                window.location.reload()
+            }
             }
         } catch (error) {
             toast.error('Something went wrong.')
@@ -153,12 +182,61 @@ const Product = () => {
         }
     }
 
-    console.log('product', product)
 
     if (!product) {
         return null
     }
+    const download = async () => {
+        const srcUrl= `${SRC_URL_PREFIX}/${product.src_url}`
+        window.location.assign(srcUrl)
+    }
+    const addToCart = async () => {
+        try {
+            const { data: sessionData } = await supabase.auth.getSession()
 
+            if (!sessionData.session) {
+                navigate('/login')
+            }
+
+            const { data: orderData, error: orderError } = await supabase.from('orders').select('*').eq('user_id', sessionData.session.user.id).eq('is_completed', false).single()
+
+            if (orderError) {
+                const { data: createdOrderData } = await supabase.from('orders').insert({
+                    is_completed: false,
+                    is_paid: false,
+                    user_id: sessionData.session.user.id,
+                }).select('*').single()
+
+                const { error: createdOrderItemError } = await supabase.from('order_items').insert({
+                    order_id: createdOrderData.id,
+                    product_id: productId,
+                })
+
+                if (createdOrderItemError) {
+                    toast.error('Product is already in cart or you have already purchased it!')
+                } else {
+                    toast.success('Product added to cart successfully!')
+                    navigate(location.pathname)
+                }
+            } else {
+                const { error: createdOrderItemError } = await supabase.from('order_items').insert({
+                    order_id: orderData.id,
+                    product_id: productId,
+                })
+
+                if (createdOrderItemError) {
+                    toast.error('Product is already in cart or you have already purchased it!')
+                } else {
+                    toast.success('Product added to cart successfully!')
+                    navigate(location.pathname)
+                }
+            }
+        } catch (error) {
+            console.log('ERROR_AT_PRODUCT_CARD_HORIZONTAL_ADD_TO_CART', error)
+            toast.error('Something went wrong!')
+        }
+    }
+    const ispurchased = purchasedProducts.find((purchasedProduct) => purchasedProduct.product_id === product.id)
     return (
         <>
 
@@ -197,12 +275,19 @@ const Product = () => {
                             <p className="mt-6 font-bold text-2xl text-neutral-700">Rs. {product.price}
                             </p>
                             <div className="space-y-3 pt-6 max-w-sm">
-                                <button
+                                {!ispurchased?<button onClick={addToCart}
                                     className="inline-flex w-full justify-center items-center gap-2 py-2 rounded-md border-[1px] border-gray-300 hover:bg-gray-50 hover:border-gray-500 transition">
                                     <FiShoppingBag className="flex justify-start items-center h-5 w-5 stroke-brown" />
                                     <span className="font-bold uppercase tracking-widest text-xs text-neutral-700">Add to
                                         Cart</span>
                                 </button>
+                                :
+                                <button onClick={download}
+                                    className="inline-flex w-full justify-center items-center gap-2 py-2 rounded-md border-[1px] border-gray-300 hover:bg-gray-50 hover:border-gray-500 transition">
+                                    <AiOutlineDownload className="flex justify-center items-center h-5 w-5 text-brown" />
+                                    <span className="font-bold uppercase tracking-widest text-xs text-neutral-700">Download</span>
+                                </button>}
+
 
                                 {product.live_preview_url && (
                                     <Link to={product.live_preview_url} target="_blank"
