@@ -10,13 +10,15 @@ const CategoriesCard = ({
     description,
     to,
 }) => {
+    console.log()
+
     return (
         <>
             <Link className="rounded-md overflow-hidden group shadow-sm shadow-gray-100 border-[1px] border-gray-200"
                 to={to}>
                 <div className="overflow-hidden">
                     <img className="block aspect-video group-hover:scale-110 transition"
-                        src={`${IMAGE_URL_PREFIX}/${image}`} alt={name} />
+                        src={image} alt={name} />
                 </div>
                 <div className=" p-4">
                     <div className="flex justify-between items-center">

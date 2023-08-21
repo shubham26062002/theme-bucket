@@ -22,7 +22,7 @@ const Home = () => {
         },
     ]
 
-    const {session,categories} = useOutletContext()
+    const { session, categories } = useOutletContext()
 
     return (
         <main>

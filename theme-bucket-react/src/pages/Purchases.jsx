@@ -51,7 +51,7 @@ const Purchases = () => {
                     <>
 
                         {purchased_products.map((purchased_product, index) => (
-                            <ProductCardHorizontal key={index} to={`/categories/${purchased_product.product.category_id}/products/${purchased_product.product.id}`} imageUrl={`${IMAGE_URL_PREFIX}/${purchased_product.product.product_images[0].image_url}`} name={purchased_product.product.name} type="purchased" publisherName={purchased_product.product.profiles.full_name} avgRating={purchased_product.product.avg_rating} ratingsCount={purchased_product.product.ratings.length} price={purchased_product.product.price} createdAt={purchased_product.created_at} srcUrl={`${SRC_URL_PREFIX}/${purchased_product.product.src_url}`} />
+                            <ProductCardHorizontal key={index} to={`/categories/${purchased_product.product.category_id}/products/${purchased_product.product.id}`} imageUrl={`${IMAGE_URL_PREFIX}/${purchased_product.product.product_images[0].image_url}`} name={purchased_product.product.name} type="purchased" publisherName={purchased_product.product.profiles.full_name} avgRating={purchased_product.product.avg_rating} ratingsCount={purchased_product.product.ratings.length} price={purchased_product.product.price} createdAt={purchased_product.created_at} srcUrl={`${SRC_URL_PREFIX}/${purchased_product.product.src_url}`} cardType='purchased' />
                         ))}
                     </>
                 ) : (
